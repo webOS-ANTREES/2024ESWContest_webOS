@@ -35,7 +35,7 @@ app.get('/weather', async (req, res) => {
         const response = await axios.get(weatherAPI, {
             params: {
                 tm: '202408011500', // 2024년 07월 29일 09:00 시 데이터
-                stn: '108', // 특정 지역 코드로 변경 (예: 서울 108) -> 정확히 숫자가 어디 지역인지 모르겠음...
+                stn: '108', // 특정 지역 코드로 변경 (예: 서울 108) -> 
                 help: '1',
                 authKey: apiKey
             },
