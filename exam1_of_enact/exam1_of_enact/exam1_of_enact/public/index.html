@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        .weather-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .weather-item {
+            border: 1px solid #ccc;
+            margin: 5px;
+            padding: 10px;
+            width: 300px;
+        }
+        .weather-item div {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Data</h1>
+    <div id="weather" class="weather-container"></div>
+
+    <script>
+        async function fetchWeather() {
+            try {
+                const response = await fetch('/weather');
+                const data = await response.json();
+                const weatherDiv = document.getElementById('weather');
+
+                if (data.error) {
+                    weatherDiv.innerHTML = `<p>${data.error}</p>`;
+                } else {
+                    data.forEach(entry => {
+                        const weatherItem = document.createElement('div');
+                        weatherItem.className = 'weather-item';
+                        weatherItem.innerHTML = `
+                            <div><strong>날짜:</strong> ${entry.time}</div>
+                            <div><strong>온도:</strong> ${entry.temperature}°C</div>
+                            <div><strong>상대습도:</strong> ${entry.relativeHumidity}%</div>
+                            <div><strong>강수량:</strong> ${entry.precipitation}mm</div>
+                            <div><strong>일강수량:</strong> ${entry.oneDayPrecipitation}mm</div>
+                            <div><strong>일조량:</strong> ${entry.sunlight}hr</div>
+                        `;
+                        weatherDiv.appendChild(weatherItem);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                document.getElementById('weather').innerHTML = '<p>Failed to fetch weather data</p>';
+            }
+        }
+
+        fetchWeather();
+    </script>
+</body>
+</html>
