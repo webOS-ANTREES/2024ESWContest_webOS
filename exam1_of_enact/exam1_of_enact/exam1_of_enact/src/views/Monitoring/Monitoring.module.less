@@ -1,0 +1,146 @@
+/* 전체 컨테이너를 화면 중앙에 위치 */
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 20px;
+    background: #fcfcfc;
+    background-size: cover;
+    color: #333;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* 타이틀 스타일 */
+.title {
+    font-size: 2rem;
+    color: rgb(7, 0, 0);
+    margin-bottom: 2rem;
+}
+
+/* 네모 상자와 그래프 컨테이너를 나란히 배치 */
+.infoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;  
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    gap: 2rem;
+}
+
+/* 대구 버튼을 포함한 네모 상자 스타일 */
+.button {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 10px;
+    padding: 6.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    box-sizing: border-box;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.cityName {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.temperature {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+}
+
+.humidity, .description {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+/* 그래프 컨테이너 스타일 */
+.chartContainer {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* 그래프 제목 스타일 */
+.chartContainer h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* 스크롤 가능한 날씨 데이터 컨테이너 */
+.weatherContainer {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  width: 40%;
+  margin-left: auto;  /* 추가 */
+  margin-right: 0;    /* 추가 */
+  text-align: right;  /* 추가 */
+}
+
+
+/* 데이터 간격 줄이기 및 스타일 조정 */
+.weatherMain {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.time, .temperature, .humidity {
+    font-size: 1rem;
+}
+
+/* 날씨 데이터 제목 스타일 */
+.weatherContainer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.weatherContainer h3, h4 {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.weatherTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.weatherTable th, .weatherTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.weatherTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+

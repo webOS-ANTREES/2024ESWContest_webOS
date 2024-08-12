@@ -1,6 +1,7 @@
 .app {
     font-family: 'Arial, sans-serif';
     background-color: #f0f0f0;
+    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
