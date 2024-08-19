@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App/App';
 import './index.css';
+import './Firebase';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -12,6 +12,7 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
 /*
 const express = require('express');
 // 웹 서버를 구축하기 위함
