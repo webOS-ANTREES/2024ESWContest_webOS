@@ -3,6 +3,8 @@ import Button from '@enact/moonstone/Button';
 import css from './Monitoring.module.less';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import * as weatherService from './Weather_Service';
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { firebaseApp } from '../../Firebase';
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -12,6 +14,7 @@ const MainPanel = () => {
     const [detailedWeather, setDetailedWeather] = useState({ today: [], tomorrow: [], dayAfterTomorrow: [] });
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showDetailedWeather, setShowDetailedWeather] = useState(false);
+    const [sensorData, setSensorData] = useState(null); // Firebase에서 가져온 센서 데이터를 저장할 상태
 
     useEffect(() => {
         const timeInterval = setInterval(() => {
@@ -24,6 +27,20 @@ const MainPanel = () => {
 
         weatherService.fetchDetailedWeather(selectedCity, apiKey, setDetailedWeather, setWeather, currentTime); // 처음에 한 번 호출
 
+        // Firebase Realtime Database에서 센서 데이터를 가져오기
+        const database = getDatabase(firebaseApp);
+        const sensorDataRef = ref(database, 'sensorData');
+
+        onValue(sensorDataRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                const allData = Object.values(data);
+                setSensorData(allData);
+                const latestData = Object.keys(data).pop();
+                setSensorData(data[latestData]);
+            }
+        });
+
         return () => {
             clearInterval(timeInterval);
             clearInterval(apiInterval);
@@ -32,15 +49,30 @@ const MainPanel = () => {
 
     return (
         <div className={css.container}>
+            <div className={css.sensorContainer}>
+                {sensorData && (
+                    <div className={css.sensorButton}>
+                        <h3>센서 데이터</h3>
+                        <p>시간: {sensorData.timestamp}</p>
+                        <p>온도: {sensorData.temperature}°C</p>
+                        <p>습도: {sensorData.humidity}%</p>
+                    </div>
+                )}
+            </div>
+
+            
+            
             <h1 className={css.title}>날씨 정보</h1>
             <div className={css.currentTime}>
                 <div>{weatherService.formatDateOnly(weatherService.getCurrentDate())}</div>
                 <div>{currentTime.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}</div>
             </div>
+            
+
             <div className={css.infoContainer}>
                 <div className={css.leftContainer}>
                     <Button
-                        className={css.button}
+                        className={css.weatherbutton}
                         onClick={() => setShowDetailedWeather(!showDetailedWeather)} // 클릭 시 세부 데이터 표시/숨김
                     >
                         <div className={css.cityName}>{weatherService.cities[selectedCity].name}</div>
@@ -48,7 +80,7 @@ const MainPanel = () => {
                         <div className={css.humidity}>{weather[selectedCity]?.humidity}%</div>
                         <div className={css.windSpeed}>{weather[selectedCity]?.windSpeed} m/s</div>
                         <div className={css.description}>{weather[selectedCity]?.description}</div>
-                    </Button>
+                    </Button> 
                 </div>
 
                 <div className={css.rightContainer}>
