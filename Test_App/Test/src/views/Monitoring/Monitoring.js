@@ -3,9 +3,8 @@ import Button from '@enact/moonstone/Button';
 import css from './Monitoring.module.less';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import * as weatherService from './Weather_Service';
-
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { firebaseApp } from '../../Firebase'; // Import firebaseApp from Firebase.js
+import { firebaseApp } from '../../Firebase';
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -15,7 +14,11 @@ const MainPanel = () => {
     const [detailedWeather, setDetailedWeather] = useState({ today: [], tomorrow: [], dayAfterTomorrow: [] });
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showDetailedWeather, setShowDetailedWeather] = useState(false);
-    const [sensorData, setSensorData] = useState(null); // Firebase에서 가져온 센서 데이터를 저장할 상태
+    const [sensorData, setSensorData] = useState([]); // 모든 센서 데이터를 저장
+    const [latestSensorData, setLatestSensorData] = useState(null); // 최신 센서 데이터를 저장
+
+    // 오늘 날짜를 YYYY-MM-DD 형식으로 가져옴
+    const todayDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
 
     useEffect(() => {
         const timeInterval = setInterval(() => {
@@ -28,37 +31,169 @@ const MainPanel = () => {
 
         weatherService.fetchDetailedWeather(selectedCity, apiKey, setDetailedWeather, setWeather, currentTime); // 처음에 한 번 호출
 
-        // Firebase Realtime Database에서 센서 데이터를 가져오기
+        // Firebase Realtime Database에서 오늘 날짜의 센서 데이터를 가져오기
         const database = getDatabase(firebaseApp);
-        const sensorDataRef = ref(database, 'sensorData');
+        const sensorDataRef = ref(database, `sensorData/${todayDate}`); // 오늘 날짜 경로로 데이터 참조
 
         onValue(sensorDataRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                // 가장 최신의 센서 데이터를 가져와서 상태에 저장
-                const latestKey = Object.keys(data).pop();
-                setSensorData(data[latestKey]);
+                // Firebase 구조를 반영하여 데이터를 처리
+                const allData = [];
+                Object.keys(data).forEach(timeKey => {
+                    const timeData = data[timeKey];  // 각 시간대 데이터
+                    const innerKeys = Object.keys(timeData);
+                    innerKeys.forEach(innerKey => {
+                        allData.push({
+                            ...timeData[innerKey],  // 센서 데이터
+                            timeKey: timeKey,       // 시간대
+                            key: innerKey           // 고유한 키
+                        });
+                    });
+                });
+    
+                setSensorData(allData); // 모든 데이터를 배열로 저장
+                const latestData = allData[allData.length - 1]; // 최신 데이터 가져오기
+                setLatestSensorData(latestData); // 최신 데이터를 별도로 저장
+            } else {
+                setSensorData([]); // 데이터가 없을 경우 빈 배열로 설정
+                setLatestSensorData(null); // 최신 데이터가 없음을 표시
             }
         });
-
+        // Clean up on unmount
         return () => {
             clearInterval(timeInterval);
             clearInterval(apiInterval);
         };
     }, [selectedCity]);
+    // 이미 오늘의 데이터만 가져왔으므로 별도의 필터링 없이 사용 가능
+    const todaySensorData = sensorData; // 오늘 날짜의 데이터
+
 
     return (
         <div className={css.container}>
+            <div className={css.sensorContainer}>
+                <div className={css.leftContainer}>
+                    {/* 최신 센서 데이터 표시 */}
+                    {latestSensorData && (
+                        <div className={css.sensorButton}>
+                            <h3>센서 데이터</h3>
+                            <p>시간: {latestSensorData.timestamp}</p>
+                            <p>온도: {latestSensorData.temperature}°C</p>
+                            <p>습도: {latestSensorData.humidity}%</p>
+                            <p>CO2: {latestSensorData.co2}ppm</p>
+                        </div>
+                    )}
+                </div>
+                <div className={css.rightContainer}>
+                    {/*모든 센서 데이터를 그래프로 표시*/}
+                    <div className={css.chartContainer}>
+                        <ResponsiveContainer width={300} height={200}>
+                            <LineChart
+                                data={todaySensorData.map(item => ({
+                                    time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
+                                    온도: item.temperature
+                                }))}
+                                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="time" />
+                                <YAxis
+                                    stroke="#000000"
+                                    domain={[20, 32]}
+                                    ticks={[20, 23, 26, 29, 32]}
+                                    tick={{ fontSize: 14 }}
+                                    interval={0}
+                                />
+                                <Tooltip />
+                                <Legend layout="horizontal" verticalAlign="top" align="left" />
+                                <Line
+                                    type="monotone"
+                                    dataKey="온도"
+                                    stroke="#FF5733"
+                                    strokeWidth={3}
+                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+
+                    <div className={css.chartContainer}>
+                        <ResponsiveContainer width={300} height={200}>
+                            <LineChart
+                                data={todaySensorData.map(item => ({
+                                    time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
+                                    습도: item.humidity
+                                }))}
+                                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="time" />
+                                <YAxis
+                                    stroke="#000000"
+                                    domain={[0, 100]}
+                                    ticks={[0, 25, 50, 75, 100]}
+                                    tick={{ fontSize: 14 }}
+                                    interval={0}
+                                />
+                                <Tooltip />
+                                <Legend layout="horizontal" verticalAlign="top" align="left" />
+                                <Line
+                                    type="monotone"
+                                    dataKey="습도"
+                                    stroke="#87CEEB"
+                                    strokeWidth={3}
+                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+
+                    <div className={css.chartContainer}>
+                        <ResponsiveContainer width={300} height={200}>
+                            <LineChart
+                                data={todaySensorData.map(item => ({
+                                    time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
+                                    Co2: item.co2
+                                }))}
+                                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="time" />
+                                <YAxis
+                                    stroke="#000000"
+                                    domain={[1000, 3000]}
+                                    ticks={[1000, 1500, 2000, 2500, 3000]}
+                                    tick={{ fontSize: 14 }}
+                                    interval={0}
+                                />
+                                <Tooltip />
+                                <Legend layout="horizontal" verticalAlign="top" align="left" />
+                                <Line
+                                    type="monotone"
+                                    dataKey="Co2"
+                                    stroke="#919191"
+                                    strokeWidth={3}
+                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+            </div>
+
+
             <h1 className={css.title}>날씨 정보</h1>
             <div className={css.currentTime}>
                 <div>{weatherService.formatDateOnly(weatherService.getCurrentDate())}</div>
                 <div>{currentTime.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}</div>
             </div>
-            
+
+
             <div className={css.infoContainer}>
                 <div className={css.leftContainer}>
                     <Button
-                        className={css.button}
+                        className={css.weatherbutton}
                         onClick={() => setShowDetailedWeather(!showDetailedWeather)} // 클릭 시 세부 데이터 표시/숨김
                     >
                         <div className={css.cityName}>{weatherService.cities[selectedCity].name}</div>
@@ -67,28 +202,17 @@ const MainPanel = () => {
                         <div className={css.windSpeed}>{weather[selectedCity]?.windSpeed} m/s</div>
                         <div className={css.description}>{weather[selectedCity]?.description}</div>
                     </Button>
-                    
-                    {/* 센서 데이터 표시 */}
-                    {sensorData && (
-                        <div className={css.sensorData} style={{ marginTop: '20px' }}>
-                            <h3>센서 데이터</h3>
-                            <p>시간: {sensorData.timestamp}</p>
-                            <p>온도: {sensorData.temperature}°C</p>
-                            <p>습도: {sensorData.humidity}%</p>
-                        </div>
-                    )}
                 </div>
 
                 <div className={css.rightContainer}>
                     <div className={css.chartContainer}>
-                        <h3>온도 그래프</h3>
                         <ResponsiveContainer width={300} height={200}>
                             <LineChart
                                 data={detailedWeather.today.map(item => ({
                                     time: weatherService.formatTimeOnly(item.time),
                                     온도: item.temperature
                                 }))}
-                                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                                margin={{ top: 30, right: 30, left: 20, bottom: 5 }}
                             >
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis
@@ -104,20 +228,19 @@ const MainPanel = () => {
                                     interval={0}
                                 />
                                 <Tooltip />
-                                <Legend />
+                                <Legend layout="horizontal" verticalAlign="bottom" align="left" />
                                 <Line
                                     type="monotone"
                                     dataKey="온도"
                                     stroke="#FF5733"
                                     strokeWidth={3}
-                                    activeDot={{ r: 8 }}
+                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
 
                     <div className={css.chartContainer}>
-                        <h3>습도 그래프</h3>
                         <ResponsiveContainer width={300} height={200}>
                             <LineChart
                                 data={detailedWeather.today.map(item => ({
@@ -140,12 +263,13 @@ const MainPanel = () => {
                                     interval={0}
                                 />
                                 <Tooltip />
-                                <Legend />
+                                <Legend layout="horizontal" verticalAlign="bottom" align="left" />
                                 <Line
                                     type="monotone"
                                     dataKey="습도"
                                     stroke="#87CEEB"
                                     strokeWidth={3}
+                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
                         </ResponsiveContainer>
@@ -244,3 +368,4 @@ const MainPanel = () => {
 };
 
 export default MainPanel;
+

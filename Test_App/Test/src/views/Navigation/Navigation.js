@@ -8,16 +8,16 @@ const Navigation = kind({
   render: () => (
     <div className={css.navigationContainer}>
       <Link to="/monitoring">
-        <Button>모니터링</Button>
+        <Button className={css.button}>모니터링</Button>
       </Link>
       <Link to="/automation">
-        <Button>자동화</Button>
+        <Button className={css.button}>자동화</Button>
       </Link>
       <Link to="/alerts">
-        <Button>알림</Button>
+        <Button className={css.button}>알림</Button>
       </Link>
       <Link to="/report">
-        <Button>리포트</Button>
+        <Button className={css.button}>리포트</Button>
       </Link>
     </div>
   )

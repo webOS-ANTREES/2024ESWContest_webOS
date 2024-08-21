@@ -13,6 +13,17 @@
     overflow-x: hidden;
 }
 
+.sensorContainer {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 200px;
+    margin-left: 100px;
+    position: absolute;  /* 절대 위치로 설정 */
+    left: 0;  /* 왼쪽으로 정렬 */
+}
+
 .title {
     font-size: 2rem;
     color: rgb(7, 0, 0);
@@ -39,7 +50,7 @@
     gap: 2rem;
 }
 
-.button {
+.weatherbutton {
     background: rgba(255, 255, 255, 0.8);
     border: none;
     border-radius: 10px;
@@ -54,10 +65,6 @@
     box-sizing: border-box;
     text-align: center;
     transition: background 0.3s ease;
-}
-
-.button:hover {
-    background: rgba(255, 255, 255, 1);
 }
 
 .cityName {
