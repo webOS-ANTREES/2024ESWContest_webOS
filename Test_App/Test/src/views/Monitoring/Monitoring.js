@@ -189,7 +189,6 @@ const MainPanel = () => {
                 <div>{currentTime.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}</div>
             </div>
 
-
             <div className={css.infoContainer}>
                 <div className={css.leftContainer}>
                     <Button
