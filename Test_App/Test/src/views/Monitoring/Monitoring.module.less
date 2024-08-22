@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-end;
+    align-items: center;
     padding: 20px;
     background: #fcfcfc;
     background-size: cover;
@@ -19,10 +19,20 @@
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 200px;
-    margin-left: 100px;
+    margin-right: 100px;  /* 왼쪽 여백 대신 오른쪽 여백 설정 */
     position: absolute;  /* 절대 위치로 설정 */
-    left: 0;  /* 왼쪽으로 정렬 */
+    right: 0;  /* 오른쪽으로 정렬 */
 }
+
+.sensorRowContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* 공간을 균등하게 분배 */
+    align-items: center;
+    width: 100%;
+    gap: 1rem; /* 각 그래프 사이에 간격 추가 */
+}
+
 
 .title {
     font-size: 2rem;
@@ -43,7 +53,7 @@
 .infoContainer {
     display: flex;
     flex-direction: row;
-    justify-content: center;  
+    justify-content: space-between;  
     align-items: flex-start;
     width: 100%;
     max-width: 1200px;
