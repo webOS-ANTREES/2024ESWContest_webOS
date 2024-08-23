@@ -1,10 +1,17 @@
 .navigationContainer {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    background-color: #f0f0f0;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-  }
-  
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: #fcfcfc;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+}
+
+
+.button {
+  width: 1000px;
+  /* 원하는 너비로 설정 */
+  margin-bottom: 10px;
+  /* 버튼 간격을 위해 추가 */
+}
