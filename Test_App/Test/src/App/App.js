@@ -14,8 +14,7 @@ const App = kind({
     <Router>
       <div className={css.app}>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/root" element={<Login />}/>
           <Route path="/monitoring" element={<Monitoring />} />
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/automation" element={<Automation />} />

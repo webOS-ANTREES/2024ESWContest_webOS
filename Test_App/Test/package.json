@@ -7,7 +7,6 @@
 	
 	"scripts": {
 		"start-client": "npm run serve",
-		"start-server": "node server.js",
 		"start": "concurrently \"npm run start-client\" \"npm run start-server\"",
 		"serve": "enact serve",
 		"pack": "enact pack",
