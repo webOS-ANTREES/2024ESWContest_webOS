@@ -10,8 +10,11 @@ const Navigation = kind({
       <Link to="/monitoring">
         <Button className={css.button}>모니터링</Button>
       </Link>
-      <Link to="/automation">
-        <Button className={css.button}>자동화</Button>
+      <Link to="/PestManagement">
+        <Button className={css.button}>병해충 관리</Button>
+      </Link>
+      <Link to="/SystemControl">
+        <Button className={css.button}>시스템 제어</Button>
       </Link>
       <Link to="/alerts">
         <Button className={css.button}>알림</Button>

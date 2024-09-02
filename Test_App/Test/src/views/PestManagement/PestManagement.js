@@ -1,5 +1,5 @@
 import kind from '@enact/core/kind';
-import css from './PestManagement.module.css';
+import css from './PestManagement.module.css'; // 정확한 파일 이름 사용
 
 const PestManagement = kind({
   name: 'PestManagement',
