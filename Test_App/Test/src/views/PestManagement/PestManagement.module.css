@@ -1,0 +1,38 @@
+.PestManagementContainer {
+    padding: 20px;
+    margin-bottom: 60px; /* 네비게이션 버튼 영역 확보 */
+    background-color: #f9f9f9; /* 배경색 설정 */
+  }
+  
+  .PestManagementContainer h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .PestManagementContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .PestManagementItem {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .PestManagementItem h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .PestManagementItem p {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+  

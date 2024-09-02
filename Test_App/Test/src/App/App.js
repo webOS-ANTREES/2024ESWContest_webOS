@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from '../views/Login/Login';
 import Monitoring from '../views/Monitoring/Monitoring';
 import Alerts from '../views/Alerts/Alerts';
-import Automation from '../views/Automation/Automation';
 import Report from '../views/Report/Report';
 import Navigation from '../views/Navigation/Navigation';
+import PestManagement from '../views/PestManagement/PestManagement';
+import SystemControl from '../views/SystemControl/SystemControl';
 import css from './App.module.css';
+
 
 const App = kind({
   name: 'App',
@@ -14,10 +16,11 @@ const App = kind({
     <Router>
       <div className={css.app}>
         <Routes>
-          <Route path="/root" element={<Login />}/>
+          <Route path="/" element={<Login />}/>
           <Route path="/monitoring" element={<Monitoring />} />
           <Route path="/alerts" element={<Alerts />} />
-          <Route path="/automation" element={<Automation />} />
+          <Route path="/SystemControl" element={<SystemControl />} />
+          <Route path="/PestManagement" element={<PestManagement />} />
           <Route path="/report" element={<Report />} />
         </Routes>
         <Navigation /> {/* 항상 네비게이션 버튼을 표시 */}
