@@ -1,11 +1,8 @@
-// Import the functions you need from the SDKs you need
+// Firebase.js
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getDatabase } from "firebase/database"; // Firebase 실시간 데이터베이스 사용
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase 설정
 const firebaseConfig = {
   apiKey: "AIzaSyCxvF5eMySB-6Uhn9F5jWGpLoQ3O36z5zo",
   authDomain: "weather-6a3c7.firebaseapp.com",
@@ -17,6 +14,9 @@ const firebaseConfig = {
   measurementId: "G-ZSQ1N44C1H"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Firebase 초기화
+const firebaseApp = initializeApp(firebaseConfig);
+const database = getDatabase(firebaseApp); // 실시간 데이터베이스 초기화
+
+// 내보내기
+export { firebaseApp, database }; // 필요한 모듈을 내보냄

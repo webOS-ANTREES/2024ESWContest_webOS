@@ -80,21 +80,21 @@
 .InputGroup {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; /* 입력 그룹 간의 간격 */
+  margin-bottom: 20px; /* 입력 그룹 간의 간격 */
+}
+
+.InputField {
+  width: 30%; /* 입력 필드가 차지할 공간을 %로 설정 */
+  padding: 5px; /* 내부 패딩을 줄임 */
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .InputGroup label {
   font-size: 1rem;
-  flex-basis: 15%; /* 레이블이 차지할 공간 */
+  flex-basis: 10%; /* 레이블이 차지할 공간을 %로 설정 */
   text-align: left; /* 레이블 왼쪽 정렬 */
-}
-
-.InputField {
-  flex-basis: 40%; /* 입력 필드가 차지할 공간 */
-  padding: 5px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
 /* 수동제어 섹션 */
@@ -127,4 +127,17 @@
   grid-column: 2 / 3; /* 두 번째 열 */
   grid-row: 2 / 3; /* 두 번째 행 */
   text-align: left; /* 내벽제어 2 제목 왼쪽 정렬 */
+}
+
+
+.LatestSensorData {
+  margin-top: 20px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.LatestSensorData h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
 }
