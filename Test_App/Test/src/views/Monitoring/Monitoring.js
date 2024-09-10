@@ -10,7 +10,7 @@ const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 const MainPanel = () => {
     const [weather, setWeather] = useState({ seoul: {}, daegu: {}, busan: {} });
-    const [selectedCity, setSelectedCity] = useState('daegu');
+    const [selectedCity] = useState('daegu');
     const [detailedWeather, setDetailedWeather] = useState({ today: [], tomorrow: [], dayAfterTomorrow: [] });
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showDetailedWeather, setShowDetailedWeather] = useState(false);
@@ -40,7 +40,7 @@ const MainPanel = () => {
         onValue(sensorDataRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                const allData = [];
+                const allData = []; 
                 Object.keys(data).forEach(timeKey => {
                     const timeData = data[timeKey];
                     const innerKeys = Object.keys(timeData);

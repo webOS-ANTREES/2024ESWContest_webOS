@@ -128,16 +128,3 @@
   grid-row: 2 / 3; /* 두 번째 행 */
   text-align: left; /* 내벽제어 2 제목 왼쪽 정렬 */
 }
-
-
-.LatestSensorData {
-  margin-top: 20px;
-  background-color: #f0f0f0;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-.LatestSensorData h4 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}

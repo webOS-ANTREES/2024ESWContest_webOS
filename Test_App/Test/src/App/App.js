@@ -5,7 +5,7 @@ import Monitoring from '../views/Monitoring/Monitoring';
 import Alerts from '../views/Alerts/Alerts';
 import Report from '../views/Report/Report';
 import Navigation from '../views/Navigation/Navigation';
-import PestManagement from '../views/PestManagement/PestManagement'; // 올바른 경로로 수정
+import PestManagement from '../views/PestManagement/PestManagement';
 import SystemControl from '../views/SystemControl/SystemControl';
 import css from './App.module.css';
 
