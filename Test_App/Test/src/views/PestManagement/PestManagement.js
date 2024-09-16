@@ -1,11 +1,14 @@
 import kind from '@enact/core/kind';
-import css from './PestManagement.module.css'; // 정확한 파일 이름 사용
+import css from './PestManagement.module.css'; 
 
 const PestManagement = kind({
   name: 'PestManagement',
   render: () => (
     <div className={css.PestManagementContainer}>
       <h1>PestManagement Page</h1>
+      <h1>CCTV</h1>
+      <img src="http://192.168.50.31:8080/video_feed" width="50%"/>
+      
       <div className={css.PestManagementContent}>
         <div className={css.PestManagementItem}>
           <h2>병해충 관리</h2>

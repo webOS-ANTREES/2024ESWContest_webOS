@@ -17,7 +17,6 @@
 		"license": "enact license",
 		"test": "enact test",
 		"test-watch": "enact test --watch"
-		
 	},
 	"license": "UNLICENSED",
 	"private": true,
@@ -31,7 +30,6 @@
 	"eslintConfig": {
 		"extends": "enact-proxy"
 	},
-	
 	"eslintIgnore": [
 		"node_modules/*",
 		"build/*",
