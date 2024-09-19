@@ -117,17 +117,6 @@ const MainPanel = () => {
             </div>
 
             <div className={css.sensorContainer}>
-
-                {/* 최신 센서 데이터 표시 */}
-                {currentSensorData && (
-                    <div className={css.currentSensorDataContainer}>
-                        <h3>Current Sensor Data</h3>
-                        <p>온도: {currentSensorData.temperature}°C</p>
-                        <p>습도: {currentSensorData.humidity}%</p>
-                        <p>CO2: {currentSensorData.co2}ppm</p>
-                    </div>
-                )}
-
                 <div className={css.sensorChartContainer}>
                     <div className={css.chartContainer}>
                         <ResponsiveContainer width={300} height={200}>
@@ -232,6 +221,16 @@ const MainPanel = () => {
                     <div>{currentTime.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}</div>
                 </div>
 
+                {/* 최신 센서 데이터 표시 */}
+                {currentSensorData && (
+                    <div className={css.currentSensorDataContainer}>
+                        <h3>Current Sensor Data</h3>
+                        <p>온도: {currentSensorData.temperature}°C</p>
+                        <p>습도: {currentSensorData.humidity}%</p>
+                        <p>CO2: {currentSensorData.co2}ppm</p>
+                    </div>
+                )}
+                
                 <div className={css.weatherMain}>
                     <Button
                         className={css.weatherButton}
