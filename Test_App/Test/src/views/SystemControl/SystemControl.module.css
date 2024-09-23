@@ -112,7 +112,7 @@
 }
 
 .ControlButtonContainer {
-  text-align: center; /* ON/OFF 버튼을 중앙에 배치 */
+  text-align: left; /* ON/OFF 버튼을 중앙에 배치 */
 }
 
 /* 내벽 제어 컨테이너 1 (오른쪽 상단) */
