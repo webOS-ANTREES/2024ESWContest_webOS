@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 // IPK 파일 경로 설정
-const ipkPath = path.join(__dirname, 'C:/Users/antl/Documents/GitHub/2024ESWContest_webOS_3001/Test_App/Test/ipk');
+const ipkPath = path.join(__dirname, '../ipk');
 const appId = "com.test.app"; // 앱의 ID
 const device = "webOS_raspberrypi4"; // 디바이스 이름
 

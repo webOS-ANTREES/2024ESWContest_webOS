@@ -290,8 +290,8 @@ const MainPanel = () => {
                                 />
                                 <YAxis
                                     stroke="#000000"
-                                    domain={[18, 40]}
-                                    ticks={[18, 24, 30, 36, 40]}
+                                    domain={[0, 35]}
+                                    ticks={[0, 10, 20, 27, 35]}
                                     tick={{ fontSize: 14 }}
                                     interval={0}
                                 />
