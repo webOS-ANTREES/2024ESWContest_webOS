@@ -1,5 +1,6 @@
 import kind from '@enact/core/kind';
 import css from './Alerts.module.css';
+// import LS2Request from '@enact/webos/LS2Request';
 
 const Alerts = kind({
   name: 'Alerts',

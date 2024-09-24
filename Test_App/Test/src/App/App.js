@@ -1,5 +1,5 @@
-import kind from '@enact/core/kind';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../views/Login/Login';
 import Monitoring from '../views/Monitoring/Monitoring';
 import Alerts from '../views/Alerts/Alerts';
@@ -9,24 +9,27 @@ import PestManagement from '../views/PestManagement/PestManagement';
 import SystemControl from '../views/SystemControl/SystemControl';
 import css from './App.module.css';
 
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // 로그인 상태 관리
 
-const App = kind({
-  name: 'App',
-  render: (props) => (
+  return (
     <Router>
       <div className={css.app}>
         <Routes>
-          <Route path="/" element={<Login />}/>
-          <Route path="/monitoring" element={<Monitoring />} />
-          <Route path="/alerts" element={<Alerts />} />
-          <Route path="/SystemControl" element={<SystemControl />} />
-          <Route path="/PestManagement" element={<PestManagement />} />
-          <Route path="/report" element={<Report />} />
+          {/* 로그인 성공 시 네비게이션이 표시되도록 setIsAuthenticated를 전달 */}
+          <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/monitoring" element={isAuthenticated ? <Monitoring /> : <Navigate to="/" />} />
+          <Route path="/alerts" element={isAuthenticated ? <Alerts /> : <Navigate to="/" />} />
+          <Route path="/systemcontrol" element={isAuthenticated ? <SystemControl /> : <Navigate to="/" />} />
+          <Route path="/pestmanagement" element={isAuthenticated ? <PestManagement /> : <Navigate to="/" />} />
+          <Route path="/report" element={isAuthenticated ? <Report /> : <Navigate to="/" />} />
         </Routes>
-        <Navigation /> {/* 항상 네비게이션 버튼을 표시 */}
+
+        {/* 로그인에 성공한 경우에만 네비게이션 표시 */}
+        {isAuthenticated && <Navigation />}
       </div>
     </Router>
-  )
-});
+  );
+};
 
 export default App;

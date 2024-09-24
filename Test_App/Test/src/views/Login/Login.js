@@ -4,20 +4,19 @@ import Button from '@enact/moonstone/Button';
 import Input from '@enact/moonstone/Input';
 import css from './Login.module.css';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleLogin = () => {
-    // 기본 사용자명과 비밀번호
-    const validUsername = 'antrees';
-    const validPassword = '12345';
+    const validUsername = '';
+    const validPassword = '';
 
-    // 사용자명과 비밀번호를 검증
     if (username === validUsername && password === validPassword) {
-      navigate('/monitoring'); // 로그인 성공 시 이동할 경로 설정
+      setIsAuthenticated(true);
+      navigate('/monitoring');
     } else {
       setError('아이디/비밀번호를 확인해주십시오');
     }
@@ -27,22 +26,20 @@ const Login = () => {
     <div className={css.loginContainer}>
       <h1 className={css.title}>Login</h1>
       <Input
-        placeholder="Username"
+        placeholder="ID"
         value={username}
         onChange={(e) => setUsername(e.value)}
-        className={css.input}
+        className={css.input}  
       />
       <Input
         type="password"
-        placeholder="Password"
+        placeholder="PW"
         value={password}
         onChange={(e) => setPassword(e.value)}
-        className={css.input}
+        className={css.input}  
       />
       {error && <div className={css.error}>{error}</div>}
-      <Button onClick={handleLogin} className={css.button}>
-        Login
-      </Button>
+      <Button onClick={handleLogin} className={css.button}>Login</Button>
     </div>
   );
 };
