@@ -224,8 +224,8 @@ const MainPanel = () => {
                                 <XAxis dataKey="time" />
                                 <YAxis
                                     stroke="#000000"
-                                    domain={[0, 100]}
-                                    ticks={[0, 25, 50, 75, 100]}
+                                    domain={[0, 65000]}
+                                    ticks={[0, 15000, 30000, 45000, 60000]}
                                     tick={{ fontSize: 14 }}
                                     interval={0}
                                 />
@@ -258,6 +258,7 @@ const MainPanel = () => {
                         <p>온도: {currentSensorData.temperature}°C</p>
                         <p>습도: {currentSensorData.humidity}%</p>
                         <p>CO2: {currentSensorData.co2}ppm</p>
+                        <p>조도: {currentSensorData.illuminance}lux</p>
                     </div>
                 )}
                 
