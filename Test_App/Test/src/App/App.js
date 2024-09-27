@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../views/Login/Login';
 import Monitoring from '../views/Monitoring/Monitoring';
-import Alerts from '../views/Alerts/Alerts';
+import Alerts from '../views/Notice/Notice';
 import Report from '../views/Report/Report';
 import Navigation from '../views/Navigation/Navigation';
 import PestManagement from '../views/PestManagement/PestManagement';

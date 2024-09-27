@@ -47,7 +47,7 @@ export const getSkyDescription = (sky) => {
             case '4': return '흐림';
             default: return '';
         }
-    } 
+    }
 };
 
 export const formatPrecipitation = (precipitation) => {

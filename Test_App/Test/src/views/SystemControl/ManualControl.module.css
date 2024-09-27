@@ -1,0 +1,31 @@
+.ManualControl {
+  flex-grow: 1;
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.ManualControl h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+.ControlButtonContainer {
+  text-align: left; /* 버튼을 왼쪽 정렬 */
+}
+
+.ControlButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px; /* 버튼 간의 간격 추가 */
+}
+
+.ControlButton:hover {
+  background-color: #0056b3;
+}

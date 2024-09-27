@@ -33,7 +33,6 @@ const Report = kind({
               <td></td>
               <td></td>
               <td></td>
-            
               <td></td>
               <td></td>
               <td></td>

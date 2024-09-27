@@ -1,30 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import mqtt from 'mqtt';
 import css from './SystemControl.module.css';
 import { getDatabase, ref, query, limitToLast, onValue } from 'firebase/database';
 import { firebaseApp } from '../../Firebase';
+import AutoControl from './AutoControl';
+import ManualControl from './ManualControl';
+import Notice from '../Notice/Notice'; // Notice 컴포넌트 추가
+import { sendAlert } from '../../services/Luna_Service';    // Luna_Service에서 sendAlert 가져오기
 
 const SystemControl = () => {
   const [client, setClient] = useState(null);
   const [currentSensorData, setLatestSensorData] = useState(null);
-  const [userInput, setUserInput] = useState({
-    temperature: '',
-    humidity: '',
-    co2: '',
-    illumination: ''
-  });
-
-  // 외벽 제어 상태를 추적하는 state
-  const [isWallOpen, setIsWallOpen] = useState(false); // 처음에는 닫혀있다고 가정
-
-  const DEFAULT_CONDITIONS = {
-    temperature: 10,
-    humidity: 10,
-    co2: 10
-  };
+  
+  // 내벽 제어 상태
+  const [isInnerWall1Open, setIsInnerWall1Open] = useState(false);
+  const [isInnerWall2Open, setIsInnerWall2Open] = useState(false);
 
   useEffect(() => {
-    // MQTT 및 Firebase 설정
     const mqttClient = mqtt.connect('ws://172.20.48.180:1884');
     setClient(mqttClient);
 
@@ -59,169 +51,69 @@ const SystemControl = () => {
     };
   }, []);
 
-  // 센서 데이터가 업데이트되면 자동 제어를 실행
-  useEffect(() => {
-    if (currentSensorData) {
-      handleAutoControl();
-    }
-  }, [currentSensorData]);  // currentSensorData가 업데이트될 때 실행
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserInput((prevInput) => ({
-      ...prevInput,
-      [name]: value,
-    }));
-  };
-
-  const handleAutoControl = () => {
-    const userTemperature = userInput.temperature || DEFAULT_CONDITIONS.temperature;
-    const userHumidity = userInput.humidity || DEFAULT_CONDITIONS.humidity;
-    const userCO2 = userInput.co2 || DEFAULT_CONDITIONS.co2;
-
-    if (currentSensorData) {
-      const { temperature, humidity, co2 } = currentSensorData;
-
-      // 조건을 만족하면 ON 메시지를 보냄 (한번만 전송)
-      if (temperature >= userTemperature || humidity >= userHumidity || co2 >= userCO2) {
-        if (!isWallOpen) {  // 현재 외벽이 닫혀 있으면
-          handlePestControlClick();  // ON 메시지를 한번만 보냄
-          setIsWallOpen(true);  // 외벽이 열렸음을 상태로 저장
-        }
-      } 
-      // 조건을 만족하지 않으면 OFF 메시지를 보냄 (한번만 전송)
-      else {
-        if (isWallOpen) {  // 현재 외벽이 열려 있으면
-          handleWallControlClick();  // OFF 메시지를 한번만 보냄
-          setIsWallOpen(false);  // 외벽이 닫혔음을 상태로 저장
-        }
+  const handleInnerWall1Control = () => {
+    if (client) {
+      if (isInnerWall1Open) {
+        client.publish('nodemcu/innerWall1', 'CLOSE');  // 내벽 1 닫기 메시지
+        setIsInnerWall1Open(false);
+        sendAlert("내벽 1이 닫혔습니다."); // 알림 추가
+      } else {
+        client.publish('nodemcu/innerWall1', 'OPEN');  // 내벽 1 열기 메시지
+        setIsInnerWall1Open(true);
+        sendAlert("내벽 1이 열렸습니다."); // 알림 추가
       }
     }
   };
 
-  const handleResetToDefault = () => {
-    setUserInput({
-      temperature: DEFAULT_CONDITIONS.temperature,
-      humidity: DEFAULT_CONDITIONS.humidity,
-      co2: DEFAULT_CONDITIONS.co2,
-      illumination: ''
-    });
-  };
-
-  const handlePestControlClick = () => {
+  const handleInnerWall2Control = () => {
     if (client) {
-      client.publish('nodemcu/stepper', 'ON');  // 외벽 제어 ON 메시지
-    }
-  };
-
-  const handleWallControlClick = () => {
-    if (client) {
-      client.publish('nodemcu/stepper', 'OFF');  // 외벽 제어 OFF 메시지
+      if (isInnerWall2Open) {
+        client.publish('nodemcu/innerWall2', 'CLOSE');  // 내벽 2 닫기 메시지
+        setIsInnerWall2Open(false);
+        sendAlert("내벽 2가 닫혔습니다."); // 알림 추가
+      } else {
+        client.publish('nodemcu/innerWall2', 'OPEN');  // 내벽 2 열기 메시지
+        setIsInnerWall2Open(true);
+        sendAlert("내벽 2가 열렸습니다."); // 알림 추가
+      }
     }
   };
 
   return (
     <div className={css.SystemControlContainer}>
-      <div className={`${css.SystemControlItem} ${css.SkylightControl}`}>
-        <h2>천창제어</h2>
-        <div className={css.AutoControl}>
-          <h3>자동제어</h3>
-          <div className={css.InputGrid}>
-            {/* 온도 입력 필드 */}
-            <div className={css.InputGroup}>
-              <label>온도:</label>
-              <div className={css.InputWithUnit}>
-                <input
-                  type="number"
-                  name="temperature"
-                  className={css.InputField}
-                  placeholder={`${DEFAULT_CONDITIONS.temperature}`}
-                  value={userInput.temperature}
-                  onChange={handleInputChange}
-                />
-                <span className={css.Unit}>°C</span>
-              </div>
-            </div>
-
-            {/* 습도 입력 필드 */}
-            <div className={css.InputGroup}>
-              <label>습도:</label>
-              <div className={css.InputWithUnit}>
-                <input
-                  type="number"
-                  name="humidity"
-                  className={css.InputField}
-                  placeholder={`${DEFAULT_CONDITIONS.humidity}`}
-                  value={userInput.humidity}
-                  onChange={handleInputChange}
-                />
-                <span className={css.Unit}>%</span>
-              </div>
-            </div>
-
-            {/* CO2 입력 필드 */}
-            <div className={css.InputGroup}>
-              <label>CO2:</label>
-              <div className={css.InputWithUnit}>
-                <input
-                  type="number"
-                  name="co2"
-                  className={css.InputField}
-                  placeholder={`${DEFAULT_CONDITIONS.co2}`}
-                  value={userInput.co2}
-                  onChange={handleInputChange}
-                />
-                <span className={css.Unit}>ppm</span>
-              </div>
-            </div>
-
-            {/* 조도 입력 필드 */}
-            <div className={css.InputGroup}>
-              <label>조도:</label>
-              <div className={css.InputWithUnit}>
-                <input
-                  type="number"
-                  name="illumination"
-                  className={css.InputField}
-                  placeholder="조도 입력"
-                  value={userInput.illumination}
-                  onChange={handleInputChange}
-                />
-                <span className={css.Unit}>lux</span>
-              </div>
-            </div>
-          </div>
-
-          {/* 확인 버튼 */}
-          <button className={css.ControlButton} onClick={handleAutoControl}>
-            확인
-          </button>
-
-          {/* 기본값으로 초기화 버튼 */}
-          <button className={css.ControlButton} onClick={handleResetToDefault}>
-            기본값
-          </button>
-        </div>
-        <div className={css.ManualControl}>
-          <h3>수동제어</h3>
-          <div className={css.ControlButtonContainer}>
-            <button className={css.ControlButton} onClick={handlePestControlClick}>
-              열기
-            </button>
-            <button className={css.ControlButton} onClick={handleWallControlClick}>
-              닫기
-            </button>
-          </div>
-        </div>
-      </div>
+      <AutoControl 
+        currentSensorData={currentSensorData} 
+        client={client} 
+      />
+      <ManualControl 
+        client={client} 
+      />
+      
+      {/* 내벽 제어 UI */}
       <div className={`${css.SystemControlItem} ${css.InnerWallControl1}`}>
-        <h2>내벽제어 1</h2>
+        <h2>내벽 제어 1</h2>
+        <div className={css.ControlButtonContainer}>
+          <button className={css.ControlButton} onClick={() => handleInnerWall1Control('OPEN')}>
+            열기
+          </button>
+          <button className={css.ControlButton} onClick={() => handleInnerWall1Control('CLOSE')}>
+            닫기
+          </button>
+        </div>
       </div>
       <div className={`${css.SystemControlItem} ${css.InnerWallControl2}`}>
-        <h2>내벽제어 2</h2>
+        <h2>내벽 제어 2</h2>
+        <div className={css.ControlButtonContainer}>
+          <button className={css.ControlButton} onClick={() => handleInnerWall2Control('OPEN')}>
+            열기
+          </button>
+          <button className={css.ControlButton} onClick={() => handleInnerWall2Control('CLOSE')}>
+            닫기
+          </button>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default SystemControl;

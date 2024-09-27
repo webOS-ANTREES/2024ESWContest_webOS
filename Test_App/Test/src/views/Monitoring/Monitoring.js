@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@enact/moonstone/Button';
 import css from './Monitoring.module.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import * as weatherService from './Weather_Service';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { firebaseApp } from '../../Firebase'; 
+import { firebaseApp } from '../../Firebase';
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 

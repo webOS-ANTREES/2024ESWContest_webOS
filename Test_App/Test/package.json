@@ -6,7 +6,7 @@
 	"main": "src/index.js",
 	"scripts": {
 		"start-client": "npm run serve",
-		"start-server": "node services/webOS_service.js",
+		"start-server": "node ./services/webOS_install.js",
 		"start": "concurrently \"npm run start-client\" \"npm run start-server\"",
 		"serve": "enact serve",
 		"pack": "enact pack",

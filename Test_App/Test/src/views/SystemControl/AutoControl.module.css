@@ -1,0 +1,58 @@
+.AutoControl {
+  flex-grow: 1;
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px; /* 자동제어와 수동제어 사이 간격 */
+}
+
+.AutoControl h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+.InputGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 두 개의 열로 구성 */
+  gap: 10px; /* 각 입력 그룹 간의 간격 */
+}
+
+.InputGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* 입력 그룹 간의 간격 */
+}
+
+.InputField {
+  width: 30%; /* 입력 필드가 차지할 공간을 %로 설정 */
+  padding: 5px; /* 내부 패딩을 줄임 */
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.InputGroup label {
+  font-size: 1rem;
+  flex-basis: 10%; /* 레이블이 차지할 공간을 %로 설정 */
+  text-align: left; /* 레이블 왼쪽 정렬 */
+}
+
+.ControlButtonContainer {
+  text-align: left; /* 버튼을 왼쪽 정렬 */
+}
+
+.ControlButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px; /* 버튼 간의 간격 추가 */
+}
+
+.ControlButton:hover {
+  background-color: #0056b3;
+}
