@@ -4,7 +4,7 @@ function init(service) {
     ls2 = service;
 }
 
-function toast(msg) {
+function sendAlert(msg) {
     let toast_url = "luna://com.webos.notification/createToast";
     let toast_params = {
         message: msg,
@@ -18,4 +18,4 @@ function toast(msg) {
 
 // Exporting the functions to be used in other files
 exports.init = init;
-exports.toast = toast;
+exports.sendAlert = sendAlert; // sendAlert만 내보냄

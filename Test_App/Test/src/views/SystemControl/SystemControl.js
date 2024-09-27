@@ -6,7 +6,7 @@ import { firebaseApp } from '../../Firebase';
 import AutoControl from './AutoControl';
 import ManualControl from './ManualControl';
 import Notice from '../Notice/Notice'; // Notice 컴포넌트 추가
-import { sendAlert } from '../../services/Luna_Service';    // Luna_Service에서 sendAlert 가져오기
+import { sendAlert } from '../../services/luna_service';    // Luna_Service에서 sendAlert 가져오기
 
 const SystemControl = () => {
   const [client, setClient] = useState(null);

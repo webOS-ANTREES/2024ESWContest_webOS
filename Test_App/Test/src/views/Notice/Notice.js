@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import css from './Notice.module.css'; // CSS 모듈 경로를 적절히 설정하세요.
-import { toast } from '../../services/Luna_Service'; // Luna_Service.js에서 toast 함수 가져오기
+import { toast } from '../../services/luna_service'; // Luna_Service.js에서 toast 함수 가져오기
 
 const Notice = ({ newNotice }) => {
   const [notices, setNotices] = useState([]);
