@@ -109,6 +109,8 @@ const MainPanel = () => {
                                                 <p>습도: {logData[date][time][key].humidity}%</p>
                                                 <p>CO2: {logData[date][time][key].co2}ppm</p>
                                                 <p>조도: {logData[date][time][key].illuminance}lux</p>
+                                                <p>수온: {logData[date][time][key].waterTemp}°C</p>
+                                                <p>pH농도: {logData[date][time][key].phVal}pH</p>
                                             </div>
                                         ))}
                                 </div>
@@ -241,6 +243,66 @@ const MainPanel = () => {
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
+                    <div className={css.chartContainer}>
+                        <ResponsiveContainer width={300} height={200}>
+                            <LineChart
+                                data={todaySensorData.map(item => ({
+                                    time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
+                                    수온: item.waterTemp
+                                }))}
+                                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="time" />
+                                <YAxis
+                                    stroke="#000000"
+                                    domain={[-20, 85]}
+                                    ticks={[-20, 0, 20, 40, 60]}
+                                    tick={{ fontSize: 14 }}
+                                    interval={0}
+                                />
+                                <Tooltip />
+                                <Legend layout="horizontal" verticalAlign="bottom" align="left" />
+                                <Line
+                                    type="monotone"
+                                    dataKey="수온"
+                                    stroke="#FFD700"
+                                    strokeWidth={3}
+                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={css.chartContainer}>
+                        <ResponsiveContainer width={300} height={200}>
+                            <LineChart
+                                data={todaySensorData.map(item => ({
+                                    time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
+                                    pH: item.phVal
+                                }))}
+                                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="time" />
+                                <YAxis
+                                    stroke="#000000"
+                                    domain={[0, 11]}
+                                    ticks={[0, 3, 6, 9, 11]}
+                                    tick={{ fontSize: 14 }}
+                                    interval={0}
+                                />
+                                <Tooltip />
+                                <Legend layout="horizontal" verticalAlign="bottom" align="left" />
+                                <Line
+                                    type="monotone"
+                                    dataKey="pH"
+                                    stroke="#8A2BE2"
+                                    strokeWidth={3}
+                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
                 </div>
             </div>
 
@@ -259,6 +321,8 @@ const MainPanel = () => {
                         <p>습도: {currentSensorData.humidity}%</p>
                         <p>CO2: {currentSensorData.co2}ppm</p>
                         <p>조도: {currentSensorData.illuminance}lux</p>
+                        <p>수온: {currentSensorData.waterTemp}°C</p>
+                        <p>조도: {currentSensorData.phVal}pH</p>
                     </div>
                 )}
                 
