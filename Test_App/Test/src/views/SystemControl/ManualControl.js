@@ -1,15 +1,18 @@
 import css from './ManualControl.module.css';
+import { sendToast } from '../webOS_service/luna_service';
 
-const ManualControl = ({ client }) => {
+const ManualControl = ({ client, onToast }) => {
   const handlePestControlClick = () => {
     if (client) {
-      client.publish('nodemcu/stepper', 'ON');  // 외벽 열기 메시지
+      client.publish('nodemcu/stepper', 'ON');  // 천창 열기 메시지
+      sendToast("천창이 열렸습니다!!"); // Toast 알림 전송
     }
   };
 
   const handleWallControlClick = () => {
     if (client) {
-      client.publish('nodemcu/stepper', 'OFF');  // 외벽 닫기 메시지
+      client.publish('nodemcu/stepper', 'OFF');  // 천창 닫기 메시지
+      sendToast("천창이 닫혔습니다!!"); // Toast 알림 전송
     }
   };
 

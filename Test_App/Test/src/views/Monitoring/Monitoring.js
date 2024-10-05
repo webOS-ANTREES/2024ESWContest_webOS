@@ -110,7 +110,7 @@ const MainPanel = () => {
                                                 <p>CO2: {logData[date][time][key].co2}ppm</p>
                                                 <p>조도: {logData[date][time][key].illuminance}lux</p>
                                                 <p>수온: {logData[date][time][key].waterTemp}°C</p>
-                                                <p>pH농도: {logData[date][time][key].phVal}pH</p>
+                                                <p>pH농도: {logData[date][time][key].pHVal}pH</p>
                                             </div>
                                         ))}
                                 </div>
@@ -266,7 +266,7 @@ const MainPanel = () => {
                                 <Line
                                     type="monotone"
                                     dataKey="수온"
-                                    stroke="#FFD700"
+                                    stroke="#008080"
                                     strokeWidth={3}
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
@@ -278,7 +278,7 @@ const MainPanel = () => {
                             <LineChart
                                 data={todaySensorData.map(item => ({
                                     time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
-                                    pH: item.phVal
+                                    pH: item.pHVal
                                 }))}
                                 margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
                             >
@@ -322,7 +322,7 @@ const MainPanel = () => {
                         <p>CO2: {currentSensorData.co2}ppm</p>
                         <p>조도: {currentSensorData.illuminance}lux</p>
                         <p>수온: {currentSensorData.waterTemp}°C</p>
-                        <p>조도: {currentSensorData.phVal}pH</p>
+                        <p>pH: {currentSensorData.pHVal}pH</p>
                     </div>
                 )}
                 

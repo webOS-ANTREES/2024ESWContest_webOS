@@ -5,8 +5,7 @@ import { getDatabase, ref, query, limitToLast, onValue } from 'firebase/database
 import { firebaseApp } from '../../Firebase';
 import AutoControl from './AutoControl';
 import ManualControl from './ManualControl';
-import Notice from '../Notice/Notice'; // Notice 컴포넌트 추가
-import { sendAlert } from '../../services/luna_service';    // Luna_Service에서 sendAlert 가져오기
+import { sendToast, createKind  } from '../webOS_service/luna_service';
 
 const SystemControl = () => {
   const [client, setClient] = useState(null);
@@ -17,6 +16,7 @@ const SystemControl = () => {
   const [isInnerWall2Open, setIsInnerWall2Open] = useState(false);
 
   useEffect(() => {
+    createKind();  // DB8에 Kind 생성 (최초 한 번)
     const mqttClient = mqtt.connect('ws://172.20.48.180:1884');
     setClient(mqttClient);
 
@@ -56,11 +56,11 @@ const SystemControl = () => {
       if (isInnerWall1Open) {
         client.publish('nodemcu/innerWall1', 'CLOSE');  // 내벽 1 닫기 메시지
         setIsInnerWall1Open(false);
-        sendAlert("내벽 1이 닫혔습니다."); // 알림 추가
+        sendToast("내벽 1이 닫혔습니다!!")
       } else {
         client.publish('nodemcu/innerWall1', 'OPEN');  // 내벽 1 열기 메시지
         setIsInnerWall1Open(true);
-        sendAlert("내벽 1이 열렸습니다."); // 알림 추가
+        sendToast("내벽 1이 열렸습니다!!")
       }
     }
   };
@@ -70,11 +70,12 @@ const SystemControl = () => {
       if (isInnerWall2Open) {
         client.publish('nodemcu/innerWall2', 'CLOSE');  // 내벽 2 닫기 메시지
         setIsInnerWall2Open(false);
-        sendAlert("내벽 2가 닫혔습니다."); // 알림 추가
+        sendToast("내벽 2가 닫혔습니다!!")
       } else {
         client.publish('nodemcu/innerWall2', 'OPEN');  // 내벽 2 열기 메시지
         setIsInnerWall2Open(true);
-        sendAlert("내벽 2가 열렸습니다."); // 알림 추가
+        sendToast("내벽 2가 열렸습니다!!")
+
       }
     }
   };

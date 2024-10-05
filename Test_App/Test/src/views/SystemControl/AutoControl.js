@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import css from './AutoControl.module.css';
+import { sendToast } from '../webOS_service/luna_service';
 
 const AutoControl = ({ currentSensorData, client }) => {
   const [userInput, setUserInput] = useState({
@@ -33,10 +34,12 @@ const AutoControl = ({ currentSensorData, client }) => {
           illumination >= userIllumination) {
         if (client) {
           client.publish('nodemcu/stepper', 'ON');  // 모터 ON 메시지
+          sendToast("천창이 열렸습니다!!")
         }
       } else {
         if (client) {
           client.publish('nodemcu/stepper', 'OFF');  // 모터 OFF 메시지
+          sendToast("천창이 닫혔습니다!!")
         }
       }
     }
@@ -68,6 +71,7 @@ const AutoControl = ({ currentSensorData, client }) => {
       <div className={css.AutoControl}>
         <h3>자동 제어</h3>
         <div className={css.InputGrid}>
+
           {/* 온도 입력 필드 */}
           <div className={css.InputGroup}>
             <label>온도:</label>
