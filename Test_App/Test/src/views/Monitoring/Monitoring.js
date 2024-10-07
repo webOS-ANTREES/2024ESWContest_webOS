@@ -314,7 +314,7 @@ const MainPanel = () => {
                 </div>
 
                 {/* 최신 센서 데이터 표시 */}
-                {currentSensorData && (
+                {currentSensorData ? (
                     <div className={css.currentSensorDataContainer}>
                         <h3>Current Sensor Data</h3>
                         <p>온도: {currentSensorData.temperature}°C</p>
@@ -323,6 +323,11 @@ const MainPanel = () => {
                         <p>조도: {currentSensorData.illuminance}lux</p>
                         <p>수온: {currentSensorData.waterTemp}°C</p>
                         <p>pH: {currentSensorData.pHVal}pH</p>
+                    </div>
+                ) : (
+                    <div className={css.currentSensorDataContainer}>
+                        <h3>Current Sensor Data</h3>
+                        <p>데이터 없음</p>
                     </div>
                 )}
                 
