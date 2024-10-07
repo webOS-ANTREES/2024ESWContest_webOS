@@ -51,28 +51,28 @@ const SystemControl = () => {
     };
   }, []);
 
-  const handleInnerWall1Control = () => {
+  const handleInnerSide = () => {
     if (client) {
       if (isInnerWall1Open) {
-        client.publish('nodemcu/innerWall1', 'CLOSE');  // 내벽 1 닫기 메시지
+        client.publish('nodemcu/side', 'OFF');  // 내벽 1 닫기 메시지
         setIsInnerWall1Open(false);
         sendToast("내벽 1이 닫혔습니다!!")
       } else {
-        client.publish('nodemcu/innerWall1', 'OPEN');  // 내벽 1 열기 메시지
+        client.publish('nodemcu/side', 'ON');  // 내벽 1 열기 메시지
         setIsInnerWall1Open(true);
         sendToast("내벽 1이 열렸습니다!!")
       }
     }
   };
 
-  const handleInnerWall2Control = () => {
+  const handleInnerCeiling = () => {
     if (client) {
       if (isInnerWall2Open) {
-        client.publish('nodemcu/innerWall2', 'CLOSE');  // 내벽 2 닫기 메시지
+        client.publish('nodemcu/ceiling', 'OFF');  // 내벽 2 닫기 메시지
         setIsInnerWall2Open(false);
         sendToast("내벽 2가 닫혔습니다!!")
       } else {
-        client.publish('nodemcu/innerWall2', 'OPEN');  // 내벽 2 열기 메시지
+        client.publish('nodemcu/ceiling', 'ON');  // 내벽 2 열기 메시지
         setIsInnerWall2Open(true);
         sendToast("내벽 2가 열렸습니다!!")
 
@@ -92,23 +92,23 @@ const SystemControl = () => {
       
       {/* 내벽 제어 UI */}
       <div className={`${css.SystemControlItem} ${css.InnerWallControl1}`}>
-        <h2>내벽 제어 1</h2>
+        <h2>내벽 사이드 제어</h2>
         <div className={css.ControlButtonContainer}>
-          <button className={css.ControlButton} onClick={() => handleInnerWall1Control('OPEN')}>
+          <button className={css.ControlButton} onClick={() => handleInnerSide('ON')}>
             열기
           </button>
-          <button className={css.ControlButton} onClick={() => handleInnerWall1Control('CLOSE')}>
+          <button className={css.ControlButton} onClick={() => handleInnerSide('OFF')}>
             닫기
           </button>
         </div>
       </div>
       <div className={`${css.SystemControlItem} ${css.InnerWallControl2}`}>
-        <h2>내벽 제어 2</h2>
+        <h2>내벽 천장 제어</h2>
         <div className={css.ControlButtonContainer}>
-          <button className={css.ControlButton} onClick={() => handleInnerWall2Control('OPEN')}>
+          <button className={css.ControlButton} onClick={() => handleInnerCeiling('ON')}>
             열기
           </button>
-          <button className={css.ControlButton} onClick={() => handleInnerWall2Control('CLOSE')}>
+          <button className={css.ControlButton} onClick={() => handleInnerCeiling('OFF')}>
             닫기
           </button>
         </div>
