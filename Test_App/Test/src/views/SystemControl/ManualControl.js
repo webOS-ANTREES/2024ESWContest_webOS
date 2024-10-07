@@ -3,13 +3,13 @@ import css from './ManualControl.module.css';
 const ManualControl = ({ client }) => {
   const handlePestControlClick = () => {
     if (client) {
-      client.publish('nodemcu/stepper', 'ON');  // 외벽 열기 메시지
+      client.publish('nodemcu/sky', 'ON');  // 외벽 열기 메시지
     }
   };
 
   const handleWallControlClick = () => {
     if (client) {
-      client.publish('nodemcu/stepper', 'OFF');  // 외벽 닫기 메시지
+      client.publish('nodemcu/sky', 'OFF');  // 외벽 닫기 메시지
     }
   };
 
