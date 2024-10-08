@@ -1,22 +1,22 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, } from 'react';
 import mqtt from 'mqtt';
 import css from './SystemControl.module.css';
 import { getDatabase, ref, query, limitToLast, onValue } from 'firebase/database';
 import { firebaseApp } from '../../Firebase';
 import AutoControl from './AutoControl';
 import ManualControl from './ManualControl';
-import { sendToast, createKind  } from '../webOS_service/luna_service';
+import { sendToast, putKind  } from '../webOS_service/luna_service';
 
 const SystemControl = () => {
   const [client, setClient] = useState(null);
   const [currentSensorData, setLatestSensorData] = useState(null);
-  
+
   // 내벽 제어 상태
   const [isInnerWall1Open, setIsInnerWall1Open] = useState(false);
   const [isInnerWall2Open, setIsInnerWall2Open] = useState(false);
 
   useEffect(() => {
-    createKind();  // DB8에 Kind 생성 (최초 한 번)
+    putKind();  // DB8에 Kind 생성 (최초 한 번)
     const mqttClient = mqtt.connect('ws://172.20.48.180:1884');
     setClient(mqttClient);
 
@@ -82,14 +82,14 @@ const SystemControl = () => {
 
   return (
     <div className={css.SystemControlContainer}>
-      <AutoControl 
-        currentSensorData={currentSensorData} 
-        client={client} 
+      <AutoControl
+        currentSensorData={currentSensorData}
+        client={client}
       />
-      <ManualControl 
-        client={client} 
+      <ManualControl
+        client={client}
       />
-      
+
       {/* 내벽 제어 UI */}
       <div className={`${css.SystemControlItem} ${css.InnerWallControl1}`}>
         <h2>내벽 사이드 제어</h2>
