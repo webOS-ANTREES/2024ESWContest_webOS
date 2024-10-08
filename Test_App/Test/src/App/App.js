@@ -6,6 +6,7 @@ import Notice from '../views/Notice/Notice';
 import Navigation from '../views/Navigation/Navigation';
 import PestManagement from '../views/PestManagement/PestManagement';
 import SystemControl from '../views/SystemControl/SystemControl';
+import StatusBar from '../views/StatusBar/StatusBar'; // 시스템 시간을 가져오는 함수 가져오기
 import css from './App.module.css';
 
 const App = () => {
@@ -14,6 +15,8 @@ const App = () => {
   return (
     <Router>
       <div className={css.app}>
+      <StatusBar />
+
         <Routes>
           {/* 로그인 성공 시 네비게이션이 표시되도록 setIsAuthenticated를 전달 */}
           <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />

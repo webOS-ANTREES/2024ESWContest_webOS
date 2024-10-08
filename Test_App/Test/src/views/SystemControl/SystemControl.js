@@ -105,10 +105,10 @@ const SystemControl = () => {
       <div className={`${css.SystemControlItem} ${css.InnerWallControl2}`}>
         <h2>내벽 천장 제어</h2>
         <div className={css.ControlButtonContainer}>
-          <button className={css.ControlButton} onClick={() => handleInnerCeiling('ON')}>
+          <button className={css.ControlButton} onClick={() => handleInnerCeiling('OFF')}>
             열기
           </button>
-          <button className={css.ControlButton} onClick={() => handleInnerCeiling('OFF')}>
+          <button className={css.ControlButton} onClick={() => handleInnerCeiling('ON')}>
             닫기
           </button>
         </div>

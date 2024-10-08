@@ -11,29 +11,6 @@
 	  "notification.operation",
 	  "time.query",
 	  "activity.operation",
-	  "database.operation",
-	  "db.permission"
-	],
-	"permissions": [
-	  {
-		"service": "luna://com.webos.service.db",
-		"methods": [
-		  "putKind",
-		  "put",
-		  "find",
-		  "del"
-		]
-	  },
-	  {
-		"service": "luna://com.webos.notification",
-		"methods": [
-		  "createToast"
-		]
-	  }
-	],
-	"allowedGroup": [
-	  "com.webos.service.db",
-	  "database.operation",
-	  "service.communication"
+	  "database.operation"
 	]
 }

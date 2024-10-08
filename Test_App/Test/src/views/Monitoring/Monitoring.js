@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from '@enact/moonstone/Button';
 import css from './Monitoring.module.css';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import * as weatherService from './Weather_Service';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { firebaseApp } from '../../Firebase';
@@ -40,7 +40,7 @@ const MainPanel = () => {
         onValue(sensorDataRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                const allData = []; 
+                const allData = [];
                 Object.keys(data).forEach(timeKey => {
                     const timeData = data[timeKey];
                     const innerKeys = Object.keys(timeData);
@@ -75,9 +75,8 @@ const MainPanel = () => {
             clearInterval(timeInterval);
             clearInterval(apiInterval);
         };
-    }, [selectedCity]);
+    }, [selectedCity, currentTime, todayDate]);
 
-    // 추가된 부분
     const todaySensorData = sensorData; // 오늘 날짜의 데이터
 
     const handleDateClick = (date) => {
@@ -122,8 +121,8 @@ const MainPanel = () => {
             <div className={css.sensorContainer}>
                 <div className={css.sensorChartContainer}>
                     <div className={css.chartContainer}>
-                        <ResponsiveContainer width={300} height={200}>
                             <LineChart
+                            width={300} height={200}
                                 data={todaySensorData.map(item => ({
                                     time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
                                     온도: item.temperature
@@ -149,12 +148,11 @@ const MainPanel = () => {
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
-                        </ResponsiveContainer>
                     </div>
 
                     <div className={css.chartContainer}>
-                        <ResponsiveContainer width={300} height={200}>
                             <LineChart
+                            width={300} height={200}
                                 data={todaySensorData.map(item => ({
                                     time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
                                     습도: item.humidity
@@ -180,12 +178,11 @@ const MainPanel = () => {
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
-                        </ResponsiveContainer>
                     </div>
 
                     <div className={css.chartContainer}>
-                        <ResponsiveContainer width={300} height={200}>
                             <LineChart
+                            width={300} height={200}
                                 data={todaySensorData.map(item => ({
                                     time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
                                     Co2: item.co2
@@ -211,11 +208,10 @@ const MainPanel = () => {
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
-                        </ResponsiveContainer>
                     </div>
                     <div className={css.chartContainer}>
-                        <ResponsiveContainer width={300} height={200}>
                             <LineChart
+                            width={300} height={200}
                                 data={todaySensorData.map(item => ({
                                     time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
                                     조도: item.illuminance
@@ -241,11 +237,10 @@ const MainPanel = () => {
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
-                        </ResponsiveContainer>
                     </div>
                     <div className={css.chartContainer}>
-                        <ResponsiveContainer width={300} height={200}>
                             <LineChart
+                            width={300} height={200}
                                 data={todaySensorData.map(item => ({
                                     time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
                                     수온: item.waterTemp
@@ -271,11 +266,10 @@ const MainPanel = () => {
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
-                        </ResponsiveContainer>
                     </div>
                     <div className={css.chartContainer}>
-                        <ResponsiveContainer width={300} height={200}>
                             <LineChart
+                            width={300} height={200}
                                 data={todaySensorData.map(item => ({
                                     time: new Date(item.timestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),  // 시간 표시
                                     pH: item.pHVal
@@ -301,18 +295,11 @@ const MainPanel = () => {
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
-                        </ResponsiveContainer>
                     </div>
                 </div>
             </div>
 
             <div className={css.weatherContainer}>
-
-                <div className={css.currentTime}>
-                    <div>{weatherService.formatDateOnly(weatherService.getCurrentDate())}</div>
-                    <div>{currentTime.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}</div>
-                </div>
-
                 {/* 최신 센서 데이터 표시 */}
                 {currentSensorData ? (
                     <div className={css.currentSensorDataContainer}>
@@ -330,7 +317,6 @@ const MainPanel = () => {
                         <p>데이터 없음</p>
                     </div>
                 )}
-                
                 <div className={css.weatherMain}>
                     <Button
                         className={css.weatherButton}
@@ -344,8 +330,8 @@ const MainPanel = () => {
                     </Button>
 
                     <div className={css.chartContainer}>
-                        <ResponsiveContainer width={300} height={200}>
                             <LineChart
+                            width={300} height={200}
                                 data={detailedWeather.today.map(item => ({
                                     time: weatherService.formatTimeOnly(item.time),
                                     온도: item.temperature
@@ -375,12 +361,11 @@ const MainPanel = () => {
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
-                        </ResponsiveContainer>
                     </div>
 
                     <div className={css.chartContainer}>
-                        <ResponsiveContainer width={300} height={200}>
                             <LineChart
+                            width={300} height={200}
                                 data={detailedWeather.today.map(item => ({
                                     time: weatherService.formatTimeOnly(item.time),
                                     습도: item.humidity
@@ -410,12 +395,13 @@ const MainPanel = () => {
                                     dot={false}  // 데이터 포인트의 동그라미 원 제거
                                 />
                             </LineChart>
-                        </ResponsiveContainer>
                     </div>
                 </div>
-                {showDetailedWeather && (
+            </div>
+            {showDetailedWeather && (
                     <div className={css.detailweatherContainer}>
                         <h3>세부 날씨</h3>
+                        <Button className={css.closeButton} onClick={() => setShowDetailedWeather(false)}>닫기</Button>
                         <h4>{weatherService.formatDateOnly(weatherService.getCurrentDate())}</h4>
                         <table className={css.weatherTable}>
                             <thead>
@@ -501,9 +487,6 @@ const MainPanel = () => {
                         </table>
                     </div>
                 )}
-            </div>
-
-
         </div>
     );
 };

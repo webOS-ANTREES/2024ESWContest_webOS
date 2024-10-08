@@ -3,6 +3,29 @@ import LS2Request from '@enact/webos/LS2Request';
 const webOSBridge = new LS2Request();
 const kindID = "com.test.app:1"; // Kind의 고유 ID
 
+// 시스템 시간 가져오기 함수
+export const getSystemTime = (callback) => {
+    const params = {};
+
+    webOSBridge.send({
+        service: 'luna://com.webos.service.systemservice/clock',  // 시스템 시간 가져오기 서비스
+        method: 'getTime',
+        parameters: params,
+        onSuccess: (result) => {
+            if (result.utc) {
+                const dateObj = new Date(result.utc * 1000); // UTC를 밀리초로 변환
+                const formattedTime = dateObj.toLocaleTimeString('ko-KR', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true, // 12시간 형식
+                    hourCycle: 'h12', // 선행 0 제거
+                });
+                callback(null, formattedTime); // 콜백을 통해 전달
+            }
+        },
+    });
+};
+
 export const putKind = () => {
     const url = 'luna://com.webos.service.db';  // 요청할 서비스 URL
     const params = {
@@ -33,14 +56,8 @@ export const putKind = () => {
     webOSBridge.send({
       service: url,
       method: "putKind",
-      parameters: params,
-      onSuccess: (msg) => {
-          console.log("Kind 생성 성공:", msg);
-      },
-      onFailure: (err) => {
-          console.error("Kind 생성 실패:", JSON.stringify(err));
-      }
-  });
+      parameters: params
+    });
 }
 
 
@@ -65,20 +82,27 @@ export const putPermissions = () => {
    webOSBridge.send({
        service: "luna://com.webos.service.db",
        method: "putPermissions",
-       parameters: params,
-       onSuccess: (result) => console.log("Permissions 설정 성공:", result),
-       onFailure: (error) => console.error("Permissions 설정 실패:", error)
+       parameters: params
    });
 }
 
 // Toast 알림을 DB에 저장하는 함수
 export const saveToastToDB = (message) => {
+   const formattedDate = new Date().toLocaleString('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true // 24시간 형식 사용
+    });
     const params = {
         objects: [
             {
                 "_kind": kindID,
                 "message": message,
-                "timestamp": new Date().toISOString()
+                "timestamp": formattedDate
             }
         ]
     };
@@ -86,26 +110,22 @@ export const saveToastToDB = (message) => {
     webOSBridge.send({
         service: "luna://com.webos.service.db",
         method: "put",
-        parameters: params,
-        onSuccess: (result) => console.log("DB 저장 성공:", result),
-        onFailure: (error) => console.error("DB 저장 실패:", error)
+        parameters: params
     });
 };
 
 // Toast 알림을 띄우는 함수
 export const sendToast = (message) => {
-    const params = { message };
+   const params = { message };
 
-    webOSBridge.send({
-        service: "luna://com.webos.notification",
-        method: "createToast",
-        parameters: params,
-        onSuccess: (result) => {
-            console.log("Toast 성공:", result);
-            saveToastToDB(message);  // Toast 성공 시 DB에 저장
-        },
-        onFailure: (error) => console.error("Toast 실패:", error)
-    });
+   webOSBridge.send({
+       service: "luna://com.webos.notification",
+       method: "createToast",
+       parameters: params,
+       onSuccess: () => {
+           saveToastToDB(message);  // Toast 성공 시 DB에 저장
+       }
+   });
 };
 
 // DB에서 저장된 알림을 조회하는 함수
@@ -121,16 +141,35 @@ export const getNotificationsFromDB = (callback) => {
         method: "find",
         parameters: params,
         onSuccess: (result) => {
-            console.log("DB에서 가져온 알림들:", result.results);
             if (callback) {
                 callback(null, result.results);
             }
         },
         onFailure: (error) => {
-            console.error("DB에서 알림 가져오기 실패:", error);
             if (callback) {
                 callback(error, null);
             }
         }
     });
+};
+
+// DB에서 알림 삭제 함수
+export const deleteNotificationFromDB = (_id, callback) => {
+   const params = {
+       "ids": [_id]  // 삭제할 알림의 _id 값
+   };
+
+   webOSBridge.send({
+       service: "luna://com.webos.service.db",
+       method: "del",
+       parameters: params,
+       onSuccess: (result) => {
+           console.log("DB에서 알림 삭제 성공:", result);
+           if (callback) callback(null);
+       },
+       onFailure: (error) => {
+           console.error("DB에서 알림 삭제 실패:", error);
+           if (callback) callback(error);
+       }
+   });
 };

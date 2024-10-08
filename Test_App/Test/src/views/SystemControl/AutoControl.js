@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import css from './AutoControl.module.css';
+import { useState } from 'react';
 import { sendToast } from '../webOS_service/luna_service';
+import css from './AutoControl.module.css';
 
 const AutoControl = ({ currentSensorData, client }) => {
   const [userInput, setUserInput] = useState({
@@ -28,9 +28,9 @@ const AutoControl = ({ currentSensorData, client }) => {
       const { temperature, humidity, co2, illumination } = currentSensorData;
 
       // 조건을 만족하면 ON 메시지를 보냄
-      if (temperature >= userTemperature || 
-          humidity >= userHumidity || 
-          co2 >= userCO2 || 
+      if (temperature >= userTemperature ||
+          humidity >= userHumidity ||
+          co2 >= userCO2 ||
           illumination >= userIllumination) {
         if (client) {
           client.publish('nodemcu/stepper', 'ON');  // 모터 ON 메시지

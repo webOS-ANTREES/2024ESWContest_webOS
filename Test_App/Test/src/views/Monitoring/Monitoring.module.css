@@ -2,8 +2,8 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 0.3fr 2fr; /* 두 개의 열: Log Data와 나머지 컨텐츠 */
-    grid-template-rows: 0.5fr 1fr; /* 두 개의 행: 날씨 API와 센서 데이터 */
+    grid-template-columns: 0.35fr 2fr; /* 두 개의 열: Log Data와 나머지 컨텐츠 */
+    grid-template-rows: 0.5fr 0.5fr; /* 두 개의 행: 날씨 API와 센서 데이터 */
     gap: 10px;
     padding: 20px;
     box-sizing: border-box;
@@ -26,13 +26,15 @@
 .weatherContainer {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100%;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
     align-items: center;
-    justify-content: flex-start;
 }
 
 .sensorContainer {
@@ -47,15 +49,19 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     height: 100%;
     box-sizing: border-box;
+    transform: translate(225px);
 }
 
 
 .currentSensorDataContainer {
+    grid-column: 1 / 3;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 620px;
+    width: 600px;
+    font-weight: bold;
+    line-height: 1;
     border: 8px solid black;
 }
 
@@ -67,18 +73,12 @@
     height: 100%;
 }
 
-.weatherContainer {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    align-items: start;
-    height: 100%;
-}
-
 .weatherMain {
     display: grid;
-    grid-template-columns: 300px 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
-    align-items: start;
+    align-items: center;
+    transform: translate(153px);
 }
 
 .weatherButton {
@@ -89,35 +89,53 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 300px;
+    width: 350px;
     height: 100px;
     box-sizing: border-box;
     text-align: center;
-    transition: 0.3s ease;
-    width: 10%;
     height: auto;
+    transform: translate(-70px);
 }
 
 .detailweatherContainer {
-    grid-row-start: 3;
-    max-height: 40vh;
-    overflow-y: auto;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-    font-size : 45px;
-    height: auto;
+    overflow-y: auto;
+    z-index: 1000;
+    width: 97%;
+    height: 70%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    border: 8px solid black
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
 }
 
 .weatherTable {
     width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
     border-collapse: collapse;
 }
 
-.weatherTable th,
-.weatherTable td {
+.weatherTable th, .weatherTable td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
@@ -133,16 +151,6 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    height: 100%;
-}
-
-.currentTime {
-    grid-column: 1 / 3;
-    text-align: right;
-    font-weight: bold;
-    font-size: 1em;
-    margin-bottom: 2rem;
 }
 
 .cityName {
@@ -155,8 +163,7 @@
     margin-top: 1rem;
 }
 
-.humidity,
-.description {
+.humidity, .description {
     font-size: 1.2rem;
     margin-top: 0.5rem;
 }

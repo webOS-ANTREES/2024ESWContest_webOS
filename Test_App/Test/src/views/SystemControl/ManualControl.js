@@ -1,7 +1,7 @@
 import css from './ManualControl.module.css';
 import { sendToast } from '../webOS_service/luna_service';
 
-const ManualControl = ({ client, onToast }) => {
+const ManualControl = ({ client }) => {
   const handlePestControlClick = () => {
     if (client) {
       client.publish('nodemcu/sky', 'ON');  // 외벽 열기 메시지

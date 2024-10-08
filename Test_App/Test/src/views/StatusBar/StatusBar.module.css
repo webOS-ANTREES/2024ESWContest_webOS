@@ -1,0 +1,10 @@
+.StatusBarContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px;
+    padding-left: 200px;
+    background-color: #8A2BE2;
+    color: white;
+    font-weight: 700;
+  }
