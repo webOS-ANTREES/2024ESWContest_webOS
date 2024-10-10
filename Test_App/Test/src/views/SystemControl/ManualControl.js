@@ -5,14 +5,14 @@ const ManualControl = ({ client }) => {
   const handlePestControlClick = () => {
     if (client) {
       client.publish('nodemcu/sky', 'ON');  // 외벽 열기 메시지
-      sendToast("천창이 열렸습니다!!"); // Toast 알림 전송
+      sendToast("천창이 열렸습니다."); // Toast 알림 전송
     }
   };
 
   const handleWallControlClick = () => {
     if (client) {
       client.publish('nodemcu/sky', 'OFF');  // 외벽 닫기 메시지
-      sendToast("천창이 닫혔습니다!!"); // Toast 알림 전송
+      sendToast("천창이 닫혔습니다."); // Toast 알림 전송
     }
   };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getNotificationsFromDB, deleteNotificationFromDB } from '../webOS_service/luna_service'; // 삭제 함수 추가
+import { getNotificationsFromDB, deleteNotificationFromDB } from '../webOS_service/luna_service';
 import css from './Notice.module.css';
 
 const Notice = () => {

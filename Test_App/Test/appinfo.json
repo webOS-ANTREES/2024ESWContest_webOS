@@ -8,9 +8,14 @@
 	"icon": "Berry Smart Farm.png",
 	"uiRevision": 2,
 	"requiredPermissions": [
-	  "notification.operation",
 	  "time.query",
 	  "activity.operation",
+	  "notification.operation",
 	  "database.operation"
-	]
+	],
+	"acg": [
+    "com.webos.service.db",
+    "com.webos.service.systemservice",
+    "com.webos.service.notification"
+  ]
 }

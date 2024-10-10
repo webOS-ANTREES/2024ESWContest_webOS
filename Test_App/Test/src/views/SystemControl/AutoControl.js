@@ -1,68 +1,100 @@
-import { useState } from 'react';
-import { sendToast } from '../webOS_service/luna_service';
+import { useState, useEffect } from 'react';
+import { sendToast, saveSettingsToDB, getSettingsFromDB, deleteSettingsFromDB } from '../webOS_service/luna_service';
 import css from './AutoControl.module.css';
 
 const AutoControl = ({ currentSensorData, client }) => {
-  const [userInput, setUserInput] = useState({
+  // 기본 설정값
+  const defaultSettings = {
     temperature: 10,
     humidity: 10,
     co2: 10,
-    illumination: 1000 // illumination 변수를 초기값으로 설정
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserInput((prevInput) => ({
-      ...prevInput,
-      [name]: value,
-    }));
+    illumination: 1000
   };
 
+  const [userInput, setUserInput] = useState(defaultSettings); // 설정값 상태 관리
+  const [loadedSettings, setLoadedSettings] = useState(null);  // 불러온 설정값 저장
+
+  // 설정값을 DB에서 불러오는 함수
+  const loadSettings = () => {
+    console.log("Loading settings from DB...");
+
+    getSettingsFromDB((error, latestSettings) => {
+      if (error) {
+        console.log("Error loading settings from DB:", error);
+      } else if (latestSettings) {
+        console.log("Latest settings from DB:", JSON.stringify(latestSettings));
+
+        // 최신 설정값을 상태로 반영
+        setUserInput(latestSettings);
+        setLoadedSettings(latestSettings); // 최신 설정값을 loadedSettings로 반영
+      }
+    });
+  };
+
+  // 컴포넌트 마운트 시 DB에서 설정값 불러오기
+  useEffect(() => {
+    loadSettings();  // 페이지가 로드될 때 설정값 불러오기
+  }, []);
+
+  // loadedSettings 상태가 변경되었을 때 로그 출력
+  useEffect(() => {
+    if (loadedSettings) {
+      console.log("Loaded settings state has been updated:", JSON.stringify(loadedSettings));
+    }
+  }, [loadedSettings]);  // loadedSettings 상태가 변경될 때마다 실행
+
+  // 입력값이 변경될 때 실행
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const newUserInput = {
+      ...userInput,
+      [name]: parseInt(value) || 0  // 입력값을 숫자로 변환 후 상태에 반영
+    };
+    setUserInput(newUserInput);  // 상태 업데이트
+  };
+
+  // 자동 제어 로직
   const handleAutoControl = () => {
     const userTemperature = userInput.temperature;
     const userHumidity = userInput.humidity;
     const userCO2 = userInput.co2;
-    const userIllumination = userInput.illumination; // illumination 변수 추가
+    const userIllumination = userInput.illumination;
 
     if (currentSensorData) {
       const { temperature, humidity, co2, illumination } = currentSensorData;
 
-      // 조건을 만족하면 ON 메시지를 보냄
       if (temperature >= userTemperature ||
-          humidity >= userHumidity ||
-          co2 >= userCO2 ||
-          illumination >= userIllumination) {
+        humidity >= userHumidity ||
+        co2 >= userCO2 ||
+        illumination >= userIllumination) {
         if (client) {
-          client.publish('nodemcu/stepper', 'ON');  // 모터 ON 메시지
-          sendToast("천창이 열렸습니다!!")
+          client.publish('nodemcu/stepper', 'ON'); // 모터 ON 메시지
+          sendToast("천창이 열렸습니다.");
         }
       } else {
         if (client) {
-          client.publish('nodemcu/stepper', 'OFF');  // 모터 OFF 메시지
-          sendToast("천창이 닫혔습니다!!")
+          client.publish('nodemcu/stepper', 'OFF'); // 모터 OFF 메시지
+          sendToast("천창이 닫혔습니다.");
         }
       }
     }
   };
 
-  const handleConfirm = () => {
-    // 확인 버튼을 클릭했을 때 입력값을 저장
-    setUserInput((prevInput) => ({
-      ...prevInput,
-      temperature: userInput.temperature,
-      humidity: userInput.humidity,
-      co2: userInput.co2,
-      illumination: userInput.illumination
-    }));
+  // 설정값을 확인하고 DB에 저장한 후, 자동 제어 함수 실행
+  const handleConfirm = async () => {
+    try {
+      await saveSettingsToDB(userInput);  // 설정값을 DB에 저장 (비동기 처리)
+      sendToast(`천장 자동 제어 조건이 변경되었습니다. 온도 ${userInput.temperature}°C, 습도 ${userInput.humidity}%, CO2 ${userInput.co2}ppm, 조도 ${userInput.illumination}lux`);
+      handleAutoControl();
+    } catch (error) {
+      console.log("Error saving settings to DB:", error);  // 오류 처리
+    }
   };
 
+  // 설정을 기본값으로 되돌리는 함수
   const handleResetToDefault = () => {
-    setUserInput({
-      temperature: 10,
-      humidity: 10,
-      co2: 10,
-      illumination: 1000
-    });
+    setUserInput(defaultSettings);  // 기본값으로 상태 업데이트
+    deleteSettingsFromDB();  // DB에서 설정값 삭제
   };
 
   return (
@@ -133,7 +165,7 @@ const AutoControl = ({ currentSensorData, client }) => {
           </div>
         </div>
 
-        <button className={css.ControlButton} onClick={() => { handleAutoControl(); handleConfirm(); }}>
+        <button className={css.ControlButton} onClick={handleConfirm}>
           확인
         </button>
 

@@ -10,14 +10,18 @@ const StatusBar = () => {
             if (!err) setCurrentTime(time);
         });
 
-        const intervalId = setInterval(getSystemTime, 1000);
+        const intervalId = setInterval(() => {
+            getSystemTime((err, time) => {
+                if (!err) setCurrentTime(time);
+            });
+        }, 1000); // 1초 간격으로 갱신
 
         return () => clearInterval(intervalId);
     }, []);
 
     return (
         <div className={css.StatusBarContainer}>
-            <div>LOL{currentTime}</div>
+            <div>이 상태바에는 어떤 것들이 들어가면 좋을까???{currentTime}</div>
         </div>
     );
 };

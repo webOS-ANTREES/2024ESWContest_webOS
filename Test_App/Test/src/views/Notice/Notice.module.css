@@ -12,7 +12,8 @@
 }
 
 .NotificationList {
-  max-height: 300px;
+  width: 97%;
+  height: 70%;
   overflow-y: auto;
   padding: 0;
   margin: 0;

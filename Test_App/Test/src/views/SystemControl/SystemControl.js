@@ -16,13 +16,13 @@ const SystemControl = () => {
   const [isInnerWall2Open, setIsInnerWall2Open] = useState(false);
 
   useEffect(() => {
-    putKind();  // DB8에 Kind 생성 (최초 한 번)
     const mqttClient = mqtt.connect('ws://172.20.48.180:1884');
-    setClient(mqttClient);
-
     const todayDate = new Date().toISOString().split('T')[0];
     const database = getDatabase(firebaseApp);
     const sensorDataRef = query(ref(database, `sensorData/${todayDate}`), limitToLast(1));
+
+    putKind();  // DB8에 Kind 생성 (최초 한 번)
+    setClient(mqttClient);
 
     onValue(sensorDataRef, (snapshot) => {
       const data = snapshot.val();
@@ -56,11 +56,11 @@ const SystemControl = () => {
       if (isInnerWall1Open) {
         client.publish('nodemcu/side', 'OFF');  // 내벽 1 닫기 메시지
         setIsInnerWall1Open(false);
-        sendToast("내벽 1이 닫혔습니다!!")
+        sendToast("내벽 1이 닫혔습니다.")
       } else {
         client.publish('nodemcu/side', 'ON');  // 내벽 1 열기 메시지
         setIsInnerWall1Open(true);
-        sendToast("내벽 1이 열렸습니다!!")
+        sendToast("내벽 1이 열렸습니다.")
       }
     }
   };
@@ -70,11 +70,11 @@ const SystemControl = () => {
       if (isInnerWall2Open) {
         client.publish('nodemcu/ceiling', 'OFF');  // 내벽 2 닫기 메시지
         setIsInnerWall2Open(false);
-        sendToast("내벽 2가 닫혔습니다!!")
+        sendToast("내벽 2가 닫혔습니다.")
       } else {
         client.publish('nodemcu/ceiling', 'ON');  // 내벽 2 열기 메시지
         setIsInnerWall2Open(true);
-        sendToast("내벽 2가 열렸습니다!!")
+        sendToast("내벽 2가 열렸습니다.")
 
       }
     }
@@ -105,10 +105,10 @@ const SystemControl = () => {
       <div className={`${css.SystemControlItem} ${css.InnerWallControl2}`}>
         <h2>내벽 천장 제어</h2>
         <div className={css.ControlButtonContainer}>
-          <button className={css.ControlButton} onClick={() => handleInnerCeiling('OFF')}>
+          <button className={css.ControlButton} onClick={() => handleInnerCeiling('ON')}>
             열기
           </button>
-          <button className={css.ControlButton} onClick={() => handleInnerCeiling('ON')}>
+          <button className={css.ControlButton} onClick={() => handleInnerCeiling('OFF')}>
             닫기
           </button>
         </div>
