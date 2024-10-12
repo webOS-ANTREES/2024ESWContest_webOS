@@ -28,6 +28,7 @@ const ManualControl = ({ client }) => {
         </button>
       </div>
     </div>
+    
   );
 };
 

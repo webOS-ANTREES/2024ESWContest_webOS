@@ -47,15 +47,6 @@
   background-color: #0056b3;
 }
 
-/* 천창 제어 컨테이너 (왼쪽 상단) */
-.SkylightControl {
-  grid-column: 1 / 2; /* First column */
-  grid-row: 1 / 2; /* First row */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 /* 수동 제어 컨테이너 (왼쪽 하단) */
 .ManualControl {
   grid-column: 1 / 2; /* First column */
