@@ -21,7 +21,7 @@ const StatusBar = () => {
       getSystemTime((err, time) => {
         if (!err) setCurrentTime(time);
       });
-    }, 1000); 
+    }, 1000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -31,26 +31,26 @@ const StatusBar = () => {
     setMenuVisible(!isMenuVisible); // 메뉴의 보임/숨김을 토글
   };
 
+  const handleBackClick = () => {
+    setMenuVisible(false); // 메뉴를 숨기기
+    navigate('/menu');
+  };
+
   return (
-    <div className={css.StatusBarContainer}>
-      {/* 뒤로 가기 버튼이 특정 경로에서만 보이도록 조건 추가 */}
+<div className={css.StatusBarContainer}>
       {pathsWithBackButton.includes(location.pathname) && (
         <>
-          <button onClick={() => navigate('/menu')} className={css.backButton}>
+          <button onClick={handleBackClick} className={css.backButton}>
             뒤로 가기
           </button>
-
-          {/* 메뉴 버튼도 같은 조건에서만 보이도록 */}
           <button onClick={toggleMenu} className={css.menuButton}>
             메뉴
           </button>
         </>
       )}
-      
-      {/* 현재 시간 표시 */}
+
       <div className={css.timeContainer}>현재 시간: {currentTime}</div>
 
-      {/* 메뉴 팝업 */}
       {isMenuVisible && (
         <div className={css.menuPopup}>
           <button onClick={() => navigate('/monitoring')} className={css.menuItem}>모니터링</button>

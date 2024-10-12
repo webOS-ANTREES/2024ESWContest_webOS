@@ -33,7 +33,7 @@ const AutoControl = ({ currentSensorData, client }) => {
 
   // 컴포넌트 마운트 시 DB에서 설정값 불러오기
   useEffect(() => {
-    loadSettings();  // 페이지가 로드될 때 설정값 불러오기
+    loadSettings();
   }, []);
 
   // loadedSettings 상태가 변경되었을 때 로그 출력
@@ -41,16 +41,16 @@ const AutoControl = ({ currentSensorData, client }) => {
     if (loadedSettings) {
       console.log("Loaded settings state has been updated:", JSON.stringify(loadedSettings));
     }
-  }, [loadedSettings]);  // loadedSettings 상태가 변경될 때마다 실행
+  }, [loadedSettings]); // loadedSettings 상태가 변경될 때마다 실행
 
   // 입력값이 변경될 때 실행
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     const newUserInput = {
       ...userInput,
-      [name]: parseInt(value) || 0  // 입력값을 숫자로 변환 후 상태에 반영
+      [name]: parseInt(value) || 0 // 입력값을 숫자로 변환 후 상태에 반영
     };
-    setUserInput(newUserInput);  // 상태 업데이트
+    setUserInput(newUserInput); // 상태 업데이트
   };
 
   // 자동 제어 로직
@@ -83,18 +83,18 @@ const AutoControl = ({ currentSensorData, client }) => {
   // 설정값을 확인하고 DB에 저장한 후, 자동 제어 함수 실행
   const handleConfirm = async () => {
     try {
-      await saveSettingsToDB(userInput);  // 설정값을 DB에 저장 (비동기 처리)
+      await saveSettingsToDB(userInput); //설정값을 DB에 저장 (비동기 처리)
       sendToast(`천장 자동 제어 조건이 변경되었습니다. 온도 ${userInput.temperature}°C, 습도 ${userInput.humidity}%, CO2 ${userInput.co2}ppm, 조도 ${userInput.illumination}lux`);
       handleAutoControl();
     } catch (error) {
-      console.log("Error saving settings to DB:", error);  // 오류 처리
+      console.log("Error saving settings to DB:", error);
     }
   };
 
   // 설정을 기본값으로 되돌리는 함수
   const handleResetToDefault = () => {
-    setUserInput(defaultSettings);  // 기본값으로 상태 업데이트
-    deleteSettingsFromDB();  // DB에서 설정값 삭제
+    setUserInput(defaultSettings); // 기본값으로 상태 업데이트
+    deleteSettingsFromDB(); // DB에서 설정값 삭제
   };
 
   return (
