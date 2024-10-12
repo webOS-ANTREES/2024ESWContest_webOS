@@ -29,7 +29,7 @@ const Login = ({ setIsAuthenticated }) => {
 
   return (
     <div className={css.loginContainer}>
-      <img src="../../../Berry Smart Farm.png" alt="logo" className={css.logo} />
+      <img src="/Berry Smart Farm.png" alt="logo" className={css.logo} />
       <h1 className={css.title}>Login</h1>
       <Input
         placeholder="ID"
