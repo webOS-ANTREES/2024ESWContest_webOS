@@ -178,7 +178,6 @@ export const deleteNotificationFromDB = (_id, callback) => {
 
 // 설정값을 DB에 저장하는 함수
 export const saveSettingsToDB = (settings) => {
-    console.log("saveSettingsToDB");
     const params = {
         objects: [
             {
