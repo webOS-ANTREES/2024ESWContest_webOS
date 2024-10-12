@@ -8,7 +8,7 @@ import { firebaseApp } from '../../Firebase';
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
-const MainPanel = () => {
+const Monitoring = () => {
     const [weather, setWeather] = useState({ seoul: {}, daegu: {}, busan: {} });
     const [selectedCity] = useState('daegu');
     const [detailedWeather, setDetailedWeather] = useState({ today: [], tomorrow: [], dayAfterTomorrow: [] });
@@ -491,4 +491,4 @@ const MainPanel = () => {
     );
 };
 
-export default MainPanel;
+export default Monitoring;

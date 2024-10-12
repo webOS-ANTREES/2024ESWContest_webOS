@@ -21,7 +21,7 @@ const Login = ({ setIsAuthenticated }) => {
 
     if (id === validID && password === validPW) {
       setIsAuthenticated(true);
-      navigate('/monitoring');  // 로그인 성공 시 경로 이동
+      navigate('/menu');  // 로그인 성공 시 경로 이동
     } else {
       setError('아이디/비밀번호를 확인해주십시오');
     }
@@ -29,6 +29,7 @@ const Login = ({ setIsAuthenticated }) => {
 
   return (
     <div className={css.loginContainer}>
+      <img src="../../../Berry Smart Farm.png" alt="logo" className={css.logo} />
       <h1 className={css.title}>Login</h1>
       <Input
         placeholder="ID"

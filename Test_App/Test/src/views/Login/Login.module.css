@@ -8,6 +8,12 @@
   background-color: #f0f0f0;
 }
 
+.logo {
+  width: 500px;
+  margin-top: -500px;
+  margin-bottom: 100px;
+}
+
 .title {
   margin-bottom: 128px;
   color: #333;
