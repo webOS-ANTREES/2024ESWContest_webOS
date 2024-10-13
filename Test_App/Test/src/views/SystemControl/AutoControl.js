@@ -98,9 +98,8 @@ const AutoControl = ({ currentSensorData, client }) => {
   };
 
   return (
-    <div className={`${css.SystemControlItem} ${css.SkylightControl}`}>
+    <div className={`${css.SystemControlItem} ${css.AutoControl}`}>
       <h2>천창 제어</h2>
-      <div className={css.AutoControl}>
         <h3>자동 제어</h3>
         <div className={css.InputGrid}>
 
@@ -173,7 +172,6 @@ const AutoControl = ({ currentSensorData, client }) => {
           기본값
         </button>
       </div>
-    </div>
   );
 };
 

@@ -1,12 +1,12 @@
 .SystemControlContainer {
   display: grid;
-  grid-template-columns: 0.7fr 1fr; /* 첫 번째 열은 0.7fr, 두 번째 열은 1fr */
-  grid-template-rows: 1fr 1fr; /* 두 개의 행을 생성 */
-  gap: 10px; /* 각 섹션 간의 간격 */
+  grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
+  grid-template-rows: 1fr 1fr; /* Two rows */
+  gap: 10px;
   width: 100vw;
   height: 100vh;
   padding: 20px;
-  background-color: #f9f9f9; /* 배경색 설정 */
+  background-color: #f9f9f9;
   box-sizing: border-box;
 }
 
@@ -16,7 +16,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  text-align: left; /* 텍스트를 왼쪽으로 정렬 */
+  text-align: left;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -25,11 +25,11 @@
 .SystemControlItem h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  text-align: left; /* 제목도 왼쪽으로 정렬 */
+  text-align: left;
 }
 
 .ControlButtonContainer {
-  text-align: center; /* 버튼을 중앙에 정렬하기 위한 컨테이너 */
+  text-align: center;
 }
 
 .ControlButton {
@@ -40,66 +40,17 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 10px; /* 버튼 간의 간격 추가 */
+  margin: 10px;
 }
 
 .ControlButton:hover {
   background-color: #0056b3;
 }
 
-/* 천창 제어 컨테이너 (왼쪽 상단) */
-.SkylightControl {
-  grid-column: 1 / 2; /* 첫 번째 열 */
-  grid-row: 1 / 3; /* 첫 번째부터 두 번째 행까지 사용 */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* 세로로 컨텐츠를 균등하게 배치 */
-}
-
-/* 자동제어 섹션 */
-.AutoControl {
-  flex-grow: 1;
-  background-color: #e9ecef;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 10px; /* 자동제어와 수동제어 사이 간격 */
-}
-
-.AutoControl h3 {
-  margin: 0;
-  font-size: 1.3rem;
-  text-align: left; /* 자동제어 제목 왼쪽 정렬 */
-}
-
-.InputGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 두 개의 열로 구성 */
-  gap: 10px; /* 각 입력 그룹 간의 간격 */
-}
-
-.InputGroup {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px; /* 입력 그룹 간의 간격 */
-}
-
-.InputField {
-  width: 30%; /* 입력 필드가 차지할 공간을 %로 설정 */
-  padding: 5px; /* 내부 패딩을 줄임 */
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-}
-
-.InputGroup label {
-  font-size: 1rem;
-  flex-basis: 10%; /* 레이블이 차지할 공간을 %로 설정 */
-  text-align: left; /* 레이블 왼쪽 정렬 */
-}
-
-/* 수동제어 섹션 */
+/* 수동 제어 컨테이너 (왼쪽 하단) */
 .ManualControl {
-  flex-grow: 1;
+  grid-column: 1 / 2; /* First column */
+  grid-row: 2 / 3; /* Second row */
   background-color: #e9ecef;
   padding: 15px;
   border-radius: 8px;
@@ -108,23 +59,25 @@
 .ManualControl h3 {
   margin: 0;
   font-size: 1.3rem;
-  text-align: left; /* 수동제어 제목 왼쪽 정렬 */
+  text-align: left;
 }
 
-.ControlButtonContainer {
-  text-align: left; /* ON/OFF 버튼을 중앙에 배치 */
-}
-
-/* 내벽 제어 컨테이너 1 (오른쪽 상단) */
+/* 내벽 사이드 제어 (중간 열) */
 .InnerWallControl1 {
-  grid-column: 2 / 3; /* 두 번째 열 */
-  grid-row: 1 / 2; /* 첫 번째 행 */
-  text-align: left; /* 내벽제어 1 제목 왼쪽 정렬 */
+  grid-column: 2 / 3; /* Second column */
+  grid-row: 1 / 3; /* Spans two rows */
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
 }
 
-/* 내벽 제어 컨테이너 2 (오른쪽 하단) */
+/* 내벽 천장 제어 (오른쪽 열) */
 .InnerWallControl2 {
-  grid-column: 2 / 3; /* 두 번째 열 */
-  grid-row: 2 / 3; /* 두 번째 행 */
-  text-align: left; /* 내벽제어 2 제목 왼쪽 정렬 */
+  grid-column: 3 / 4; /* Third column */
+  grid-row: 1 / 3; /* Spans two rows */
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
 }
