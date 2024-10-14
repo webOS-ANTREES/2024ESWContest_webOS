@@ -315,7 +315,7 @@ const AutoControl = ({ currentSensorData, client }) => {
           </div>
         </div>
         <button className={css.ControlButton} onClick={() => handleConfirm('sideWall')}>
-          확인  
+          확인
         </button>
         <button className={css.ControlButton} onClick={() => handleResetToDefault('sideWall')}>
           기본값

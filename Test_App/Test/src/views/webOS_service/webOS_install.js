@@ -65,5 +65,4 @@ function startProcess() {
     });
 }
 
-// 실행 시작
 startProcess();

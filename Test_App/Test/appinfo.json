@@ -4,7 +4,7 @@
 	"vendor": "LGE-SVL",
 	"type": "web",
 	"main": "index.html",
-	"title": "webOS App",
+	"title": "Berry Smart Farm",
 	"icon": "Berry Smart Farm.png",
 	"uiRevision": 2,
 	"requiredPermissions": [

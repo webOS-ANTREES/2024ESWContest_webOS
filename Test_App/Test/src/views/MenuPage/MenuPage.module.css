@@ -1,12 +1,24 @@
 .menuContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  .button {
-    margin: 20px;
-    width: 200px;
-  }  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  margin-bottom: 800px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-bottom: 1000px;
+}
+
+.button {
+  width: 500px;
+  padding: 10px;
+  text-align: center;
+}
