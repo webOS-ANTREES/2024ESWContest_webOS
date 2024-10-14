@@ -20,7 +20,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/menu" element={isAuthenticated ? <MenuPage /> : <Navigate to="/" />} />
-
           <Route path="/monitoring" element={isAuthenticated ? <Monitoring /> : <Navigate to="/" />} />
           <Route path="/notice" element={isAuthenticated ? <Notice /> : <Navigate to="/" />} />
           <Route path="/systemcontrol" element={isAuthenticated ? <SystemControl /> : <Navigate to="/" />} />

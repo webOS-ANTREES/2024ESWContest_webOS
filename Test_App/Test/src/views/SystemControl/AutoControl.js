@@ -3,175 +3,325 @@ import { sendToast, saveSettingsToDB, getSettingsFromDB, deleteSettingsFromDB } 
 import css from './AutoControl.module.css';
 
 const AutoControl = ({ currentSensorData, client }) => {
-  // 기본 설정값
+  // 기본 설정값 (천창, 내벽 천장, 내벽 사이드)
   const defaultSettings = {
-    temperature: 10,
-    humidity: 10,
-    co2: 10,
-    illumination: 1000
+    skylight: { temperature: 10, humidity: 10, co2: 10, illumination: 1000 },
+    ceiling: { temperature: 10, humidity: 10, co2: 10, illumination: 1000 },
+    sideWall: { temperature: 10, humidity: 10, co2: 10, illumination: 1000 },
   };
 
   const [userInput, setUserInput] = useState(defaultSettings); // 설정값 상태 관리
-  const [loadedSettings, setLoadedSettings] = useState(null);  // 불러온 설정값 저장
+  const [loadedSettings, setLoadedSettings] = useState({
+    skylight: null,
+    ceiling: null,
+    sideWall: null,
+  });  // 불러온 설정값 저장
 
   // 설정값을 DB에서 불러오는 함수
-  const loadSettings = () => {
-    console.log("Loading settings from DB...");
-
-    getSettingsFromDB((error, latestSettings) => {
+  const loadSettings = (type) => {
+    console.log(`Attempting to load ${type} settings from DB...`);  // 타입별 로그 확인
+    getSettingsFromDB(type, (error, latestSettings) => {
       if (error) {
-        console.log("Error loading settings from DB:", error);
+        console.log(`Error loading ${type} settings from DB:`, error);
       } else if (latestSettings) {
-        console.log("Latest settings from DB:", JSON.stringify(latestSettings));
+        console.log(`Latest ${type} settings from DB:`, JSON.stringify(latestSettings));
 
-        // 최신 설정값을 상태로 반영
-        setUserInput(latestSettings);
-        setLoadedSettings(latestSettings); // 최신 설정값을 loadedSettings로 반영
+        // 최신 설정값을 상태로 반영 (불러온 값을 저장하는 부분 확인)
+        setUserInput((prevInput) => ({
+          ...prevInput,
+          [type]: {
+            ...prevInput[type], // 기존 설정값 유지
+            ...latestSettings, // 새 설정값 덮어쓰기
+          },
+        }));
+
+        setLoadedSettings((prevLoaded) => ({
+          ...prevLoaded,
+          [type]: {
+            ...prevLoaded[type], // 기존 값 유지
+            ...latestSettings, // 새 값 덮어쓰기
+          },
+        }));
+        console.log(`${type} settings updated in state.`);
+      } else {
+        console.log(`No settings found for ${type} in DB.`);
       }
     });
   };
 
-  // 컴포넌트 마운트 시 DB에서 설정값 불러오기
   useEffect(() => {
-    loadSettings();
+    setTimeout(() => loadSettings('skylight'), 100);
+    setTimeout(() => loadSettings('ceiling'), 200);
+    setTimeout(() => loadSettings('sideWall'), 300);
   }, []);
 
-  // loadedSettings 상태가 변경되었을 때 로그 출력
   useEffect(() => {
-    if (loadedSettings) {
-      console.log("Loaded settings state has been updated:", JSON.stringify(loadedSettings));
+    if (loadedSettings.skylight) {
+      console.log("Skylight settings loaded and updated:", JSON.stringify(loadedSettings.skylight));
+    }
+    if (loadedSettings.ceiling) {
+      console.log("Ceiling settings loaded and updated:", JSON.stringify(loadedSettings.ceiling));
+    }
+    if (loadedSettings.sideWall) {
+      console.log("SideWall settings loaded and updated:", JSON.stringify(loadedSettings.sideWall));
     }
   }, [loadedSettings]); // loadedSettings 상태가 변경될 때마다 실행
 
   // 입력값이 변경될 때 실행
-  const handleInputChange = (e) => {
+  const handleInputChange = (type, e) => {
     const { name, value } = e.target;
-    const newUserInput = {
-      ...userInput,
-      [name]: parseInt(value) || 0 // 입력값을 숫자로 변환 후 상태에 반영
-    };
-    setUserInput(newUserInput); // 상태 업데이트
+    setUserInput((prevInput) => ({
+      ...prevInput,
+      [type]: {
+        ...prevInput[type],
+        [name]: parseInt(value) || 0,
+      },
+    }));
   };
 
   // 자동 제어 로직
-  const handleAutoControl = () => {
-    const userTemperature = userInput.temperature;
-    const userHumidity = userInput.humidity;
-    const userCO2 = userInput.co2;
-    const userIllumination = userInput.illumination;
-
+  const handleAutoControl = (type) => {
+    const controlSettings = userInput[type];
     if (currentSensorData) {
       const { temperature, humidity, co2, illumination } = currentSensorData;
 
-      if (temperature >= userTemperature ||
-        humidity >= userHumidity ||
-        co2 >= userCO2 ||
-        illumination >= userIllumination) {
-        if (client) {
-          client.publish('nodemcu/stepper', 'ON'); // 모터 ON 메시지
-          sendToast("천창이 열렸습니다.");
+      // 천창 제어 (MQTT topic: 'sky')
+      if (type === 'skylight') {
+        if (temperature >= controlSettings.temperature) {
+          client.publish('nodemcu/sky', 'ON');
+          sendToast("천창이 자동으로 열렸습니다.");
+        } else {
+          client.publish('nodemcu/sky', 'OFF');
+          sendToast("천창이 자동으로 닫혔습니다.");
         }
-      } else {
-        if (client) {
-          client.publish('nodemcu/stepper', 'OFF'); // 모터 OFF 메시지
-          sendToast("천창이 닫혔습니다.");
+      }
+      // 내벽 천장 제어 (MQTT topic: 'ceiling')
+      if (type === 'ceiling') {
+        if (illumination >= controlSettings.illumination) {
+          client.publish('nodemcu/ceiling', 'ON');
+          sendToast("내벽 천장이 자동으로 열렸습니다.");
+        } else {
+          client.publish('nodemcu/ceiling', 'OFF');
+          sendToast("내벽 천장이 자동으로 닫혔습니다.");
+        }
+      }
+      // 내벽 사이드 제어 (MQTT topic: 'side')
+      if (type === 'sideWall') {
+        if (co2 >= controlSettings.co2 || humidity >= controlSettings.humidity) {
+          client.publish('nodemcu/side', 'ON');
+          sendToast("내벽이  자동으로 열렸습니다.");
+        } else {
+          client.publish('nodemcu/side', 'OFF');
+          sendToast("내벽이 자동으로 닫혔습니다.");
         }
       }
     }
   };
 
   // 설정값을 확인하고 DB에 저장한 후, 자동 제어 함수 실행
-  const handleConfirm = async () => {
-    try {
-      await saveSettingsToDB(userInput); //설정값을 DB에 저장 (비동기 처리)
-      sendToast(`천장 자동 제어 조건이 변경되었습니다. 온도 ${userInput.temperature}°C, 습도 ${userInput.humidity}%, CO2 ${userInput.co2}ppm, 조도 ${userInput.illumination}lux`);
-      handleAutoControl();
-    } catch (error) {
-      console.log("Error saving settings to DB:", error);
+  const handleConfirm = (type) => {
+    const settings = userInput[type];
+    console.log(`Saving settings for ${type}:`, settings);
+    saveSettingsToDB(type, settings); // 설정값을 DB에 저장
+
+    let typeName = '';
+    switch (type) {
+      case 'skylight':
+        typeName = '천창';
+        break;
+      case 'ceiling':
+        typeName = '내벽 천장';
+        break;
+      case 'sideWall':
+        typeName = '내벽';
+        break;
+      default:
+        typeName = type;
     }
+    sendToast(`${typeName}의 제어 조건을 변경하였습니다. 온도: ${settings.temperature}°C, 습도: ${settings.humidity}%, CO2: ${settings.co2}ppm, 조도: ${settings.illumination}lux`);
+    handleAutoControl(type);
   };
 
   // 설정을 기본값으로 되돌리는 함수
-  const handleResetToDefault = () => {
-    setUserInput(defaultSettings); // 기본값으로 상태 업데이트
-    deleteSettingsFromDB(); // DB에서 설정값 삭제
+  const handleResetToDefault = (type) => {
+    setUserInput((prevInput) => ({
+      ...prevInput,
+      [type]: defaultSettings[type],
+    }));
+    deleteSettingsFromDB(type); // DB에서 설정값 삭제
   };
 
   return (
-    <div className={`${css.SystemControlItem} ${css.AutoControl}`}>
-      <h2>천창 제어</h2>
-        <h3>자동 제어</h3>
+    <div className={css.SystemControlContainer}>
+      {/* 천창 제어 UI */}
+      <div className={css.SystemControlItem}>
+        <h2>천창 자동 제어</h2>
         <div className={css.InputGrid}>
-
-          {/* 온도 입력 필드 */}
           <div className={css.InputGroup}>
             <label>온도:</label>
-            <div className={css.InputWithUnit}>
-              <input
-                type="number"
-                name="temperature"
-                className={css.InputField}
-                value={userInput.temperature}
-                onChange={handleInputChange}
-              />
-              <span className={css.Unit}>°C</span>
-            </div>
+            <input
+              type="number"
+              name="temperature"
+              className={css.InputField}
+              value={userInput.skylight.temperature}
+              onChange={(e) => handleInputChange('skylight', e)}
+            />
+            <span className={css.Unit}>°C</span>
           </div>
-
-          {/* 습도 입력 필드 */}
           <div className={css.InputGroup}>
             <label>습도:</label>
-            <div className={css.InputWithUnit}>
-              <input
-                type="number"
-                name="humidity"
-                className={css.InputField}
-                value={userInput.humidity}
-                onChange={handleInputChange}
-              />
-              <span className={css.Unit}>%</span>
-            </div>
+            <input
+              type="number"
+              name="humidity"
+              className={css.InputField}
+              value={userInput.skylight.humidity}
+              onChange={(e) => handleInputChange('skylight', e)}
+            />
+            <span className={css.Unit}>%</span>
           </div>
-
-          {/* CO2 입력 필드 */}
           <div className={css.InputGroup}>
             <label>CO2:</label>
-            <div className={css.InputWithUnit}>
-              <input
-                type="number"
-                name="co2"
-                className={css.InputField}
-                value={userInput.co2}
-                onChange={handleInputChange}
-              />
-              <span className={css.Unit}>ppm</span>
-            </div>
+            <input
+              type="number"
+              name="co2"
+              className={css.InputField}
+              value={userInput.skylight.co2}
+              onChange={(e) => handleInputChange('skylight', e)}
+            />
+            <span className={css.Unit}>ppm</span>
           </div>
-
-          {/* 조도 입력 필드 */}
           <div className={css.InputGroup}>
             <label>조도:</label>
-            <div className={css.InputWithUnit}>
-              <input
-                type="number"
-                name="illumination"
-                className={css.InputField}
-                value={userInput.illumination}
-                onChange={handleInputChange}
-              />
-              <span className={css.Unit}>lux</span>
-            </div>
+            <input
+              type="number"
+              name="illumination"
+              className={css.InputField}
+              value={userInput.skylight.illumination}
+              onChange={(e) => handleInputChange('skylight', e)}
+            />
+            <span className={css.Unit}>lux</span>
           </div>
         </div>
-
-        <button className={css.ControlButton} onClick={handleConfirm}>
+        <button className={css.ControlButton} onClick={() => handleConfirm('skylight')}>
           확인
         </button>
-
-        <button className={css.ControlButton} onClick={handleResetToDefault}>
+        <button className={css.ControlButton} onClick={() => handleResetToDefault('skylight')}>
           기본값
         </button>
       </div>
+      {/* 내벽 천장 제어 UI */}
+      <div className={css.SystemControlItem}>
+        <h2>내벽 천장 자동 제어</h2>
+        <div className={css.InputGrid}>
+          <div className={css.InputGroup}>
+            <label>온도:</label>
+            <input
+              type="number"
+              name="temperature"
+              className={css.InputField}
+              value={userInput.ceiling.temperature}
+              onChange={(e) => handleInputChange('ceiling', e)}
+            />
+            <span className={css.Unit}>°C</span>
+          </div>
+          <div className={css.InputGroup}>
+            <label>습도:</label>
+            <input
+              type="number"
+              name="humidity"
+              className={css.InputField}
+              value={userInput.ceiling.humidity}
+              onChange={(e) => handleInputChange('ceiling', e)}
+            />
+            <span className={css.Unit}>%</span>
+          </div>
+          <div className={css.InputGroup}>
+            <label>CO2:</label>
+            <input
+              type="number"
+              name="co2"
+              className={css.InputField}
+              value={userInput.ceiling.co2}
+              onChange={(e) => handleInputChange('ceiling', e)}
+            />
+            <span className={css.Unit}>ppm</span>
+          </div>
+          <div className={css.InputGroup}>
+            <label>조도:</label>
+            <input
+              type="number"
+              name="illumination"
+              className={css.InputField}
+              value={userInput.ceiling.illumination}
+              onChange={(e) => handleInputChange('ceiling', e)}
+            />
+            <span className={css.Unit}>lux</span>
+          </div>
+        </div>
+        <button className={css.ControlButton} onClick={() => handleConfirm('ceiling')}>
+          확인
+        </button>
+        <button className={css.ControlButton} onClick={() => handleResetToDefault('ceiling')}>
+          기본값
+        </button>
+      </div>
+      {/* 내벽 제어 UI */}
+      <div className={css.SystemControlItem}>
+        <h2>내벽 자동 제어</h2>
+        <div className={css.InputGrid}>
+          <div className={css.InputGroup}>
+            <label>온도:</label>
+            <input
+              type="number"
+              name="temperature"
+              className={css.InputField}
+              value={userInput.sideWall.temperature}
+              onChange={(e) => handleInputChange('sideWall', e)}
+            />
+            <span className={css.Unit}>°C</span>
+          </div>
+          <div className={css.InputGroup}>
+            <label>습도:</label>
+            <input
+              type="number"
+              name="humidity"
+              className={css.InputField}
+              value={userInput.sideWall.humidity}
+              onChange={(e) => handleInputChange('sideWall', e)}
+            />
+            <span className={css.Unit}>%</span>
+          </div>
+          <div className={css.InputGroup}>
+            <label>CO2:</label>
+            <input
+              type="number"
+              name="co2"
+              className={css.InputField}
+              value={userInput.sideWall.co2}
+              onChange={(e) => handleInputChange('sideWall', e)}
+            />
+            <span className={css.Unit}>ppm</span>
+          </div>
+          <div className={css.InputGroup}>
+            <label>조도:</label>
+            <input
+              type="number"
+              name="illumination"
+              className={css.InputField}
+              value={userInput.sideWall.illumination}
+              onChange={(e) => handleInputChange('sideWall', e)}
+            />
+            <span className={css.Unit}>lux</span>
+          </div>
+        </div>
+        <button className={css.ControlButton} onClick={() => handleConfirm('sideWall')}>
+          확인  
+        </button>
+        <button className={css.ControlButton} onClick={() => handleResetToDefault('sideWall')}>
+          기본값
+        </button>
+      </div>
+    </div>
   );
 };
 

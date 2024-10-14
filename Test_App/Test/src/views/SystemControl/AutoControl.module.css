@@ -1,31 +1,34 @@
-.AutoControl {
-  flex-grow: 1;
+.SystemControlContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3개의 열 */
+  gap: 20px;
+  padding: 20px;
+}
+
+.SystemControlItem {
   background-color: #e9ecef;
   padding: 15px;
   border-radius: 8px;
-}
-
-.AutoControl h3 {
-  margin: 0;
-  font-size: 1.3rem;
   text-align: left;
+  border: 8px solid black;
 }
 
 .InputGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 두 개의 열로 구성 */
-  gap: 10px; /* 각 입력 그룹 간의 간격 */
+  grid-template-columns: 1fr 1fr; /* 2개의 열로 구성 */
+  gap: 10px;
+  align-items: center;
 }
 
 .InputGroup {
   display: flex;
   align-items: center;
-  margin-bottom: 20px; /* 입력 그룹 간의 간격 */
+  margin-bottom: 20px;
 }
 
 .InputField {
-  width: 30%; /* 입력 필드가 차지할 공간을 %로 설정 */
-  padding: 5px; /* 내부 패딩을 줄임 */
+  width: 30%;
+  padding: 5px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -33,46 +36,27 @@
 
 .InputGroup label {
   font-size: 1rem;
-  flex-basis: 10%; /* 레이블이 차지할 공간을 %로 설정 */
-  text-align: left; /* 레이블 왼쪽 정렬 */
+  flex-basis: 30%;
+  text-align: left;
 }
 
-.ControlButtonContainer {
-  text-align: left; /* 버튼을 왼쪽 정렬 */
+.InputWithUnit {
+  display: flex;
+  align-items: center;
 }
 
 .ControlButton {
   padding: 10px 20px;
-  font-size: rem;
+  font-size: 1rem;
   color: #fff;
   background-color: #007bff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 10px; /* 버튼 간의 간격 추가 */
+  margin: 10px;
+  margin-top: 10px;
 }
 
 .ControlButton:hover {
   background-color: #0056b3;
 }
-
-/* 내벽 사이드 제어 (중간 열) */
-.InnerWallControl1 {
-  grid-column: 2 / 3; /* Second column */
-  grid-row: 1 / 3; /* Spans two rows */
-  background-color: #e9ecef;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: left;
-}
-
-/* 내벽 천장 제어 (오른쪽 열) */
-.InnerWallControl2 {
-  grid-column: 3 / 4; /* Third column */
-  grid-row: 1 / 3; /* Spans two rows */
-  background-color: #e9ecef;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: left;
-}
-

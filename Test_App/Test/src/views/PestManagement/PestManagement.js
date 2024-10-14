@@ -3,8 +3,7 @@ import mqtt from 'mqtt';
 import css from './PestManagement.module.css';
 
 const PestManagement = () => {
-  const [client, setClient] = useState(null); // MQTT 클라이언트 상태 관리
-  const [message, setMessage] = useState(''); // 수신된 메시지 저장
+  const [setClient] = useState(null); // MQTT 클라이언트 상태 관리
   const [data1, setData1] = useState(null);
   const [data2, setData2] = useState(null);
   const [data3, setData3] = useState(null);
@@ -16,13 +15,13 @@ const PestManagement = () => {
   useEffect(() => {
     // MQTT 브로커에 연결
     const mqttClient = mqtt.connect('ws://172.20.48.180:1884');
-    setClient(mqttClient);
+    setClient(mqttClient); // client 상태 업데이트
 
     // 연결 후 특정 토픽을 구독
     mqttClient.on('connect', () => {
       mqttClient.subscribe('robot/location', (err) => {
         if (!err) {
-          console.log('Success MQTT');
+          console.log('MQTT 구독 성공');
         }
       });
     });
@@ -30,13 +29,12 @@ const PestManagement = () => {
     // 메시지 수신 처리
     mqttClient.on('message', (topic, message) => {
       const receivedMessage = message.toString(); // 수신된 메시지를 문자열로 변환
-      setMessage(receivedMessage);
 
       // 데이터가 '20,16,80,4,20' 형식으로 온다고 가정하고 파싱
       const dataArray = receivedMessage.split(','); // 콤마로 구분하여 배열로 만듦
 
       // 각 데이터를 개별 변수에 저장
-      if (dataArray.length === 5) { // 5개의 데이터가 정확히 존재하는 경우
+      if (dataArray.length === 7) { // 7개의 데이터가 정확히 존재하는 경우
         setData1(dataArray[0]);
         setData2(dataArray[1]);
         setData3(dataArray[2]);
@@ -66,7 +64,7 @@ const PestManagement = () => {
           <p>안 익은 딸기 개수: {data4}</p>
           <p>안 익은 딸기 비율: {data5}%</p>
           <p>병해충 걸린 딸기 개수: {data6}</p>
-          <p>병해충 걸린 딸기 개수: {data7}%</p>
+          <p>병해충 걸린 딸기 비율: {data7}%</p>
         </div>
       </div>
     </div>

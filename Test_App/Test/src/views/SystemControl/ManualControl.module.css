@@ -1,18 +1,17 @@
-.ManualControl {
-  flex-grow: 1;
+.SystemControlContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3개의 열 */
+  gap: 20px;
+  padding: 20px;
+}
+
+.SystemControlItem {
   background-color: #e9ecef;
   padding: 15px;
   border-radius: 8px;
-}
-
-.ManualControl h3 {
-  margin: 0;
-  font-size: 1.3rem;
   text-align: left;
-}
-
-.ControlButtonContainer {
-  text-align: left; /* 버튼을 왼쪽 정렬 */
+  font-size: 1.5rem;
+  border: 8px solid black;
 }
 
 .ControlButton {
@@ -23,7 +22,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 10px; /* 버튼 간의 간격 추가 */
+  margin: 10px;
+  margin-top: 10px;
 }
 
 .ControlButton:hover {

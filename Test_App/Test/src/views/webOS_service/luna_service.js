@@ -176,8 +176,8 @@ export const deleteNotificationFromDB = (_id, callback) => {
     });
 };
 
-// 설정값을 DB에 저장하는 함수
-export const saveSettingsToDB = (settings) => {
+// 설정값을 DB에 저장하는 함수 (타입 추가)
+export const saveSettingsToDB = (type, settings) => {
     const params = {
         objects: [
             {
@@ -186,7 +186,7 @@ export const saveSettingsToDB = (settings) => {
                 "humidity": settings.humidity,
                 "co2": settings.co2,
                 "illumination": settings.illumination,
-                "type": "settings"  // 설정에 대한 타입 지정
+                "type": type
             }
         ]
     };
@@ -196,21 +196,21 @@ export const saveSettingsToDB = (settings) => {
         method: "put",
         parameters: params,
         onSuccess: (result) => {
-            console.log("Settings successfully saved to DataBase:", JSON.stringify(result));
+            console.log(`Settings for ${type} successfully saved to DataBase:`, JSON.stringify(result));
         },
         onFailure: (error) => {
-            console.log("Failed to save settings to DB:", JSON.stringify(error));
+            console.log(`Failed to save ${type} settings to DB:`, JSON.stringify(error));
         }
     });
 };
 
-// DB에서 저장된 설정값을 조회하는 함수
-export const getSettingsFromDB = (callback) => {
+// DB에서 저장된 설정값을 조회하는 함수 (타입 추가)
+export const getSettingsFromDB = (type, callback) => {
     const params = {
         query: {
             from: kindID,  // 같은 Kind ID 사용
             where: [
-                { prop: "type", op: "=", val: "settings" }  // 'settings' 타입의 메시지만 조회
+                { prop: "type", op: "=", val: type }
             ]
         }
     };
@@ -221,26 +221,28 @@ export const getSettingsFromDB = (callback) => {
         parameters: params,
         onSuccess: (result) => {
             if (result && result.results && result.results.length > 0) {
+                console.log(`${type} settings found in DataBase.`, JSON.stringify(result));
                 const latestSettings = result.results[result.results.length - 1];  // 제일 마지막 결과 가져오기
                 callback(null, latestSettings);  // 최신 결과 콜백으로 전달
             } else {
-                console.log("No settings found in DB.");
-                callback(null, []);  // 결과가 없을 경우 빈 배열 반환
+                console.log(`No ${type} settings found in DB.`);
+                callback(null, null);  // 결과가 없을 경우 null 반환
             }
         },
         onFailure: (error) => {
-            console.log("Fail to get from DB:", JSON.stringify(error));  // 오류 로그 출력
+            console.log(`Fail to get ${type} settings from DB:`, JSON.stringify(error));  // 오류 로그 출력
             callback(error, null);
         }
     });
 };
 
-export const deleteSettingsFromDB = () => {
+// DB에서 설정값 삭제 함수 (타입 추가)
+export const deleteSettingsFromDB = (type) => {
     const params = {
         query: {
             from: kindID,
             where: [
-                { prop: "type", op: "=", val: "settings" }  // 'settings' 타입의 데이터를 삭제
+                { prop: "type", op: "=", val: type }
             ]
         }
     };
@@ -250,10 +252,10 @@ export const deleteSettingsFromDB = () => {
         method: "del",
         parameters: params,
         onSuccess: (result) => {
-            console.log("Settings deleted from DB:", result);
+            console.log(`${type} settings deleted from DB:`, result);
         },
         onFailure: (error) => {
-            console.error("Failed to delete settings:", error);
+            console.error(`Failed to delete ${type} settings:`, error);
         }
     });
 };
