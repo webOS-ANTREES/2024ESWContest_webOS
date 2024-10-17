@@ -3,6 +3,7 @@ import mqtt from 'mqtt';
 import css from './PestManagement.module.css';
 
 const PestManagement = () => {
+  const [client, setClient] = useState(null); // MQTT 클라이언트 상태 관리
   const [data1, setData1] = useState(null);
   const [data2, setData2] = useState(null);
   const [data3, setData3] = useState(null);
@@ -13,7 +14,9 @@ const PestManagement = () => {
 
   useEffect(() => {
     const mqttClient = mqtt.connect('ws://172.20.48.180:1884'); // MQTT 브로커에 연결
+    setClient(mqttClient); // client 상태 업데이트
 
+    // 연결 후 특정 topic 구독
     mqttClient.on('connect', () => {
       mqttClient.subscribe('robot/location', (err) => {
         if (!err) {
@@ -22,6 +25,7 @@ const PestManagement = () => {
       });
     });
 
+    // 메시지 수신 처리
     mqttClient.on('message', (topic, message) => {
       const receivedMessage = message.toString(); // 수신된 메시지를 문자열로 변환
       const dataArray = receivedMessage.split(',');
@@ -43,18 +47,16 @@ const PestManagement = () => {
   }, []);
 
   return (
-    <div className={css.PestManagementContainer}>
-      {/* 첫 번째 열: CCTV와 영상 */}
+    <div className={css.PestManagementContainer}> 
       <div className={css.CCTVContainer}>
         <h1>CCTV</h1>
-        <img
+      < img
           className={css.CCTVImage}
-          src="http://192.168.50.31:8080/video_feed"
+         src="http://192.168.50.248:8080/video_feed"
           alt="Live video feed"
         />
       </div>
 
-      {/* 두 번째 열: 병해충 관리 데이터 */}
       <div className={css.PestManagementContent}>
         <div className={css.PestManagementItem}>
           <h2>병해충 관리</h2>

@@ -3,31 +3,38 @@
   grid-template-columns: 1fr 1fr; /* 2열로 나누기 */
   width: 100%;
   height: 100%;
-  gap: 20px; /* 열 간의 간격 */
+  gap: 20px;
   padding: 20px;
 }
 
-.PestManagementContent {
+.PestManagementContent, .CCTVContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin: 20px;
+  /* border: 8px solid black; */
 }
 
 .PestManagementItem {
   background-color: #f9f9f9;
+  height: 100%;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.CCTVContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  margin-left: 20px;
 }
 
 .CCTVImage {
-  width: 100%; /* 영상의 크기를 전체 열에 맞춤 */
-  max-width: 500px; /* 최대 너비를 제한 */
+  width: 90%;
+  height: 60%;
+  border: 8px solid black;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.CCTVContainer h1, 
+.PestManagementContent h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 20px;
 }

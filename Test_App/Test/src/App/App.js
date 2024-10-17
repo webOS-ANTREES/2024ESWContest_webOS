@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../views/Login/Login';
+import SignUp from '../views/SignUp/SignUp';
 import Monitoring from '../views/Monitoring/Monitoring';
 import Notice from '../views/Notice/Notice';
 import PestManagement from '../views/PestManagement/PestManagement';
@@ -19,6 +20,7 @@ const App = () => {
 
         <Routes>
           <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/menu" element={isAuthenticated ? <MenuPage /> : <Navigate to="/" />} />
           <Route path="/monitoring" element={isAuthenticated ? <Monitoring /> : <Navigate to="/" />} />
           <Route path="/notice" element={isAuthenticated ? <Notice /> : <Navigate to="/" />} />

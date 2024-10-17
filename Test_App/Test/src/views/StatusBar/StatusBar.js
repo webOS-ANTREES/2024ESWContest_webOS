@@ -2,6 +2,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { getSystemTime } from '../webOS_service/luna_service';
 import css from './StatusBar.module.css';
+import menuIcon from './Menu.png';
+import backButton from './BackButton.png';
 
 const StatusBar = () => {
   const navigate = useNavigate();
@@ -63,10 +65,10 @@ const StatusBar = () => {
       {pathsWithBackButton.includes(location.pathname) && (
         <>
           <button onClick={handleBackClick} className={css.backButton}>
-            뒤로 가기
+            <img src={backButton} alt="Back" />
           </button>
           <button ref={menuButtonRef} onClick={toggleMenu} className={css.menuButton}>
-            메뉴
+            <img src={menuIcon} alt="Menu" />
           </button>
         </>
       )}
