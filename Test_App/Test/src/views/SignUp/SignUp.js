@@ -10,10 +10,12 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [id, setId] = useState('');  // 아이디 상태
   const [password, setPassword] = useState('');  // 비밀번호 상태
+  const [confirmPassword, setConfirmPassword] = useState('');  // 비밀번호 확인 상태
   const [name, setName] = useState('');  // 이름 상태
   const [idErrorMessage, setIdErrorMessage] = useState('');  // ID 관련 에러 메시지 상태
   const [nameErrorMessage, setNameErrorMessage] = useState('');  // 이름 관련 에러 메시지 상태
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');  // 비밀번호 관련 에러 메시지 상태
+  const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] = useState('');  // 비밀번호 확인 에러 메시지
   const [isIdChecked, setIsIdChecked] = useState(false);  // 아이디 중복 확인 여부
   const [isIdAvailable, setIsIdAvailable] = useState(false);  // ID 사용 가능 여부
 
@@ -28,6 +30,11 @@ const SignUp = () => {
   const handlePWChange = (e) => {
     setPassword(e.value);
     setPasswordErrorMessage('');  // 새로운 입력 시 에러 메시지 초기화
+  };
+
+  const handleConfirmPWChange = (e) => {
+    setConfirmPassword(e.value);
+    setConfirmPasswordErrorMessage('');  // 새로운 입력 시 에러 메시지 초기화
   };
 
   const handleNameChange = (e) => {
@@ -81,6 +88,17 @@ const SignUp = () => {
       return;
     }
 
+    if (confirmPassword.trim() === '') {
+      setConfirmPasswordErrorMessage('비밀번호 확인을 입력해 주세요.');
+      return;
+    }
+
+    // 비밀번호와 비밀번호 확인이 일치하지 않으면 에러 메시지 출력
+    if (password !== confirmPassword) {
+      setConfirmPasswordErrorMessage('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
     // Firebase에 ID, PW, 이름 저장
     const userRef = ref(signUpdatabase, 'Users/' + id);
 
@@ -93,6 +111,7 @@ const SignUp = () => {
         setIdErrorMessage('');  // 성공적으로 가입되면 에러 메시지 초기화
         setNameErrorMessage('');
         setPasswordErrorMessage('');
+        setConfirmPasswordErrorMessage('');
         navigate('/');  // 회원가입 후 로그인 페이지로 이동
       })
       .catch(() => {
@@ -108,7 +127,7 @@ const SignUp = () => {
   return (
     <div className={css.signupContainer}>
       <h1>회원가입</h1>
-      
+  
       <div className={css.formContainer}>
         <div className={css.inputContainer}>
           <Input
@@ -120,20 +139,13 @@ const SignUp = () => {
           {nameErrorMessage && <div className={css.error}>{nameErrorMessage}</div>}
         </div>
   
-        <div className={css.idButtonContainer}>
-          <div className={css.inputWrapper}>
-            <Input
-              placeholder="ID"
-              value={id}
-              onChange={handleIDChange}
-              className={css.input}
-            />
-            <div className={css.buttonWrapper}>
-              <Button onClick={handleCheckId} className={css.idButton}>
-                중복 검사
-              </Button>
-            </div>
-          </div>
+        <div className={css.inputContainer}>
+          <Input
+            placeholder="ID"
+            value={id}
+            onChange={handleIDChange}
+            className={css.input}
+          />
           {idErrorMessage && (
             <div className={isIdAvailable ? css.success : css.error}>
               {idErrorMessage}
@@ -151,18 +163,37 @@ const SignUp = () => {
           />
           {passwordErrorMessage && <div className={css.error}>{passwordErrorMessage}</div>}
         </div>
-  
-        <div className={css.buttonContainer}>
-          <Button onClick={handleSignUp} className={css.button}>
-            등록
-          </Button>
-          <Button onClick={handleCancel} className={css.button}>
-            취소
-          </Button>
+
+        {/* 비밀번호 확인 입력란 추가 */}
+        <div className={css.inputContainer}>
+          <Input
+            type="password"
+            placeholder="PW 확인"
+            value={confirmPassword}
+            onChange={handleConfirmPWChange}
+            className={css.input}
+          />
+          {confirmPasswordErrorMessage && <div className={css.error}>{confirmPasswordErrorMessage}</div>}
         </div>
+      </div>
+  
+      {/* 중복 검사 버튼을 formContainer 밖으로 빼서 별도의 줄에 위치 */}
+      <div className={css.idButtonContainer}>
+        <Button onClick={handleCheckId} className={css.idButton}>
+          중복 검사
+        </Button>
+      </div>
+  
+      <div className={css.buttonWrapper}>
+        <Button onClick={handleSignUp} className={css.button}>
+          등록
+        </Button>
+        <Button onClick={handleCancel} className={css.button}>
+          취소
+        </Button>
       </div>
     </div>
   );  
-}
+};
 
 export default SignUp;
