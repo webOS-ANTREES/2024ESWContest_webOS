@@ -18,7 +18,7 @@
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    height: 100%;
+    height: 110%;
     box-sizing: border-box;
     overflow-y: auto;
     border: 8px solid black;
@@ -52,6 +52,7 @@
     height: 100%;
     box-sizing: border-box;
     transform: translate(225px);
+    margin-top: 20px;
     /* border: 8px solid black; */
 }
 
@@ -157,7 +158,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    border: 8px solid black;
+    /* border: 8px solid black; */
 }
 
 .cityName {

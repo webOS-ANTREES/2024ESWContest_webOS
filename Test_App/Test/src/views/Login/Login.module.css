@@ -5,7 +5,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
 }
 
 .logo {
@@ -57,7 +57,7 @@
   margin-left: 20px;
   background: none;
   border: none;
-  color: #DF2E38;
+  color: #F27BBD;
   cursor: pointer;
   font-weight: bold;
   font-size: 52px;

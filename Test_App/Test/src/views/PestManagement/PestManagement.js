@@ -13,7 +13,7 @@ const PestManagement = () => {
   const [data7, setData7] = useState(null);
 
   useEffect(() => {
-    const mqttClient = mqtt.connect('ws://165.229.185.243:1883'); // MQTT 브로커에 연결
+    const mqttClient = mqtt.connect('ws://192.168.50.248:1884'); // MQTT 브로커에 연결
     setClient(mqttClient); // client 상태 업데이트
 
     // 연결 후 특정 topic 구독

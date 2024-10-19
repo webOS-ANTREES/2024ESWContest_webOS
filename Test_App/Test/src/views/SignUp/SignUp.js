@@ -126,7 +126,7 @@ const SignUp = () => {
 
   return (
     <div className={css.signupContainer}>
-      <h1>회원가입</h1>
+      <h1>회원 가입</h1>
 
       <div className={css.formContainer}>
         <div className={css.inputContainer}>

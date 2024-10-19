@@ -7,7 +7,7 @@ import Input from '@enact/moonstone/Input';
 import css from './Login.module.css';
 import logo from '../../../Berry Smart Farm.png';
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = ({ setIsAuthenticated, setUserName }) => {
   const navigate = useNavigate();
   const [id, setId] = useState('');  // id 상태
   const [password, setPassword] = useState('');  // password 상태
@@ -29,6 +29,7 @@ const Login = ({ setIsAuthenticated }) => {
         // 입력된 비밀번호가 데이터베이스 비밀번호와 일치하는지 확인
         if (userData.password === password) {
           setIsAuthenticated(true);
+          setUserName(userData.name);
           navigate('/menu');
         } else {
           setErrorMessage('비밀번호가 올바르지 않습니다.');
@@ -69,7 +70,7 @@ const Login = ({ setIsAuthenticated }) => {
       <div className={css.signupLink}>
         <span>아직 계정이 없으신가요? </span>
         <button onClick={handleSignUpRedirect} className={css.signupButton}>
-          가입하기
+          회원가입
         </button>
       </div>
     </div>
