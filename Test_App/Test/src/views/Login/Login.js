@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUpdatabase } from '../../Firebase';  // Firebase에서 signUp 데이터베이스 가져오기
-import { ref, get } from "firebase/database";  // Firebase Realtime Database 함수 사용
+import { signUpdatabase } from '../../Firebase';
+import { ref, get } from "firebase/database";
 import Button from '@enact/moonstone/Button';
 import Input from '@enact/moonstone/Input';
 import css from './Login.module.css';
@@ -11,11 +11,11 @@ const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [id, setId] = useState('');  // id 상태
   const [password, setPassword] = useState('');  // password 상태
-  const [errorMessage, setErrorMessage] = useState('');  // 에러 메시지 상태 (변수 이름 변경)
+  const [errorMessage, setErrorMessage] = useState('');
 
   // ID와 PW 변경 핸들러
-  const handleIDChange = (e) => setId(e.value);  // e.target.value 대신 e.value 사용
-  const handlePWChange = (e) => setPassword(e.value);  // e.target.value 대신 e.value 사용
+  const handleIDChange = (e) => setId(e.value);
+  const handlePWChange = (e) => setPassword(e.value);
 
   // 로그인 버튼 클릭 시 호출
   const handleLogin = () => {
@@ -28,8 +28,8 @@ const Login = ({ setIsAuthenticated }) => {
 
         // 입력된 비밀번호가 데이터베이스 비밀번호와 일치하는지 확인
         if (userData.password === password) {
-          setIsAuthenticated(true);  // 로그인 성공
-          navigate('/menu');  // 로그인 성공 시 메뉴 페이지로 이동
+          setIsAuthenticated(true);
+          navigate('/menu');
         } else {
           setErrorMessage('비밀번호가 올바르지 않습니다.');
         }
@@ -41,13 +41,13 @@ const Login = ({ setIsAuthenticated }) => {
 
   // 회원가입 페이지로 이동
   const handleSignUpRedirect = () => {
-    navigate('/signup');  // 회원가입 페이지로 이동
+    navigate('/signup');
   };
 
   return (
     <div className={css.loginContainer}>
       <img src={logo} alt="logo" className={css.logo} />
-      <h1 className={css.title}>Login</h1>
+      <h1 className={css.title}>LOGIN</h1>
       <Input
         placeholder="ID"
         value={id}
@@ -63,14 +63,13 @@ const Login = ({ setIsAuthenticated }) => {
       />
       {errorMessage && <div className={css.error}>{errorMessage}</div>}
       <Button onClick={handleLogin} className={css.button}>
-        Login
+        LOGIN
       </Button>
 
-      {/* 회원가입 링크 버튼 */}
       <div className={css.signupLink}>
         <span>아직 계정이 없으신가요? </span>
         <button onClick={handleSignUpRedirect} className={css.signupButton}>
-          회원가입
+          가입하기
         </button>
       </div>
     </div>

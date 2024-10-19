@@ -8,7 +8,7 @@ export const getSystemTime = (callback) => {
     const params = {};
 
     webOSBridge.send({
-        service: 'luna://com.webos.service.systemservice/clock',  // 시스템 시간 가져오기 서비스
+        service: 'luna://com.webos.service.systemservice/clock',
         method: 'getTime',
         parameters: params,
         onSuccess: (result) => {
@@ -17,10 +17,9 @@ export const getSystemTime = (callback) => {
                 const formattedTime = dateObj.toLocaleTimeString('ko-KR', {
                     hour: '2-digit',
                     minute: '2-digit',
-                    hour12: true, // 12시간 형식
-                    hourCycle: 'h12', // 선행 0 제거
+                    hour12: false,
                 });
-                callback(null, formattedTime); // 콜백을 통해 전달
+                callback(null, formattedTime);
             }
         },
     });
@@ -28,7 +27,7 @@ export const getSystemTime = (callback) => {
 
 // Kind 등록
 export const putKind = () => {
-    const url = 'luna://com.webos.service.db';  // 요청할 서비스 URL
+    const url = 'luna://com.webos.service.db';
     const params = {
         "id": kindID,
         "owner": "com.test.app",
@@ -96,7 +95,7 @@ export const saveToastToDB = (message) => {
             {
                 "_kind": kindID,
                 "message": message,
-                "type": "toast",  // 메시지 타입 지정
+                "type": "toast",
                 "timestamp": formattedDate
             }
         ]
@@ -124,7 +123,7 @@ export const sendToast = (message) => {
         method: "createToast",
         parameters: params,
         onSuccess: () => {
-            saveToastToDB(message);  // Toast 성공 시 DB에 저장
+            saveToastToDB(message); // Toast 성공 시 DB에 저장
         }
     });
 };
@@ -135,7 +134,7 @@ export const getNotificationsFromDB = (callback) => {
         query: {
             from: kindID,
             where: [
-                { prop: "type", op: "=", val: "toast" }  // 'toast' 타입의 메시지만 조회
+                { prop: "type", op: "=", val: "toast" } // 'toast' 타입의 메시지만 조회
             ]
         }
     };
@@ -160,7 +159,7 @@ export const getNotificationsFromDB = (callback) => {
 // DB에서 알림 삭제 함수
 export const deleteNotificationFromDB = (_id, callback) => {
     const params = {
-        "ids": [_id]  // 삭제할 알림의 _id 값
+        "ids": [_id] // 삭제할 알림의 _id 값
     };
 
     webOSBridge.send({
@@ -181,7 +180,7 @@ export const saveSettingsToDB = (type, settings) => {
     const params = {
         objects: [
             {
-                "_kind": kindID,  // 설정과 관련된 Kind ID (같은 Kind 사용)
+                "_kind": kindID,
                 "temperature": settings.temperature,
                 "humidity": settings.humidity,
                 "co2": settings.co2,
@@ -204,11 +203,11 @@ export const saveSettingsToDB = (type, settings) => {
     });
 };
 
-// DB에서 저장된 설정값을 조회하는 함수 (타입 추가)
+// DB에서 저장된 설정값을 조회하는 함수
 export const getSettingsFromDB = (type, callback) => {
     const params = {
         query: {
-            from: kindID,  // 같은 Kind ID 사용
+            from: kindID,
             where: [
                 { prop: "type", op: "=", val: type }
             ]
@@ -222,15 +221,15 @@ export const getSettingsFromDB = (type, callback) => {
         onSuccess: (result) => {
             if (result && result.results && result.results.length > 0) {
                 console.log(`${type} settings found in DataBase.`, JSON.stringify(result));
-                const latestSettings = result.results[result.results.length - 1];  // 제일 마지막 결과 가져오기
-                callback(null, latestSettings);  // 최신 결과 콜백으로 전달
+                const latestSettings = result.results[result.results.length - 1]; // 제일 마지막 결과 가져오기
+                callback(null, latestSettings);
             } else {
                 console.log(`No ${type} settings found in DB.`);
-                callback(null, null);  // 결과가 없을 경우 null 반환
+                callback(null, null);
             }
         },
         onFailure: (error) => {
-            console.log(`Fail to get ${type} settings from DB:`, JSON.stringify(error));  // 오류 로그 출력
+            console.log(`Fail to get ${type} settings from DB:`, JSON.stringify(error));
             callback(error, null);
         }
     });

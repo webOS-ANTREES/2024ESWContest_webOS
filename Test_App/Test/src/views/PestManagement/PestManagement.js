@@ -13,14 +13,14 @@ const PestManagement = () => {
   const [data7, setData7] = useState(null);
 
   useEffect(() => {
-    const mqttClient = mqtt.connect('ws://172.20.48.180:1884'); // MQTT 브로커에 연결
+    const mqttClient = mqtt.connect('ws://165.229.185.243:1883'); // MQTT 브로커에 연결
     setClient(mqttClient); // client 상태 업데이트
 
     // 연결 후 특정 topic 구독
     mqttClient.on('connect', () => {
       mqttClient.subscribe('robot/location', (err) => {
         if (!err) {
-          console.log('MQTT 구독 성공');
+          console.log('MQTT Subcribe Success');
         }
       });
     });
@@ -46,13 +46,26 @@ const PestManagement = () => {
     };
   }, []);
 
+  // 버튼 클릭 시 메시지 전송 함수
+  const handleSendMessage = () => {
+    if (client) {
+      client.publish('robot/location', 'ON', (err) => {
+        if (err) {
+          console.log('Fail', err);
+        } else {
+          console.log('Success');
+        }
+      });
+    }
+  };
+
   return (
-    <div className={css.PestManagementContainer}> 
+    <div className={css.PestManagementContainer}>
       <div className={css.CCTVContainer}>
         <h1>CCTV</h1>
-      < img
+        <img
           className={css.CCTVImage}
-         src="http://192.168.50.248:8080/video_feed"
+          src="http://192.168.50.248:8080/video_feed"
           alt="Live video feed"
         />
       </div>
@@ -68,6 +81,10 @@ const PestManagement = () => {
           <p>병해충 걸린 딸기 개수: {data6}</p>
           <p>병해충 걸린 딸기 비율: {data7}%</p>
         </div>
+
+        <button className={css.SendButton} onClick={handleSendMessage}>
+          메시지 전송 (ON)
+        </button>
       </div>
     </div>
   );

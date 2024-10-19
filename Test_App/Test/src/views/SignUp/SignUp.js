@@ -127,7 +127,7 @@ const SignUp = () => {
   return (
     <div className={css.signupContainer}>
       <h1>회원가입</h1>
-  
+
       <div className={css.formContainer}>
         <div className={css.inputContainer}>
           <Input
@@ -138,7 +138,7 @@ const SignUp = () => {
           />
           {nameErrorMessage && <div className={css.error}>{nameErrorMessage}</div>}
         </div>
-  
+
         <div className={css.inputContainer}>
           <Input
             placeholder="ID"
@@ -152,11 +152,11 @@ const SignUp = () => {
             </div>
           )}
         </div>
-  
+
         <div className={css.inputContainer}>
           <Input
             type="password"
-            placeholder="PW"
+            placeholder="비밀번호"
             value={password}
             onChange={handlePWChange}
             className={css.input}
@@ -164,11 +164,10 @@ const SignUp = () => {
           {passwordErrorMessage && <div className={css.error}>{passwordErrorMessage}</div>}
         </div>
 
-        {/* 비밀번호 확인 입력란 추가 */}
         <div className={css.inputContainer}>
           <Input
             type="password"
-            placeholder="PW 확인"
+            placeholder="비밀번호 확인"
             value={confirmPassword}
             onChange={handleConfirmPWChange}
             className={css.input}
@@ -176,14 +175,13 @@ const SignUp = () => {
           {confirmPasswordErrorMessage && <div className={css.error}>{confirmPasswordErrorMessage}</div>}
         </div>
       </div>
-  
-      {/* 중복 검사 버튼을 formContainer 밖으로 빼서 별도의 줄에 위치 */}
+
       <div className={css.idButtonContainer}>
         <Button onClick={handleCheckId} className={css.idButton}>
           중복 검사
         </Button>
       </div>
-  
+
       <div className={css.buttonWrapper}>
         <Button onClick={handleSignUp} className={css.button}>
           등록
@@ -193,7 +191,7 @@ const SignUp = () => {
         </Button>
       </div>
     </div>
-  );  
+  );
 };
 
 export default SignUp;

@@ -73,7 +73,7 @@ const StatusBar = () => {
         </>
       )}
 
-      <div className={css.timeContainer}>현재 시간: {currentTime}</div>
+      <div className={css.timeContainer}>{currentTime}</div>
 
       {isMenuVisible && (
         <div ref={menuRef} className={css.menuPopup}>
