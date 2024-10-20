@@ -92,6 +92,7 @@
     box-sizing: border-box;
     text-align: center;
     transform: translate(-70px);
+    /* border: 8px solid black; */
 }
 
 .detailweatherContainer {
@@ -108,9 +109,11 @@
 
 .closeButton {
     position: absolute;
+    background: transparent;
     top: 80px;
-    right: -20px;
+    right:  50px;
     cursor: pointer;
+    border: none;
 }
 
 .closeIcon {
@@ -160,6 +163,13 @@
     margin-top: 0.5rem;
 }
 
-.h3, .h4 {
-    margin-left: 20px;
+.detailweatherContainer h3 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.detailweatherContainer h4 {
+    font-size: 1.2rem;
+    margin: 50px; 
 }

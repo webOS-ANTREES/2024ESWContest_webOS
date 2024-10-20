@@ -20,7 +20,6 @@ const Monitoring = () => {
     const [logData, setLogData] = useState({}); // 모든 로그 데이터를 저장
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
-
     const todayDate = new Date().toISOString().split('T')[0];
 
     useEffect(() => {
@@ -402,9 +401,11 @@ const Monitoring = () => {
             {showDetailedWeather && (
                     <div className={css.detailweatherContainer}>
                         <h3>세부 날씨</h3>
-                        <Button className={css.closeButton} onClick={() => setShowDetailedWeather(false)}>
-                            <img src={closeIcon} alt="닫기 아이콘" className={css.closeIcon} />
-                        </Button>
+                        <div>
+                            <button className={css.closeButton} onClick={() => setShowDetailedWeather(false)}>
+                                <img src={closeIcon} alt="닫기" className={css.closeIcon} />
+                            </button>
+                        </div>
                         <h4>{weatherService.formatDateOnly(weatherService.getCurrentDate())}</h4>
                         <table className={css.weatherTable}>
                             <thead>
