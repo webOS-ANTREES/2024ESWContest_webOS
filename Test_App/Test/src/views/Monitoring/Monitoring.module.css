@@ -106,11 +106,16 @@
     border: 8px solid black;
 }
 
+.closeButton::before {
+    content: none; /* 가상 요소 제거 */
+    display: none; /* 가상 요소 숨기기 */
+}
+
+
 .closeButton {
     position: absolute;
     top: 80px;
     right: -20px;
-    cursor: pointer;
 }
 
 .closeIcon {
