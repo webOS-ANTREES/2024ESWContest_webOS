@@ -4,7 +4,6 @@
     display: grid;
     grid-template-columns: 0.35fr 2fr; /* 두 개의 열: Log Data와 나머지 컨텐츠 */
     grid-template-rows: 0.5fr 0.5fr; /* 두 개의 행: 날씨 API와 센서 데이터 */
-    gap: 10px;
     padding: 20px;
     box-sizing: border-box;
     background: #fcfcfc;
@@ -30,6 +29,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto 1fr;
+    width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
