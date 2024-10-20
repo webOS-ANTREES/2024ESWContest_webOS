@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getNotificationsFromDB, deleteNotificationFromDB } from '../webOS_service/luna_service';
+import deleteIcon from './Delete.png'; // 아이콘 경로
 import css from './Notice.module.css';
 
 const Notice = () => {
@@ -30,7 +31,9 @@ const Notice = () => {
                 {notifications.map((notification) => (
                     <li key={notification._id} className={css.NotificationItem}>
                         {notification.timestamp} - {notification.message}
-                        <button className={css.DeleteButton} onClick={() => handleDelete(notification._id)}>삭제</button>
+                        <button className={css.DeleteButton} onClick={() => handleDelete(notification._id)}>
+                            <img src={deleteIcon} alt="삭제" className={css.DeleteIcon} />
+                        </button>
                     </li>
                 ))}
             </ul>

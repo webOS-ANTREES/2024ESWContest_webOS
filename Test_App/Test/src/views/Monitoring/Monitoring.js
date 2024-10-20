@@ -5,6 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 import * as weatherService from './Weather_Service';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { firebaseApp } from '../../Firebase';
+import closeIcon from './Close.png';
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -401,7 +402,9 @@ const Monitoring = () => {
             {showDetailedWeather && (
                     <div className={css.detailweatherContainer}>
                         <h3>세부 날씨</h3>
-                        <Button className={css.closeButton} onClick={() => setShowDetailedWeather(false)}>닫기</Button>
+                        <Button className={css.closeButton} onClick={() => setShowDetailedWeather(false)}>
+                            <img src={closeIcon} alt="닫기 아이콘" className={css.closeIcon} />
+                        </Button>
                         <h4>{weatherService.formatDateOnly(weatherService.getCurrentDate())}</h4>
                         <table className={css.weatherTable}>
                             <thead>

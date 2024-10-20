@@ -6,6 +6,7 @@
   height: 100%;
   width: 100%;
   text-align: center;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
 }
 
 .header {
@@ -34,7 +35,8 @@
 
 .buttonWrapper {
   position: relative;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
@@ -47,4 +49,12 @@
   width: 640px;
   height: 640px;
   border: 8px solid #7d40e7;
+}
+
+.iconLabel {
+  margin-top: 50px;
+  font-size: 64px;
+  font-weight: bold;
+  color: #7d40e7;
+  text-decoration: none;
 }

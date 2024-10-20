@@ -18,7 +18,7 @@
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    height: 110%;
+    height: 102%;
     box-sizing: border-box;
     overflow-y: auto;
     border: 8px solid black;
@@ -34,9 +34,7 @@
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     align-items: center;
-    /* border: 8px solid black; */
 }
 
 .sensorContainer {
@@ -52,8 +50,7 @@
     height: 100%;
     box-sizing: border-box;
     transform: translate(225px);
-    margin-top: 20px;
-    /* border: 8px solid black; */
+    margin-top: 60px;
 }
 
 
@@ -75,7 +72,6 @@
     gap: 10px;
     width: 100%;
     height: 100%;
-    /* border: 8px solid black; */
 }
 
 .weatherMain {
@@ -84,54 +80,42 @@
     gap: 10px;
     align-items: center;
     transform: translate(153px);
-    /* border: 8px solid black; */
 }
 
 .weatherButton {
     border-radius: 10px;
     padding: 6rem;
     cursor: pointer;
-    display: gird;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 350px;
     height: 100px;
     box-sizing: border-box;
     text-align: center;
-    height: auto;
     transform: translate(-70px);
 }
 
 .detailweatherContainer {
     position: absolute;
-    top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 1rem;
-    border-radius: 10px;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
     overflow-y: auto;
     z-index: 1000;
-    width: 97%;
-    height: 70%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-    border: 8px solid black
+    width: 100%;
+    height: 95%;
+    border: 8px solid black;
 }
 
 .closeButton {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
+    top: 80px;
+    right: -20px;
     cursor: pointer;
-    font-size: 12px;
-    border-radius: 5px;
+}
+
+.closeIcon {
+    width: 144px;
+    height: 144px;
 }
 
 .weatherTable {
@@ -140,6 +124,7 @@
     max-height: 100%;
     overflow-y: auto;
     border-collapse: collapse;
+    margin-left: 10px;
 }
 
 .weatherTable th, .weatherTable td {
@@ -158,7 +143,6 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    /* border: 8px solid black; */
 }
 
 .cityName {
@@ -174,4 +158,8 @@
 .humidity, .description {
     font-size: 1.2rem;
     margin-top: 0.5rem;
+}
+
+.h3, .h4 {
+    margin-left: 20px;
 }

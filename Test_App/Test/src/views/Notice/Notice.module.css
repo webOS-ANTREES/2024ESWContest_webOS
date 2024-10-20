@@ -5,14 +5,14 @@
   align-items: center;
   background-color: #f9f9f9;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   font-weight: bold;
   text-align: center;
 }
 
 .NotificationList {
   width: 97%;
-  height: 1800px;
+  height: 88%;
   overflow-y: scroll;
   padding: 0;
   margin: 0;
@@ -28,20 +28,14 @@
   font-size: 1em;
 }
 
-.NotificationItem:last-child {
-  border-bottom: none;
-}
-
 .DeleteButton {
-  background: transparent;
-  border: 1px solid blue;
-  color: blue;
+  background-color: #f9f9f9;
   cursor: pointer;
   padding: 8px 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  border: none;
 }
 
-.DeleteButton:hover {
-  background-color: rgba(0, 0, 255, 0.1);
+.DeleteIcon {
+  width: 72px;
+  height: 72px;
 }
