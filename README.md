@@ -1,3 +1,3 @@
-# 2024ESWContest_webOS
+# 제 20회 임베디드 소프트웨어 경진 대회 webOS부문 ANTREES팀
 
-- 2024 / 08 / 01 : server.js, monitoring.js 수정 및 속도 상승
+
