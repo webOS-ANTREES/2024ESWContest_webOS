@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getSystemTime } from '../webOS_service/luna_service';
-import backButton from './BackButton.png';
+import backButton from '../../../resources/images/BackButton.png';
 import css from './StatusBar.module.css';
 
 const StatusBar = () => {

@@ -12,6 +12,14 @@
   text-align: center;
 }
 
+.SystemControlItem h2 {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 2rem;
+}
+
 .InputGrid {
   display: grid;
   grid-template-columns: 1fr 1fr; /* 2개의 열로 구성 */
@@ -48,16 +56,14 @@
 
 .ControlButton {
   padding: 10px 20px;
-  font-size: 1.2rem;
-  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 30%;
+  color: white;
   background-color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin: 20px;
   margin-top: 50px;
-}
-
-.ControlButton:hover {
-  background-color: #0056b3;
 }

@@ -10,13 +10,15 @@
   padding: 15px;
   border-radius: 8px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .ControlButton {
   padding: 10px 20px;
-  font-size: 1.2rem;
-  color: #fff;
+  width: 30%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
   background-color: black;
   border: none;
   border-radius: 5px;

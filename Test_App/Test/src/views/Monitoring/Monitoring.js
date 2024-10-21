@@ -4,8 +4,8 @@ import css from './Monitoring.module.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import * as weatherService from './Weather_Service';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { firebaseApp } from '../../Firebase';
-import closeIcon from './Close.png';
+import { firebaseApp } from '../Firebase/Firebase';
+import closeIcon from '../../../resources/images/Close.png';
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 

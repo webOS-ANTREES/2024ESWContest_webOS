@@ -5,8 +5,5 @@
 	"type": "web",
 	"main": "index.html",
 	"title": "webOS App",
-	"icon": "icon.png",
-	"miniicon": "icon-mini.png",
-	"largeIcon": "icon-large.png",
 	"uiRevision": 2
 }

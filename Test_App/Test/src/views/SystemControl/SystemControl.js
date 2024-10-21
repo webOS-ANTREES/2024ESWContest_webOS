@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import mqtt from 'mqtt';
 import css from './SystemControl.module.css';
 import { getDatabase, ref, query, limitToLast, onValue } from 'firebase/database';
-import { firebaseApp } from '../../Firebase';
+import { firebaseApp } from '../Firebase/Firebase';
 import AutoControl from './AutoControl';
 import ManualControl from './ManualControl';
 import { putKind } from '../webOS_service/luna_service';

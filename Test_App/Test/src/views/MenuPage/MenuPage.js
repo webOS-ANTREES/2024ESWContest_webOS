@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import userIcon from './User.gif';
-import usersIcon from './Users.gif';
-import monitoringIcon from './Monitoring.gif';
-import pestmanagementlIcon from './PestManagement.gif';
-import systemcontrolIcon from './SystemControl.gif';
-import noticeIcon from './Notice.gif';
+import userIcon from '../../../resources/images/User.gif';
+import usersIcon from '../../../resources/images/Users.gif';
+import monitoringIcon from '../../../resources/images/Monitoring.gif';
+import pestmanagementlIcon from '../../../resources/images/PestManagement.gif';
+import systemcontrolIcon from '../../../resources/images/SystemControl.gif';
+import noticeIcon from '../../../resources/images/Notice.gif';
 import css from './MenuPage.module.css';
 
 const MenuPage = ({ userName }) => {

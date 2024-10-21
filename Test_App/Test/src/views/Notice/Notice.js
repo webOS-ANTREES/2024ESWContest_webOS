@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { getNotificationsFromDB, deleteNotificationFromDB } from '../webOS_service/luna_service';
-import deleteIcon from './Delete.png';
-import noticeList_1 from './NoticeList_1.png';
-import noticeList_2 from './NoticeList_2.png';
-import systemControlIcon from './SystemControl.png';
-import skyOpenIcon from './SkyOpen.png';
-import skyCloseIcon from './SkyClose.png';
-import ceilingOpenIcon from './CeilingOpen.png';
-import ceilingCloseIcon from './CeilingClose.png';
-import sideOpenIcon from './SideOpen.png';
-import sideCloseIcon from './SideClose.png';
+import deleteIcon from '../../../resources/images/Delete.png';
+import noticeList_1 from '../../../resources/images/NoticeList_1.png';
+import noticeList_2 from '../../../resources/images/NoticeList_2.png';
+import systemControlIcon from '../../../resources/images/SystemControl.png';
+import skyOpenIcon from '../../../resources/images/SkyOpen.png';
+import skyCloseIcon from '../../../resources/images/SkyClose.png';
+import ceilingOpenIcon from '../../../resources/images/CeilingOpen.png';
+import ceilingCloseIcon from '../../../resources/images/CeilingClose.png';
+import sideOpenIcon from '../../../resources/images/SideOpen.png';
+import sideCloseIcon from '../../../resources/images/SideClose.png';
 import css from './Notice.module.css';
 
 const Notice = () => {

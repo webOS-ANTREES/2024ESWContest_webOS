@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ref, query, onValue, limitToLast } from "firebase/database";  // Firebase 관련 모듈 추가
-import { database } from '../../Firebase';  // Firebase 설정 파일에서 DB 불러오기
+import { database } from '../Firebase/Firebase';  // Firebase 설정 파일에서 DB 불러오기
 import { sendToast, saveSettingsToDB, getSettingsFromDB, deleteSettingsFromDB } from '../webOS_service/luna_service';
 import css from './AutoControl.module.css';
 

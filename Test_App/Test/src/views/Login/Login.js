@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUpdatabase } from '../../Firebase';
+import { signUpdatabase } from '../Firebase/Firebase';
 import { ref, get } from "firebase/database";
 import Button from '@enact/moonstone/Button';
 import Input from '@enact/moonstone/Input';
-import css from './Login.module.css';
 import logo from '../../../Berry Smart Farm.png';
+import css from './Login.module.css';
 
 const Login = ({ setIsAuthenticated, setUserName }) => {
   const navigate = useNavigate();

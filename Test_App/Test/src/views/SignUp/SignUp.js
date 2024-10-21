@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUpdatabase } from '../../Firebase';  // Firebase에서 signUp 데이터베이스 가져오기
+import { signUpdatabase } from '../Firebase/Firebase';  // Firebase에서 signUp 데이터베이스 가져오기
 import { ref, set, get } from "firebase/database";  // Firebase Realtime Database 함수 사용
 import Button from '@enact/moonstone/Button';
 import Input from '@enact/moonstone/Input';
-import signUpIcon from './SignUp.png';
+import signUpIcon from '../../../resources/images/SignUp.png';
 import css from './SignUp.module.css';
 
 const SignUp = () => {

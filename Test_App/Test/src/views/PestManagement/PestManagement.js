@@ -4,8 +4,8 @@ import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
-import cameraIcon from './Camera.png';
-import robotArmIcon from './RobotArm.png';
+import cameraIcon from '../../../resources/images/Camera.png';
+import robotArmIcon from '../../../resources/images/RobotArm.png';
 import css from './PestManagement.module.css';
 
 // 플러그인 등록
