@@ -9,14 +9,14 @@
   background-color: #e9ecef;
   padding: 15px;
   border-radius: 8px;
-  text-align: left;
-  /* border: 8px solid black; */
+  text-align: center;
 }
 
 .InputGrid {
   display: grid;
   grid-template-columns: 1fr 1fr; /* 2개의 열로 구성 */
   gap: 10px;
+  margin-left: 120px;
   align-items: center;
 }
 
@@ -27,8 +27,9 @@
 }
 
 .InputField {
-  width: 30%;
+  width: 45%;
   padding: 5px;
+  margin-right: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -47,14 +48,14 @@
 
 .ControlButton {
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #fff;
-  background-color: #007bff;
+  background-color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 10px;
-  margin-top: 10px;
+  margin: 20px;
+  margin-top: 50px;
 }
 
 .ControlButton:hover {

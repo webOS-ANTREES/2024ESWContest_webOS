@@ -1,7 +1,7 @@
 .NoticeContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: #f9f9f9;
   width: 100%;
@@ -11,13 +11,31 @@
   text-align: center;
 }
 
+.titleWithIcons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.Icon {
+  width: 144px;
+  height: 144px;
+  margin: 50px;
+}
+
 .NotificationList {
+  position: absolute;
   width: 97%;
-  height: 85%;
+  height: 80%;
+  bottom: 100px;
   overflow-y: scroll;
   padding: 0;
   margin: 0;
-  border: 8px solid black
+  border: 8px solid black;
+  box-sizing: border-box;
 }
 
 .NotificationItem {
@@ -29,6 +47,25 @@
   font-size: 1.1em;
 }
 
+.NotificationIcon {
+  width: 300px;
+  height: 300px;
+  margin-right: 10px; /* 메시지와 아이콘 간격 */
+}
+
+.NotificationMessage {
+  flex: 1;
+  font-size: 1.2rem;
+}
+
+.NotificationTime {
+  position: relative;
+  font-size: 1rem;
+  right: 100px;
+  top: 80px;
+  color: #777;
+}
+
 .DeleteButton {
   background-color: #f9f9f9;
   cursor: pointer;
@@ -37,6 +74,7 @@
 }
 
 .DeleteIcon {
-  width: 72px;
-  height: 72px;
+  width: 120px;
+  height: 120px;
+  margin-right: 50px;
 }

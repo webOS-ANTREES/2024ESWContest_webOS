@@ -12,12 +12,12 @@ const SystemControl = () => {
   const [currentSensorData, setLatestSensorData] = useState(null);
 
   useEffect(() => {
-    const mqttClient = mqtt.connect('ws://192.168.50.248:1884');  // MQTT 서버에 연결
+    const mqttClient = mqtt.connect('ws://192.168.137.147:1884');  // MQTT 서버에 연결
     const todayDate = new Date().toISOString().split('T')[0];
     const database = getDatabase(firebaseApp);
     const sensorDataRef = query(ref(database, `sensorData/${todayDate}`), limitToLast(1));
 
-    putKind();  // DB8에 Kind 생성 (최초 한 번 실행)
+    putKind(); // DB8에 Kind 생성 (최초 한 번 실행)
     setClient(mqttClient);
 
     onValue(sensorDataRef, (snapshot) => {

@@ -9,38 +9,6 @@
   position: relative;
 }
 
-.menuButton {
-  background-color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  order: 1;  /* 메뉴 버튼을 첫 번째로 배치 */
-  margin-left: 30px;
-  height: 100%;
-}
-
-.menuButton img {
-  width: 100%; /* 아이콘 너비 설정 */
-  height: 100%;
-  cursor: pointer;
-}
-
-.menuPopup {
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-  position: absolute;
-  top: 100px;
-  width: 400px;
-  height: 1000px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
-}
-
 .timeContainer {
   font-size: 64px;
   font-weight: bold;
@@ -50,6 +18,8 @@
 }
 
 .backButton {
+  position: absolute;
+  right: 0;
   background-color: white;
   padding: 10px 20px;
   border: none;
@@ -60,7 +30,7 @@
 }
 
 .backButton img {
-  width: 100%; /* 아이콘 너비 설정 */
+  width: 100%;
   height: 100%;
   cursor: pointer;
 }

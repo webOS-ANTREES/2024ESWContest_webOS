@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
+import { ref, query, onValue, limitToLast } from "firebase/database";  // Firebase 관련 모듈 추가
+import { database } from '../../Firebase';  // Firebase 설정 파일에서 DB 불러오기
 import { sendToast, saveSettingsToDB, getSettingsFromDB, deleteSettingsFromDB } from '../webOS_service/luna_service';
 import css from './AutoControl.module.css';
 
-const AutoControl = ({ currentSensorData, client }) => {
+const AutoControl = ({ client }) => {
   // 기본 설정값 (천창, 내벽 천장, 내벽 사이드)
   const defaultSettings = {
-    skylight: { temperature: 10, humidity: 10, co2: 10, illumination: 1000 },
-    ceiling: { temperature: 10, humidity: 10, co2: 10, illumination: 1000 },
-    sideWall: { temperature: 10, humidity: 10, co2: 10, illumination: 1000 },
+    skylight: { temperature: 10, humidity: 10, co2: 10, illuminance: 1000 },
+    ceiling: { temperature: 10, humidity: 10, co2: 10, illuminance: 1000 },
+    sideWall: { temperature: 10, humidity: 10, co2: 10, illuminance: 1000 },
   };
 
   const [userInput, setUserInput] = useState(defaultSettings); // 설정값 상태 관리
@@ -15,18 +17,50 @@ const AutoControl = ({ currentSensorData, client }) => {
     skylight: null,
     ceiling: null,
     sideWall: null,
-  });  // 불러온 설정값 저장
+  });
+  const [latestSensorData, setLatestSensorData] = useState(null);
+
+  // Firebase에서 최신 센서 데이터를 불러오는 함수
+  const loadLatestSensorData = () => {
+    const todayDate = new Date().toISOString().split('T')[0];
+    const sensorDataRef = query(ref(database, `sensorData/${todayDate}`), limitToLast(1)); // 오늘 날짜의 데이터에서 최신 값 추출
+
+    onValue(sensorDataRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const allData = [];
+        // 외부 타임스탬프 키(timeKey) 및 내부 데이터 키(innerKey)를 순회하며 데이터를 배열에 쌓음
+        Object.keys(data).forEach(timeKey => {
+          const timeData = data[timeKey];
+          const innerKeys = Object.keys(timeData);
+          innerKeys.forEach(innerKey => {
+            allData.push({
+              ...timeData[innerKey],
+              timeKey: timeKey,
+              key: innerKey
+            });
+          });
+        });
+
+        // 가장 최신 데이터를 배열의 마지막에서 가져옴
+        const currentData = allData[allData.length - 1];
+        setLatestSensorData(currentData); // 최신 센서 데이터를 상태로 설정
+      } else {
+        setLatestSensorData(null);
+      }
+    });
+  };
 
   // 설정값을 DB에서 불러오는 함수
   const loadSettings = (type) => {
-    console.log(`Attempting to load ${type} settings from DB...`);  // 타입별 로그 확인
+    console.log(`Attempting to load ${type} settings from DB...`);
     getSettingsFromDB(type, (error, latestSettings) => {
       if (error) {
         console.log(`Error loading ${type} settings from DB:`, error);
       } else if (latestSettings) {
         console.log(`Latest ${type} settings from DB:`, JSON.stringify(latestSettings));
 
-        // 최신 설정값을 상태로 반영 (불러온 값을 저장하는 부분 확인)
+        // 최신 설정값을 상태로 반영
         setUserInput((prevInput) => ({
           ...prevInput,
           [type]: {
@@ -49,10 +83,16 @@ const AutoControl = ({ currentSensorData, client }) => {
     });
   };
 
+  // 모든 설정을 불러오는 함수
   useEffect(() => {
-    setTimeout(() => loadSettings('skylight'), 100);
-    setTimeout(() => loadSettings('ceiling'), 200);
-    setTimeout(() => loadSettings('sideWall'), 300);
+    const loadAllSettings = () => {
+      loadSettings('skylight');
+      setTimeout(() => loadSettings('ceiling'), 200);
+      setTimeout(() => loadSettings('sideWall'), 300);
+    };
+
+    loadAllSettings();
+    loadLatestSensorData(); // 센서 데이터도 불러옴
   }, []);
 
   useEffect(() => {
@@ -74,7 +114,7 @@ const AutoControl = ({ currentSensorData, client }) => {
       ...prevInput,
       [type]: {
         ...prevInput[type],
-        [name]: parseInt(value) || 0,
+        [name]: value === "" ? "" : parseInt(value, 10),
       },
     }));
   };
@@ -82,37 +122,61 @@ const AutoControl = ({ currentSensorData, client }) => {
   // 자동 제어 로직
   const handleAutoControl = (type) => {
     const controlSettings = userInput[type];
-    if (currentSensorData) {
-      const { temperature, humidity, co2, illumination } = currentSensorData;
 
-      // 천창 제어 (MQTT topic: 'sky')
+    if (latestSensorData) {
+      const temperature = Number(latestSensorData.temperature);
+      const humidity = Number(latestSensorData.humidity);
+      const co2 = Number(latestSensorData.co2);
+      const illuminance = Number(latestSensorData.illuminance);
+
+      const tempSetting = Number(controlSettings.temperature);
+      const humiditySetting = Number(controlSettings.humidity);
+      const co2Setting = Number(controlSettings.co2);
+      const illuminanceSetting = Number(controlSettings.illuminance);
+
+      // 천창 제어
       if (type === 'skylight') {
-        if (temperature >= controlSettings.temperature) {
+        if (temperature >= tempSetting && humidity >= humiditySetting && co2 >= co2Setting && illuminance >= illuminanceSetting) {
           client.publish('nodemcu/sky', 'ON');
-          sendToast("천창이 자동으로 열렸습니다.");
+          setTimeout(() => {
+            sendToast("천창이 자동으로 열렸습니다.");
+          }, 1000);
         } else {
+          console.log("Skylight: Closing");
           client.publish('nodemcu/sky', 'OFF');
-          sendToast("천창이 자동으로 닫혔습니다.");
+          setTimeout(() => {
+            sendToast("천창이 자동으로 닫혔습니다.");
+          }, 1000);
         }
       }
-      // 내벽 천장 제어 (MQTT topic: 'ceiling')
+
+      // 내벽 천장 제어
       if (type === 'ceiling') {
-        if (illumination >= controlSettings.illumination) {
+        if (temperature >= tempSetting && humidity >= humiditySetting && co2 >= co2Setting && illuminance >= illuminanceSetting) {
           client.publish('nodemcu/ceiling', 'ON');
-          sendToast("내벽 천장이 자동으로 열렸습니다.");
+          setTimeout(() => {
+            sendToast("내벽 천장이 자동으로 열렸습니다.");
+          }, 1000);
         } else {
           client.publish('nodemcu/ceiling', 'OFF');
-          sendToast("내벽 천장이 자동으로 닫혔습니다.");
+          setTimeout(() => {
+            sendToast("내벽 천장이 자동으로 닫혔습니다.");
+          }, 1000);
         }
       }
-      // 내벽 사이드 제어 (MQTT topic: 'side')
+
+      // 내벽 제어
       if (type === 'sideWall') {
-        if (co2 >= controlSettings.co2 || humidity >= controlSettings.humidity) {
+        if (temperature >= tempSetting || humidity >= humiditySetting || co2 >= co2Setting || illuminance >= illuminanceSetting) {
           client.publish('nodemcu/side', 'ON');
-          sendToast("내벽이  자동으로 열렸습니다.");
+          setTimeout(() => {
+            sendToast("내벽이 자동으로 열렸습니다.");
+          }, 1000);
         } else {
           client.publish('nodemcu/side', 'OFF');
-          sendToast("내벽이 자동으로 닫혔습니다.");
+          setTimeout(() => {
+            sendToast("내벽이 자동으로 닫혔습니다.");
+          }, 1000);
         }
       }
     }
@@ -138,7 +202,7 @@ const AutoControl = ({ currentSensorData, client }) => {
       default:
         typeName = type;
     }
-    sendToast(`${typeName}의 제어 조건을 변경하였습니다. 온도: ${settings.temperature}°C, 습도: ${settings.humidity}%, CO2: ${settings.co2}ppm, 조도: ${settings.illumination}lux`);
+    sendToast(`${typeName}의 제어 조건을 변경하였습니다. 온도: ${settings.temperature}°C, 습도: ${settings.humidity}%, CO2: ${settings.co2}ppm, 조도: ${settings.illuminance}lux`);
     handleAutoControl(type);
   };
 
@@ -153,7 +217,6 @@ const AutoControl = ({ currentSensorData, client }) => {
 
   return (
     <div className={css.SystemControlContainer}>
-      {/* 천창 제어 UI */}
       <div className={css.SystemControlItem}>
         <h2>천창 자동 제어</h2>
         <div className={css.InputGrid}>
@@ -194,9 +257,9 @@ const AutoControl = ({ currentSensorData, client }) => {
             <label>조도:</label>
             <input
               type="number"
-              name="illumination"
+              name="illuminance"
               className={css.InputField}
-              value={userInput.skylight.illumination}
+              value={userInput.skylight.illuminance}
               onChange={(e) => handleInputChange('skylight', e)}
             />
             <span className={css.Unit}>lux</span>
@@ -209,7 +272,6 @@ const AutoControl = ({ currentSensorData, client }) => {
           기본값
         </button>
       </div>
-      {/* 내벽 천장 제어 UI */}
       <div className={css.SystemControlItem}>
         <h2>내벽 천장 자동 제어</h2>
         <div className={css.InputGrid}>
@@ -250,9 +312,9 @@ const AutoControl = ({ currentSensorData, client }) => {
             <label>조도:</label>
             <input
               type="number"
-              name="illumination"
+              name="illuminance"
               className={css.InputField}
-              value={userInput.ceiling.illumination}
+              value={userInput.ceiling.illuminance}
               onChange={(e) => handleInputChange('ceiling', e)}
             />
             <span className={css.Unit}>lux</span>
@@ -265,7 +327,6 @@ const AutoControl = ({ currentSensorData, client }) => {
           기본값
         </button>
       </div>
-      {/* 내벽 제어 UI */}
       <div className={css.SystemControlItem}>
         <h2>내벽 자동 제어</h2>
         <div className={css.InputGrid}>
@@ -306,9 +367,9 @@ const AutoControl = ({ currentSensorData, client }) => {
             <label>조도:</label>
             <input
               type="number"
-              name="illumination"
+              name="illuminance"
               className={css.InputField}
-              value={userInput.sideWall.illumination}
+              value={userInput.sideWall.illuminance}
               onChange={(e) => handleInputChange('sideWall', e)}
             />
             <span className={css.Unit}>lux</span>

@@ -2,17 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, #a8edea, #fed6e3);
     width: 100%;
     height: 100%;
   }
-  
+
+  .signupIcon {
+    width: 400px;
+    height: 400px;
+    margin-top: 50px;
+  }
+
   .formContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 80%;
-    margin-top: 200px;
+    margin-top: 100px;
   }
   
   .inputContainer {
@@ -37,12 +42,12 @@
     margin-top: -850px;
     margin-right: 1000px;
     width: 100%;
-}
+  }
   
   .idButton {
     width: 350px;
     height: 40px;
-    background-color: #007bff;
+    background: linear-gradient(135deg, #a18cd1, #8fd3f4);
     border: none;
     color: white;
   }
@@ -57,7 +62,7 @@
   .button {
     width: 150px;
     padding: 10px;
-    background-color: #007bff;
+    background: linear-gradient(135deg, #a18cd1, #8fd3f4);
     color: white;
   }
   

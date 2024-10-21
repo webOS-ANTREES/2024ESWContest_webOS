@@ -134,7 +134,7 @@ const PestManagement = () => {
   return (
     <div className={css.PestManagementContainer}>
       <div className={css.CCTVContainer}>
-        <img src={cameraIcon} alt="CCTV 아이콘" className={css.CCTVIcon} /> 
+        <img src={cameraIcon} alt="CCTV 아이콘" className={css.CCTVIcon} />
         <h1>CAM</h1>
         <img
           className={css.CCTVImage}

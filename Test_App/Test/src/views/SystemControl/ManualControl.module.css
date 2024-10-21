@@ -9,23 +9,18 @@
   background-color: #e9ecef;
   padding: 15px;
   border-radius: 8px;
-  text-align: left;
+  text-align: center;
   font-size: 1.5rem;
-  /* border: 8px solid black; */
 }
 
 .ControlButton {
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #fff;
-  background-color: #007bff;
+  background-color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 10px;
+  margin: 20px;
   margin-top: 10px;
-}
-
-.ControlButton:hover {
-  background-color: #0056b3;
 }

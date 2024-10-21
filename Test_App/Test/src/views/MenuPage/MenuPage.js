@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import userIcon from './User.gif';
+import usersIcon from './Users.gif';
 import monitoringIcon from './Monitoring.gif';
 import pestmanagementlIcon from './PestManagement.gif';
 import systemcontrolIcon from './SystemControl.gif';
@@ -9,7 +11,12 @@ const MenuPage = ({ userName }) => {
   return (
     <div className={css.menuContainer}>
       <div className={css.header}>
-        <h1 className={css.welcomeText}>환영합니다! {userName}님</h1>
+        <div className={css.welcomeContainer}>
+        <img src={userIcon} alt="User Icon" className={css.userIcon} />
+        <h1 className={css.welcomeText}>{userName}님 환영합니다!</h1>
+      </div>
+        <p className={css.largeText}>이용 해주셔서 감사합니다!</p>
+        <img src={usersIcon} alt="Users Icon" className={css.usersIcon} />
       </div>
 
       <div className={css.buttonContainer}>

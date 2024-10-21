@@ -6,45 +6,57 @@ const ManualControl = ({ client }) => {
   // 천창 제어 함수
   const handleSkylightOpen = () => {
     if (client) {
-      client.publish('nodemcu/sky', 'ON');  // 천창 열기 메시지
-      sendToast("천창이 열렸습니다."); // Toast 알림 전송
+      client.publish('nodemcu/sky', 'ON');
+      setTimeout(() => {
+        sendToast("천창이 열렸습니다.");
+      }, 1000);  // 1초 지연
     }
   };
 
   const handleSkylightClose = () => {
     if (client) {
-      client.publish('nodemcu/sky', 'OFF');  // 천창 닫기 메시지
-      sendToast("천창이 닫혔습니다."); // Toast 알림 전송
+      client.publish('nodemcu/sky', 'OFF');
+      setTimeout(() => {
+        sendToast("천창이 닫혔습니다.");
+      }, 1000);  // 1초 지연
     }
   };
 
   // 내벽 사이드 제어 함수
   const handleInnerSide = () => {
     if (client) {
-      client.publish('nodemcu/side', 'ON');  // 내벽 사이드 열기 메시지
-      sendToast("내벽 사이드가 열렸습니다.");
+      client.publish('nodemcu/side', 'ON');
+      setTimeout(() => {
+        sendToast("내벽이 열렸습니다.");
+      }, 1000);  // 1초 지연
     }
   };
 
   const handleInnerSideClose = () => {
     if (client) {
-      client.publish('nodemcu/side', 'OFF');  // 내벽 사이드 닫기 메시지
-      sendToast("내벽 사이드가 닫혔습니다.");
+      client.publish('nodemcu/side', 'OFF');
+      setTimeout(() => {
+        sendToast("내벽이 닫혔습니다.");
+      }, 1000);  // 1초 지연
     }
   };
 
   // 내벽 천장 제어 함수
   const handleInnerCeiling = () => {
     if (client) {
-      client.publish('nodemcu/ceiling', 'ON');  // 내벽 천장 열기 메시지
-      sendToast("내벽 천장이 열렸습니다.");
+      client.publish('nodemcu/ceiling', 'ON');
+      setTimeout(() => {
+        sendToast("내벽 천장이 열렸습니다.");
+      }, 1000);  // 1초 지연
     }
   };
 
   const handleInnerCeilingClose = () => {
     if (client) {
-      client.publish('nodemcu/ceiling', 'OFF');  // 내벽 천장 닫기 메시지
-      sendToast("내벽 천장이 닫혔습니다.");
+      client.publish('nodemcu/ceiling', 'OFF');
+      setTimeout(() => {
+        sendToast("내벽 천장이 닫혔습니다.");
+      }, 1000);  // 1초 지연
     }
   };
 

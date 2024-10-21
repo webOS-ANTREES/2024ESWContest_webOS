@@ -4,6 +4,7 @@ import { signUpdatabase } from '../../Firebase';  // Firebase에서 signUp 데�
 import { ref, set, get } from "firebase/database";  // Firebase Realtime Database 함수 사용
 import Button from '@enact/moonstone/Button';
 import Input from '@enact/moonstone/Input';
+import signUpIcon from './SignUp.png';
 import css from './SignUp.module.css';
 
 const SignUp = () => {
@@ -126,7 +127,7 @@ const SignUp = () => {
 
   return (
     <div className={css.signupContainer}>
-      <h1>회원 가입</h1>
+      <img src={signUpIcon} alt="회원 가입 아이콘" className={css.signupIcon} />
 
       <div className={css.formContainer}>
         <div className={css.inputContainer}>
