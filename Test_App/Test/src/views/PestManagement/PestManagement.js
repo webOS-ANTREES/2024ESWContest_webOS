@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import mqtt from 'mqtt';
-import { Pie } from 'react-chartjs-2'; // Pie chart 추가
-import 'chart.js/auto'; // Chart.js 자동 로드
-import ChartDataLabels from 'chartjs-plugin-datalabels'; // 데이터 레이블 플러그인 추가
-import { Chart } from 'chart.js'; // Chart.js 로드
+import { Pie } from 'react-chartjs-2';
+import 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart } from 'chart.js';
+import cameraIcon from './Camera.png';
+import robotArmIcon from './RobotArm.png';
 import css from './PestManagement.module.css';
 
 // 플러그인 등록
@@ -23,11 +25,17 @@ const PestManagement = () => {
     const mqttClient = mqtt.connect('ws://192.168.50.248:1884'); // MQTT 브로커에 연결
     setClient(mqttClient); // client 상태 업데이트
 
-    // 연결 후 특정 topic 구독
+    // 연결 후 topic 구독
     mqttClient.on('connect', () => {
       mqttClient.subscribe('robot/location', (err) => {
         if (!err) {
           console.log('MQTT Subcribe Success');
+        }
+      });
+
+      mqttClient.publish('robot/location', 'give data', (err) => {
+        if (!err) {
+          console.log('Give Data Request Sent');
         }
       });
     });
@@ -72,7 +80,7 @@ const PestManagement = () => {
       legend: {
         labels: {
           font: {
-            size: 16, // 범례 글씨 크기
+            size: 16,
           },
         },
       },
@@ -80,19 +88,19 @@ const PestManagement = () => {
         display: true,
         text: '딸기 상태 비율',
         font: {
-          size: 24, // 제목 글씨 크기
+          size: 24,
         },
       },
       datalabels: {
-        formatter: (value) => `${value}%`, // 각 섹션 안에 비율 표시
-        color: '#fff', // 레이블 색상
+        formatter: (value) => `${value}%`,
+        color: '#fff',
         font: {
-          size: 20, // 레이블 글씨 크기
-          weight: 'bold', // 글씨 굵기
+          size: 20,
+          weight: 'bold',
         },
-        display: true, // 항상 레이블 표시
-        anchor: 'center', // 레이블을 중앙에 표시
-        align: 'center', // 레이블을 섹션 안에 맞춤
+        display: true,
+        anchor: 'center',
+        align: 'center',
       },
     },
   };
@@ -126,7 +134,8 @@ const PestManagement = () => {
   return (
     <div className={css.PestManagementContainer}>
       <div className={css.CCTVContainer}>
-        <h1>CCTV</h1>
+        <img src={cameraIcon} alt="CCTV 아이콘" className={css.CCTVIcon} /> 
+        <h1>CAM</h1>
         <img
           className={css.CCTVImage}
           src="http://192.168.50.248:8080/video_feed"
@@ -136,7 +145,7 @@ const PestManagement = () => {
 
       <div className={css.PestManagementContent}>
         <div className={css.PestManagementItem}>
-          <div style={{ height: '500px', width: '500px' }}>
+          <div style={{ height: '450px', width: '600px' }}>
             <Pie data={chartData} options={chartOptions} />
           </div>
           {/* 원 그래프 아래에 개수 표시 */}
@@ -148,15 +157,14 @@ const PestManagement = () => {
           </div>
         </div>
 
-        {/* 버튼을 가로로 나열 */}
         <div className={css.buttonContainer}>
-          {/* ON 메시지 전송 버튼 */}
           <button className={css.SendButton} onClick={handleSendMessageOn}>
-            ON
+            <img src={robotArmIcon} alt="ON 아이콘" className={css.icon} />
+            <span className={css.buttonText}>ON</span>
           </button>
-          {/* OFF 메시지 전송 버튼 */}
           <button className={css.SendButton} onClick={handleSendMessageOff}>
-            OFF
+            <img src={robotArmIcon} alt="OFF 아이콘" className={css.icon} />
+            <span className={css.buttonText}>OFF</span>
           </button>
         </div>
       </div>

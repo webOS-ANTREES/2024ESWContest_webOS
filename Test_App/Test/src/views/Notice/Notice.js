@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getNotificationsFromDB, deleteNotificationFromDB } from '../webOS_service/luna_service';
-import deleteIcon from './Delete.png'; // 아이콘 경로
+import deleteIcon from './Delete.png';
 import css from './Notice.module.css';
 
 const Notice = () => {
