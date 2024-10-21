@@ -39,9 +39,22 @@ export const getDayAfterTomorrowDate = () => {
     return `${year}${month}${day}`;
 };
 
-export const getSkyDescription = (sky) => {
-    if (sky !== '0') {
-        switch (sky) {
+export const getSkyDescription = (sky, pty) => {
+    const ptyStr = String(pty);  // pty 값을 문자열로 변환
+    const skyStr = String(sky);  // sky 값을 문자열로 변환
+
+    if (ptyStr !== '0') {  // pty 값이 0이 아니면 강수 형태 처리
+        switch (ptyStr) {
+            case '1': return '비';
+            case '2': return '비/눈';
+            case '3': return '눈';
+            case '4': return '소나기';
+            default: return '';
+        }
+    }
+
+    if (skyStr !== '0') {  // sky 값이 0이 아니면 하늘 상태 처리
+        switch (skyStr) {
             case '1': return '맑음';
             case '3': return '구름 많음';
             case '4': return '흐림';

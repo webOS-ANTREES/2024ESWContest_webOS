@@ -17,7 +17,7 @@ const Monitoring = () => {
     const [showDetailedWeather, setShowDetailedWeather] = useState(false);
     const [sensorData, setSensorData] = useState([]);
     const [currentSensorData, setLatestSensorData] = useState(null);
-    const [logData, setLogData] = useState({}); // 모든 로그 데이터를 저장
+    const [logData, setLogData] = useState({});
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
     const todayDate = new Date().toISOString().split('T')[0];
@@ -35,7 +35,7 @@ const Monitoring = () => {
 
         const database = getDatabase(firebaseApp);
         const sensorDataRef = ref(database, `sensorData/${todayDate}`);
-        const logDataRef = ref(database, 'sensorData'); // 전체 로그 데이터를 가져오기
+        const logDataRef = ref(database, 'sensorData');
 
         onValue(sensorDataRef, (snapshot) => {
             const data = snapshot.val();
@@ -77,7 +77,7 @@ const Monitoring = () => {
         };
     }, [selectedCity, currentTime, todayDate]);
 
-    const todaySensorData = sensorData; // 오늘 날짜의 데이터
+    const todaySensorData = sensorData;
 
     const handleDateClick = (date) => {
         setSelectedDate(date === selectedDate ? null : date);
@@ -145,7 +145,7 @@ const Monitoring = () => {
                                     dataKey="온도"
                                     stroke="#FF5733"
                                     strokeWidth={3}
-                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                    dot={false}
                                 />
                             </LineChart>
                     </div>
@@ -175,7 +175,7 @@ const Monitoring = () => {
                                     dataKey="습도"
                                     stroke="#87CEEB"
                                     strokeWidth={3}
-                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                    dot={false}
                                 />
                             </LineChart>
                     </div>
@@ -205,7 +205,7 @@ const Monitoring = () => {
                                     dataKey="Co2"
                                     stroke="#919191"
                                     strokeWidth={3}
-                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                    dot={false}
                                 />
                             </LineChart>
                     </div>
@@ -234,7 +234,7 @@ const Monitoring = () => {
                                     dataKey="조도"
                                     stroke="#FFD700"
                                     strokeWidth={3}
-                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                    dot={false}
                                 />
                             </LineChart>
                     </div>
@@ -263,7 +263,7 @@ const Monitoring = () => {
                                     dataKey="수온"
                                     stroke="#008080"
                                     strokeWidth={3}
-                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                    dot={false}
                                 />
                             </LineChart>
                     </div>
@@ -292,7 +292,7 @@ const Monitoring = () => {
                                     dataKey="pH"
                                     stroke="#8A2BE2"
                                     strokeWidth={3}
-                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                    dot={false}
                                 />
                             </LineChart>
                     </div>
@@ -300,7 +300,6 @@ const Monitoring = () => {
             </div>
 
             <div className={css.weatherContainer}>
-                {/* 최신 센서 데이터 표시 */}
                 {currentSensorData ? (
                     <div className={css.currentSensorDataContainer}>
                         <h3>Current Sensor Data</h3>
@@ -314,7 +313,6 @@ const Monitoring = () => {
                 ) : (
                     <div className={css.currentSensorDataContainer}>
                         <h3>Current Sensor Data</h3>
-                        <p>데이터 없음</p>
                     </div>
                 )}
                 <div className={css.weatherMain}>
@@ -358,7 +356,7 @@ const Monitoring = () => {
                                     dataKey="온도"
                                     stroke="#FF5733"
                                     strokeWidth={3}
-                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                    dot={false}
                                 />
                             </LineChart>
                     </div>
@@ -392,7 +390,7 @@ const Monitoring = () => {
                                     dataKey="습도"
                                     stroke="#87CEEB"
                                     strokeWidth={3}
-                                    dot={false}  // 데이터 포인트의 동그라미 원 제거
+                                    dot={false}
                                 />
                             </LineChart>
                     </div>
@@ -423,7 +421,7 @@ const Monitoring = () => {
                                 {detailedWeather.today.map((item, index) => (
                                     <tr key={index}>
                                         <td>{weatherService.formatTimeOnly(item.time)}</td>
-                                        <td>{weatherService.getSkyDescription(item.sky)}</td>
+                                        <td>{weatherService.getSkyDescription(item.sky, item.pty)}</td>
                                         <td>{item.temperature}°C</td>
                                         <td>{item.precipitation}</td>
                                         <td>{item.precipitationProbability}%</td>
@@ -451,7 +449,7 @@ const Monitoring = () => {
                                 {detailedWeather.tomorrow.map((item, index) => (
                                     <tr key={index}>
                                         <td>{weatherService.formatTimeOnly(item.time)}</td>
-                                        <td>{weatherService.getSkyDescription(item.sky)}</td>
+                                        <td>{weatherService.getSkyDescription(item.sky, item.pty)}</td>
                                         <td>{item.temperature}°C</td>
                                         <td>{item.precipitation}</td>
                                         <td>{item.precipitationProbability}%</td>
@@ -479,7 +477,7 @@ const Monitoring = () => {
                                 {detailedWeather.dayAfterTomorrow.map((item, index) => (
                                     <tr key={index}>
                                         <td>{weatherService.formatTimeOnly(item.time)}</td>
-                                        <td>{weatherService.getSkyDescription(item.sky)}</td>
+                                        <td>{weatherService.getSkyDescription(item.sky, item.pty)}</td>
                                         <td>{item.temperature}°C</td>
                                         <td>{item.precipitation}</td>
                                         <td>{item.precipitationProbability}%</td>
