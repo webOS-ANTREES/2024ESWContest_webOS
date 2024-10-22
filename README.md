@@ -10,12 +10,12 @@
 </div>
 
 
-### 작품명 : Berry Smart Farm
+## 작품명 : Berry Smart Farm
 
 - 작품 간단 설명
 
 
-### 기능
+## 기능
 - [모니터링](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 - [병해충 관리](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 - [시스템 제어](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
@@ -23,6 +23,6 @@
 - [부가적인 기능](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 
 
-### 차별성
+## 차별성
 
-### 기대효과
+## 기대효과
