@@ -1,7 +1,7 @@
 import LS2Request from '@enact/webos/LS2Request';
 
 const webOSBridge = new LS2Request();
-const kindID = "com.webos.app:1"; // Kind의 고유 ID
+const kindID = "com.smartfarm.app:1"; // Kind의 고유 ID
 
 // 시스템 시간 가져오기 함수
 export const getSystemTime = (callback) => {
@@ -30,7 +30,7 @@ export const putKind = () => {
     const url = 'luna://com.webos.service.db';
     const params = {
         "id": kindID,
-        "owner": "com.test.app",
+        "owner": "com.smartfarm.app",
         "indexes": [
             {
                 "name": "index0",
@@ -67,7 +67,7 @@ export const putPermissions = () => {
                 },
                 "object": kindID,
                 "type": "db.kind",
-                "caller": "com.test.app"
+                "caller": "com.smartfarm.app"
             }
         ]
     };

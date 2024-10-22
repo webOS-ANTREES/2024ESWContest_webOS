@@ -4,7 +4,7 @@ import { signUpdatabase } from '../Firebase/Firebase';
 import { ref, get } from "firebase/database";
 import Button from '@enact/moonstone/Button';
 import Input from '@enact/moonstone/Input';
-import logo from '../../../resources/images/Berry Smart Farm.png';
+import logo from '../../../resources/images/Logo.png';
 import css from './Login.module.css';
 
 const Login = ({ setIsAuthenticated, setUserName }) => {

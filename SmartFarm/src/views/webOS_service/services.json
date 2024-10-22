@@ -1,6 +1,6 @@
 {
     "id": "com.smartfarm.service",
-    "description": "",
+    "description": "HelloWorld Service",
     "services": [
       {
         "name": "com.smartfarm.service",

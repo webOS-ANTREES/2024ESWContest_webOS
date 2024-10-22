@@ -5,7 +5,7 @@
 	"type": "web",
 	"main": "index.html",
 	"title": "Berry Smart Farm",
-	"icon": "Berry Smart Farm.png",
+	"icon": "Berry_Smart_Farm.png",
 	"uiRevision": 2,
 	"requiredPermissions": [
 		"time.query",
