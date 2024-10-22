@@ -18,8 +18,9 @@
 - [병해충 관리](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 - [시스템 제어](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 - [알림](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
-- [로봇팔](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
-- [인공지능](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
+- [로봇팔](https://github.com/webOS-ANTREES/RobotArm)
+- [인공지능](https://github.com/webOS-ANTREES/AI)
+- [웹캠](https://github.com/webOS-ANTREES/Test_Cam)
 - [부가적인 기능](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 
 ## 차별성
