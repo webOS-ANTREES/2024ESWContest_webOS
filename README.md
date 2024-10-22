@@ -58,7 +58,6 @@
             </ul>
         </li>
     </ul>
-    <li>
-        🗄️ raspberryPi
-    </li>
+    🗄️ raspberryPi
+    🗄️ AI
 </div>
