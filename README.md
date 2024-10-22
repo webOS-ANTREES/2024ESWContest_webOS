@@ -29,7 +29,7 @@
 ## 파일 구성
 <div style="font-family: monospace;">
     <div style="display: inline-block; border: 2px solid black; padding: 10px; border-radius: 5px; width: 300px; text-align: center;">
-        <li>🗄️ webOS_SmartFarm</li>
+       🗄️ webOS_SmartFarm
     </div>
     <ul style="list-style-type: none; margin-top: 10px;">
         <li>📁 ipk</li>
@@ -61,6 +61,6 @@
         </li>
     </ul>
     <br> 🗄️ raspberryPi <br>
-    🗄️ AI
+    <br>🗄️ AI </br>
 </div>
 
