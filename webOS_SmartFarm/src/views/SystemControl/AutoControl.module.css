@@ -1,0 +1,65 @@
+.SystemControlContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3개의 열 */
+  gap: 20px;
+  padding: 20px;
+}
+
+.SystemControlItem {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.SystemControlItem h2 {
+  font-size: 2rem;
+}
+
+.InputGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2개의 열로 구성 */
+  gap: 10px;
+  margin-left: 120px;
+  align-items: center;
+}
+
+.InputGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.InputField {
+  width: 45%;
+  padding: 5px;
+  margin-right: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.InputGroup label {
+  font-size: 1rem;
+  flex-basis: 30%;
+  text-align: left;
+}
+
+.InputWithUnit {
+  display: flex;
+  align-items: center;
+}
+
+.ControlButton {
+  padding: 10px 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  width: 20%;
+  color: white;
+  background-color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+  margin-top: 50px;
+}

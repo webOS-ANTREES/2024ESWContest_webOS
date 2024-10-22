@@ -1,0 +1,28 @@
+.SystemControlContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3개의 열 */
+  gap: 20px;
+  padding: 20px;
+}
+
+.SystemControlItem {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.ControlButton {
+  padding: 10px 20px;
+  width: 20%;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+  margin-top: 10px;
+}

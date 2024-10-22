@@ -1,9 +1,0 @@
-{
-	"id": "com.test.app",
-	"version": "1.0.0",
-	"vendor": "LGE-SVL",
-	"type": "web",
-	"main": "index.html",
-	"title": "webOS App",
-	"uiRevision": 2
-}

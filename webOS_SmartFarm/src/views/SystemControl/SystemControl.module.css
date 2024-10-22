@@ -1,0 +1,8 @@
+.SystemControlContainer {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr; /* 3열로 배치 */
+  grid-template-rows: 1fr 1fr; /* 2행으로 배치 */
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}

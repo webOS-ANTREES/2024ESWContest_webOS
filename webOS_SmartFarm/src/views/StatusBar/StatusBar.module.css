@@ -1,0 +1,36 @@
+.StatusBarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 120px;
+  background-color: rgb(255, 255, 255);
+  padding: 0 20px;
+  position: relative;
+}
+
+.timeContainer {
+  font-size: 64px;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+  order: 2;
+}
+
+.backButton {
+  position: absolute;
+  right: 0;
+  background-color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  order: 3;
+  margin-right: 30px;
+  height: 100%;
+}
+
+.backButton img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}

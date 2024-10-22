@@ -1,0 +1,81 @@
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  /* background: linear-gradient(135deg, #a8edea, #fed6e3); */
+}
+
+.header {
+  position: absolute;
+  top: 8%;
+  text-align: center;
+}
+
+.userIcon {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 20px;
+  right: 100%;
+}
+
+.usersIcon {
+  width: 300px;
+  height: 300px;
+  margin-top: 80px;
+}
+
+.welcomeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.welcomeText {
+  font-size: 128px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.largeText {
+  font-size: 72px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 600px;
+}
+
+.buttonWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  width: 640px;
+  height: 640px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 640px;
+  height: 640px;
+}
+
+.iconLabel {
+  margin-top: 50px;
+  font-size: 64px;
+  font-weight: bold;
+  color: #7d40e7;
+  text-decoration: none;
+}

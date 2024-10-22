@@ -1,0 +1,10 @@
+{
+    "id": "com.smartfarm.service",
+    "description": "",
+    "services": [
+      {
+        "name": "com.smartfarm.service",
+        "executable": "luna_service.js"
+      }
+    ]
+  }

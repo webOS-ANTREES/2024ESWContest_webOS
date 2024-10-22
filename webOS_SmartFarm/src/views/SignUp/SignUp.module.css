@@ -1,0 +1,81 @@
+.signupContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .signupIcon {
+    width: 400px;
+    height: 400px;
+    margin-top: 50px;
+  }
+
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin-top: 100px;
+  }
+  
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 200px;
+    margin: 50px;
+  }
+  
+  .input {
+    flex: 1;
+    width: 60%;
+  }
+
+  .idButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: -850px;
+    margin-right: 1000px;
+    width: 100%;
+  }
+  
+  .idButton {
+    width: 350px;
+    height: 40px;
+    background: linear-gradient(135deg, #a18cd1, #8fd3f4);
+    border: none;
+    color: white;
+  }
+  
+  .buttonWrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 800px;
+  }
+  
+  .button {
+    width: 150px;
+    padding: 10px;
+    background: linear-gradient(135deg, #a18cd1, #8fd3f4);
+    color: white;
+  }
+  
+  .message {
+    height: 20px;
+  }
+  
+  .success {
+    color: green;
+    margin-top: 50px;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 50px;
+  }
