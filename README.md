@@ -16,4 +16,8 @@
 
 
 ## 기능
-
+- [모니터링](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
+- [병해충 관리](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
+- [시스템 컨트롤](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
+- [알림](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
+- [부가적인 기능](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
