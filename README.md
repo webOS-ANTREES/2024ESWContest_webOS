@@ -18,6 +18,9 @@
 - [병해충 관리](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 - [시스템 제어](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 - [알림](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
+- [로봇팔](https://github.com/webOS-ANTREES/RobotArm)
+- [인공지능](https://github.com/webOS-ANTREES/AI)
+- [웹캠](https://github.com/webOS-ANTREES/Test_Cam)
 - [부가적인 기능](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 
 ## 차별성
@@ -27,10 +30,9 @@
 ## 파일 구성
 <div style="font-family: monospace;">
     <div style="display: inline-block; border: 2px solid black; padding: 10px; border-radius: 5px; width: 300px; text-align: center;">
-        🗄️ 2022ESWContest_webOS_3013
+       🗄️ webOS_SmartFarm
     </div>
     <ul style="list-style-type: none; margin-top: 10px;">
-        <li>📁 ipk</li>
         <li>📁 resources
             <ul>
                 <li>📁 images</li>
@@ -58,4 +60,9 @@
             </ul>
         </li>
     </ul>
+    <br>🗄️ raspberryPi </br>
+    <br>🗄️ AI </br>
+    <br>🗄️ Test_Cam </br>
+    <br>🗄️ RobotArm </br>
 </div>
+
