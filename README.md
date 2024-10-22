@@ -59,7 +59,9 @@
             </ul>
         </li>
     </ul>
-    <br> 🗄️ raspberryPi <br>
+    <br>🗄️ raspberryPi </br>
     <br>🗄️ AI </br>
+    <br>🗄️ Test_Cam </br>
+    <br>🗄️ RobotArm </br>
 </div>
 
