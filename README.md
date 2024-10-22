@@ -33,23 +33,15 @@
         🗄️ 2022ESWContest_webOS_3013
     </div>
     <ul style="list-style-type: none; margin-top: 10px;">
-                <li>📁 EC2
+                <li>📁 ipk
                     <ul>
                         <li>📄 express_file_server</li>
                         <li>📄 express_server</li>
                     </ul>
                 </li>
-                <li>📁 main-AppStore
+                <li>📁 resources
                     <ul>
-                        <li>📁 wallpad
-                            <ul>
-                                <li>📁 appstore
-                                    <ul>
-                                        <li>📄 appstore_app</li>
-                                        <li>📄 appstore_service</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li>📁 images
                         </li>
                     </ul>
                 </li>
