@@ -32,7 +32,6 @@
        🗄️ webOS_SmartFarm
     </div>
     <ul style="list-style-type: none; margin-top: 10px;">
-        <li>📁 ipk</li>
         <li>📁 resources
             <ul>
                 <li>📁 images</li>
