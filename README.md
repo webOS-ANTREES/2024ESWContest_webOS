@@ -28,11 +28,11 @@
 ```bash
 🗄️ webOS_SmartFarm
 ┃
-┃__ 📁 resources
+┗ 📁 resources
 ┃   ┃
 ┃   ┗ 📁 images
 ┃
-┃__ 📁 src
+┗ 📁 src
 ┃   ┃
 ┃   ┗ 📁 APP
 ┃   ┃
@@ -63,12 +63,33 @@
 ┗ 📜README.md
 
 🗄️ raspberryPi
+┃
+┗📜 fram_sensor.ino
+┃
+┗📜 StepMotor_Ceiling.ino
+┃
+┗📜 StepMotor_Side.ino
+┃
+┗📜 StepMotor_Sky.ino
+┃
+┗📜 fram_snsor.py
+┃
+┗📜 auto_robot.py
+┃
+┗📜 spray.py
 
 🗄️ AI
+┃
+┗📜 Crop_ObjDect&Rip&Dis.py
 
 🗄️ Test_Cam
+┃
+┗📜 camera.py
 
 🗄️ RobotArm
+┃
+┗📜 auto_mirobo.py
+
 ```
 
 
