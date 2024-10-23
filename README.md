@@ -83,7 +83,7 @@
 
 🗄️ AI
 ┃
-┗ ![Python Logo](https://github.com/C:/Users/antl/Downloads/python.png)
+┗ ![Python Logo](C:/Users/antl/Downloads/python.png)
  Crop_ObjDect&Rip&Dis.py
 
 🗄️ Test_Cam
