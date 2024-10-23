@@ -72,30 +72,23 @@
 ┃
 ┗📜 StepMotor_Sky.ino
 ┃
-┗ <img src="C:/Users/antl/Downloads/python.png" alt="Python Logo">
- fram_snsor.py
+┗ 📜 fram_snsor.py
 ┃
-┗ (https://github.com/user-attachments/assets/ab5105c4-2848-4223-ab5b-92734ce40de2)
- auto_robot.py
+┗ 📜 auto_robot.py
 ┃
-┗ (https://github.com/user-attachments/assets/3b7b1782-1482-4247-a1f8-f2e6d62d161c)
- spray.py
+┗ 📜 spray.py
 
 🗄️ AI
 ┃
-┗ ![Python Logo](C:/Users/antl/Downloads/python.png)
- Crop_ObjDect&Rip&Dis.py
+┗ 📜 Crop_ObjDect&Rip&Dis.py
 
 🗄️ Test_Cam
 ┃
-┗ (https://github.com/user-attachments/assets/c6b69358-061d-4be3-9ed4-8e5b8b64b20b)
- camera.py
+┗ 📜 camera.py
 
 🗄️ RobotArm
 ┃
-┗ (https://github.com/user-attachments/assets/f950c9b4-e36d-4c15-8bb5-bdaa277e5413)
- auto_mirobo.py
-
+┗ 📜 auto_mirobo.py
 ```
 
 
