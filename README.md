@@ -10,13 +10,14 @@
 - 작품 간단 설명
 
 ## 기능
-- [모니터링](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
-- [병해충 관리](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
-- [시스템 제어](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
-- [알림](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
-- [로봇팔](https://github.com/webOS-ANTREES/RobotArm)
+- [모니터링](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/Monitoring)
+- [병해충 관리](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/PestManagement)
+- [시스템 제어]([https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/SystemControl))
+- [알림](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/Notice)
+- [로봇팔](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/RobotArm)
 - [인공지능](https://github.com/webOS-ANTREES/AI)
-- [카메라](https://github.com/webOS-ANTREES/Test_Cam)
+- [카메라](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/Test_Cam)
+- [센서 코드 및 스텝모터](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/raspberryPi)
 - [부가적인 기능](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
 
 ## 차별성
