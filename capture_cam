@@ -1,0 +1,27 @@
+# 서버 컴퓨터의 URL 설정 (서버는 Flask로 작동 중)
+server_url = 'http://192.168.1.100:5000/upload'  # 서버 컴퓨터의 IP 주소와 Flask 경로
+
+def send_image_to_server(image_path):
+    """이미지를 서버로 전송하는 함수"""
+    with open(image_path, 'rb') as image_file:
+        files = {'file': image_file}
+        response = requests.post(server_url, files=files)
+        print(response.text)  # 서버의 응답 출력
+
+def capture_and_send_image(prefix):
+    """이미지를 캡처한 후 서버로 전송"""
+    # 캡처한 이미지 파일 경로 설정
+    if not os.path.exists('/home/pi/captures'):
+        os.makedirs('/home/pi/captures')
+
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    filename = f"/home/pi/captures/{prefix}_{timestamp}.jpg"
+    
+    # 이미지 캡처
+    success, frame = camera.read()
+    if success:
+        cv2.imwrite(filename, frame)  # 이미지 저장
+        print(f"Captured and saved image: {filename}")
+        send_image_to_server(filename)  # 캡처된 이미지를 서버로 전송
+    else:
+        print("Failed to capture image.")

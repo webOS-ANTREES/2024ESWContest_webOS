@@ -1,0 +1,26 @@
+import cv2
+
+# 카메라를 연결합니다. (/dev/video0로 연결된 경우)
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("카메라를 열 수 없습니다.")
+    exit()
+
+while True:
+    ret, frame = cap.read()  # 카메라로부터 프레임을 읽어옵니다.
+    
+    if not ret:
+        print("프레임을 읽어올 수 없습니다.")
+        break
+
+    # 화면에 프레임을 표시합니다.
+    cv2.imshow('Camera Feed', frame)
+
+    # 'q'를 누르면 종료합니다.
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# 카메라와 모든 창을 정리합니다.
+cap.release()
+cv2.destroyAllWindows()

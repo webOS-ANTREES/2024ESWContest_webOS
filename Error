@@ -1,0 +1,77 @@
+Frame captured and saved as /home/kkymin/Test_Cam/captures/777_captureforward_20241012-153643.jpg
+Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/usr/lib/python3/dist-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/usr/lib/python3/dist-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/lib/python3.9/http/client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.9/http/client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.9/http/client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.9/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.9/http/client.py", line 950, in send
+    self.connect()
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0xddc898f8>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /upload (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xddc898f8>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/werkzeug/serving.py", line 323, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python3/dist-packages/werkzeug/serving.py", line 314, in execute
+    for data in application_iter:
+  File "/usr/lib/python3/dist-packages/werkzeug/wsgi.py", line 506, in __next__
+    return self._next()
+  File "/usr/lib/python3/dist-packages/werkzeug/wrappers/base_response.py", line 45, in _iter_encoded
+    for item in iterable:
+  File "/home/kkymin/Test_Cam/Test_Cam_v2.py", line 113, in gen_frames
+    send_image_to_server(filename)
+  File "/home/kkymin/Test_Cam/Test_Cam_v2.py", line 33, in send_image_to_server
+    response = requests.post(server_url, files=files)
+  File "/usr/lib/python3/dist-packages/requests/api.py", line 119, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /upload (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xddc898f8>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+(python:3102): GStreamer-CRITICAL **: 15:36:54.033: gst_sample_get_caps: assertion 'GST_IS_SAMPLE (sample)' failed
+[ERROR:1@62.940] global cap_gstreamer.cpp:925 retrieveVideoFrame GStreamer: gst_sample_get_caps() returns NULL
+        
