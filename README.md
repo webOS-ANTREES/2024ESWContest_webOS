@@ -2,10 +2,10 @@
 
 <div style="text-align: right;">
     <a href="https://github.com/webOS-ANTREES">
-        <img src="https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github" alt="GitHub">
+        <img src="https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github" alt="GitHub" width="200" height="200">
     </a>
     <a href="https://www.youtube.com/results?search_query=%EB%B9%84%EB%B9%94%EB%8C%80%EC%99%95">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube" width="200" height="200">
     </a>
 
 </div>
