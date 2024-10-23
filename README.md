@@ -12,7 +12,7 @@
 ## 기능
 - [모니터링](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/Monitoring)
 - [병해충 관리](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/PestManagement)
-- [시스템 제어]([https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/SystemControl))
+- [시스템 제어](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/SystemControl)
 - [알림](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/Notice)
 - [로봇팔](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/RobotArm)
 - [인공지능](https://github.com/webOS-ANTREES/AI)
