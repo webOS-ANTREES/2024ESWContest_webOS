@@ -72,7 +72,7 @@
 ┃
 ┗📜 StepMotor_Sky.ino
 ┃
-┗ (https://github.com/user-attachments/assets/8d7afa45-6b8c-4530-b8bd-b277a4b92fd2)
+┗ <img src="C:/Users/antl/Downloads/python.png" alt="Python Logo">
  fram_snsor.py
 ┃
 ┗ (https://github.com/user-attachments/assets/ab5105c4-2848-4223-ab5b-92734ce40de2)
