@@ -19,7 +19,7 @@
 - [카메라](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/Test_Cam)
 - [센서 코드 및 스텝모터](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/raspberryPi)
 - [부가적인 기능](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
-┃ ┗
+- 
 ## 차별성
 
 ## 기대효과
