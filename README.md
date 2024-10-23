@@ -19,46 +19,54 @@
 - [카메라](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/Test_Cam)
 - [센서 코드 및 스텝모터](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/raspberryPi)
 - [부가적인 기능](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002)
-
+┃ ┗
 ## 차별성
 
 ## 기대효과
 
 ## 파일 구성
-<div style="font-family: monospace;">
-    <div style="display: inline-block; border: 2px solid black; padding: 10px; border-radius: 5px; width: 300px; text-align: center;">
-       🗄️ webOS_SmartFarm
-    </div>
-    <ul style="list-style-type: none; margin-top: 10px;">
-        <li>📁 resources
-            <ul>
-                <li>📁 images</li>
-            </ul>
-        </li>
-        <li>📁 src
-            <ul>
-                <li>📁 APP</li>
-                <li>📁 components</li>
-                <li>📁 views
-                    <ul>
-                        <li>📁 Firebase</li>
-                        <li>📁 Login</li>
-                        <li>📁 MenuPage</li>
-                        <li>📁 Monitoring</li>
-                        <li>📁 Notice</li>
-                        <li>📁 PestManagement</li>
-                        <li>📁 SignUp</li>
-                        <li>📁 StatusBar</li>
-                        <li>📁 SystemControl</li>
-                        <li>📁 webOS_service</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <br>🗄️ raspberryPi </br>
-    <br>🗄️ AI </br>
-    <br>🗄️ Test_Cam </br>
-    <br>🗄️ RobotArm </br>
-</div>
+🗄️ webOS_SmartFarm
+┃
+┃__ 📁 resources
+┃   ┃
+┃   ┗ 📁 images
+┃
+┃__ 📁 src
+┃   ┃
+┃   ┗ 📁 APP
+┃   ┃
+┃   ┗ 📁 components
+┃   ┃
+┃   ┗ 📁 views
+┃       ┃
+┃       ┗ 📁 Firebase
+┃       ┃
+┃       ┗ 📁 Login
+┃       ┃
+┃       ┗ 📁 MenuPage
+┃       ┃
+┃       ┗ 📁 Monitoring
+┃       ┃
+┃       ┗ 📁 Notice
+┃       ┃
+┃       ┗ 📁 PestManagement
+┃       ┃
+┃       ┗ 📁 SignUp
+┃       ┃
+┃       ┗ 📁 StatusBar
+┃       ┃
+┃       ┗ 📁 SystemControl
+┃       ┃
+┃       ┗ 📁 webOS_service
+┃
+┗ 📜README.md
+
+🗄️ raspberryPi
+
+🗄️ AI
+
+🗄️ Test_Cam
+
+🗄️ RobotArm
+
 
