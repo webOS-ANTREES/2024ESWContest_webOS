@@ -72,28 +72,28 @@
 ┃
 ┗📜 StepMotor_Sky.ino
 ┃
-┗![python](https://github.com/user-attachments/assets/8d7afa45-6b8c-4530-b8bd-b277a4b92fd2)
+┗ (https://github.com/user-attachments/assets/8d7afa45-6b8c-4530-b8bd-b277a4b92fd2)
  fram_snsor.py
 ┃
-┗![python](https://github.com/user-attachments/assets/ab5105c4-2848-4223-ab5b-92734ce40de2)
+┗ (https://github.com/user-attachments/assets/ab5105c4-2848-4223-ab5b-92734ce40de2)
  auto_robot.py
 ┃
-┗![python](https://github.com/user-attachments/assets/3b7b1782-1482-4247-a1f8-f2e6d62d161c)
+┗ (https://github.com/user-attachments/assets/3b7b1782-1482-4247-a1f8-f2e6d62d161c)
  spray.py
 
 🗄️ AI
 ┃
-┗![python](https://github.com/user-attachments/assets/98e4e082-e1ed-4eb9-a681-b25fc9f74277)
+┗ (https://github.com/user-attachments/assets/98e4e082-e1ed-4eb9-a681-b25fc9f74277)
  Crop_ObjDect&Rip&Dis.py
 
 🗄️ Test_Cam
 ┃
-┗![python](https://github.com/user-attachments/assets/c6b69358-061d-4be3-9ed4-8e5b8b64b20b)
+┗ (https://github.com/user-attachments/assets/c6b69358-061d-4be3-9ed4-8e5b8b64b20b)
  camera.py
 
 🗄️ RobotArm
 ┃
-┗![python](https://github.com/user-attachments/assets/f950c9b4-e36d-4c15-8bb5-bdaa277e5413)
+┗ (https://github.com/user-attachments/assets/f950c9b4-e36d-4c15-8bb5-bdaa277e5413)
  auto_mirobo.py
 
 ```
