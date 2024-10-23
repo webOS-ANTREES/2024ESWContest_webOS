@@ -25,6 +25,7 @@
 ## 기대효과
 
 ## 파일 구성
+```bash
 🗄️ webOS_SmartFarm
 ┃
 ┃__ 📁 resources
@@ -68,5 +69,6 @@
 🗄️ Test_Cam
 
 🗄️ RobotArm
+```
 
 
