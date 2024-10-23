@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import mqtt from 'mqtt';
+import { sendToast } from '../webOS_service/luna_service';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -22,18 +23,18 @@ const PestManagement = () => {
   const [data7, setData7] = useState(null);
 
   useEffect(() => {
-    const mqttClient = mqtt.connect('ws://192.168.137.147:1884'); // MQTT 브로커에 연결
+    const mqttClient = mqtt.connect('ws://172.20.49.75:1884'); // MQTT 브로커에 연결
     setClient(mqttClient); // client 상태 업데이트
 
     // 연결 후 topic 구독
     mqttClient.on('connect', () => {
-      mqttClient.subscribe('robot/location', (err) => {
+      mqttClient.subscribe('berry/number', (err) => {
         if (!err) {
           console.log('MQTT Subcribe Success');
         }
       });
 
-      mqttClient.publish('robot/location', 'give data', (err) => {
+      mqttClient.publish('berry/number', 'givedata', (err) => {
         if (!err) {
           console.log('Give Data Request Sent');
         }
@@ -108,26 +109,16 @@ const PestManagement = () => {
   // ON 메시지 전송 함수
   const handleSendMessageOn = () => {
     if (client) {
-      client.publish('robot/location', 'ON', (err) => {
-        if (err) {
-          console.log('Fail', err);
-        } else {
-          console.log('Success');
-        }
-      });
+      client.publish('robot/location', 'ON');
+      sendToast("병해충 판별과 자동 수확을 시작합니다.");
     }
   };
 
   // OFF 메시지 전송 함수
   const handleSendMessageOff = () => {
     if (client) {
-      client.publish('robot/location', 'OFF', (err) => {
-        if (err) {
-          console.log('Fail', err);
-        } else {
-          console.log('Success');
-        }
-      });
+      client.publish('robot/location', 'OFF');
+      sendToast("병해충 판별과 자동 수확을 종료합니다.");
     }
   };
 
@@ -138,7 +129,7 @@ const PestManagement = () => {
         <h1>CAM</h1>
         <img
           className={css.CCTVImage}
-          src="http://192.168.50.248:8080/video_feed"
+          src="http://192.168.50.104:8080/video_feed"
           alt="Live video feed"
         />
       </div>

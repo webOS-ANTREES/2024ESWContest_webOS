@@ -7,9 +7,9 @@ import css from './AutoControl.module.css';
 const AutoControl = ({ client }) => {
   // 기본 설정값 (천창, 내벽 천장, 내벽 사이드)
   const defaultSettings = {
-    skylight: { temperature: 10, humidity: 10, co2: 10, illuminance: 1000 },
-    ceiling: { temperature: 10, humidity: 10, co2: 10, illuminance: 1000 },
-    sideWall: { temperature: 10, humidity: 10, co2: 10, illuminance: 1000 },
+    skylight: { temperature: 20, humidity: 60, co2: 900, illuminance: 2500 },
+    ceiling: { temperature: 20, humidity: 60, co2: 900, illuminance: 2500 },
+    sideWall: { temperature: 20, humidity: 60, co2: 900, illuminance: 2500 },
   };
 
   const [userInput, setUserInput] = useState(defaultSettings); // 설정값 상태 관리
@@ -153,30 +153,30 @@ const AutoControl = ({ client }) => {
       // 내벽 천장 제어
       if (type === 'ceiling') {
         if (temperature >= tempSetting && humidity >= humiditySetting && co2 >= co2Setting && illuminance >= illuminanceSetting) {
-          client.publish('nodemcu/ceiling', 'ON');
-          setTimeout(() => {
-            sendToast("내벽 천장이 자동으로 열렸습니다.");
-          }, 1000);
-        } else {
           client.publish('nodemcu/ceiling', 'OFF');
           setTimeout(() => {
+            sendToast("내벽 천장이 자동으로 열렸습니다.");
+          }, 3000);
+        } else {
+          client.publish('nodemcu/ceiling', 'ON');
+          setTimeout(() => {
             sendToast("내벽 천장이 자동으로 닫혔습니다.");
-          }, 1000);
+          }, 3000);
         }
       }
 
       // 내벽 제어
       if (type === 'sideWall') {
-        if (temperature >= tempSetting || humidity >= humiditySetting || co2 >= co2Setting || illuminance >= illuminanceSetting) {
-          client.publish('nodemcu/side', 'ON');
-          setTimeout(() => {
-            sendToast("내벽이 자동으로 열렸습니다.");
-          }, 1000);
-        } else {
+        if (temperature >= tempSetting && humidity >= humiditySetting && co2 >= co2Setting && illuminance >= illuminanceSetting) {
           client.publish('nodemcu/side', 'OFF');
           setTimeout(() => {
+            sendToast("내벽이 자동으로 열렸습니다.");
+          }, 3000);
+        } else {
+          client.publish('nodemcu/side', 'ON');
+          setTimeout(() => {
             sendToast("내벽이 자동으로 닫혔습니다.");
-          }, 1000);
+          }, 3000);
         }
       }
     }

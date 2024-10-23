@@ -20,7 +20,11 @@ const Monitoring = () => {
     const [logData, setLogData] = useState({});
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
-    const todayDate = new Date().toISOString().split('T')[0];
+    const todayDate = new Date().toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    }).replace(/. /g, '-').replace('.', '');
 
     useEffect(() => {
         const timeInterval = setInterval(() => {
@@ -52,6 +56,9 @@ const Monitoring = () => {
                         });
                     });
                 });
+
+                // 시간을 기준으로 데이터 정렬 (가장 최신 순)
+                allData.sort((a, b) => new Date(a.timeKey) - new Date(b.timeKey));
 
                 setSensorData(allData);
                 const currentData = allData[allData.length - 1];

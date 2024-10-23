@@ -3,25 +3,25 @@ import { getDatabase } from "firebase/database"; // Firebase 실시간 데이터
 
 // 환경 변수에서 Firebase 설정 불러오기
 const weatherfirebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY_WEATHER,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN_WEATHER,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL_WEATHER,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID_WEATHER,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET_WEATHER,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID_WEATHER,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID_WEATHER,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID_WEATHER
+  apiKey: "AIzaSyCxvF5eMySB-6Uhn9F5jWGpLoQ3O36z5zo",
+  authDomain: "weather-6a3c7.firebaseapp.com",
+  databaseURL: "https://weather-6a3c7-default-rtdb.firebaseio.com",
+  projectId: "weather-6a3c7",
+  storageBucket: "weather-6a3c7.appspot.com",
+  messagingSenderId: "380557469558",
+  appId: "1:380557469558:web:e7d09b83616116e4177c57",
+  measurementId: "G-ZSQ1N44C1H"
 };
 
 const signUpFirebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY_SIGNUP,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN_SIGNUP,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL_SIGNUP,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID_SIGNUP,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET_SIGNUP,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID_SIGNUP,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID_SIGNUP,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID_SIGNUP
+  apiKey: "AIzaSyCRaXqzlP9eedJa6Wc-INXJ_sYc3wVQbcs",
+  authDomain: "sign-up-da063.firebaseapp.com",
+  databaseURL: "https://sign-up-da063-default-rtdb.firebaseio.com",
+  projectId: "sign-up-da063",
+  storageBucket: "sign-up-da063.appspot.com",
+  messagingSenderId: "297374469841",
+  appId: "1:297374469841:web:443f8fe6089e096ff3fff0",
+  measurementId: "G-01FS6F8DL8"
 };
 
 // Firebase 초기화

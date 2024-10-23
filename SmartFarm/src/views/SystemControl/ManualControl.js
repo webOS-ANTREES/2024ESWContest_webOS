@@ -22,41 +22,41 @@ const ManualControl = ({ client }) => {
     }
   };
 
-  // 내벽 사이드 제어 함수
+  // 내벽 제어 함수
   const handleInnerSide = () => {
     if (client) {
-      client.publish('nodemcu/side', 'ON');
+      client.publish('nodemcu/side', 'OFF');
       setTimeout(() => {
         sendToast("내벽이 열렸습니다.");
-      }, 1000);  // 1초 지연
+      }, 3000);  // 3초 지연
     }
   };
 
   const handleInnerSideClose = () => {
     if (client) {
-      client.publish('nodemcu/side', 'OFF');
+      client.publish('nodemcu/side', 'ON');
       setTimeout(() => {
         sendToast("내벽이 닫혔습니다.");
-      }, 1000);  // 1초 지연
+      }, 3000);  // 3초 지연
     }
   };
 
   // 내벽 천장 제어 함수
   const handleInnerCeiling = () => {
     if (client) {
-      client.publish('nodemcu/ceiling', 'ON');
+      client.publish('nodemcu/ceiling', 'OFF');
       setTimeout(() => {
         sendToast("내벽 천장이 열렸습니다.");
-      }, 1000);  // 1초 지연
+      }, 3000);  // 3초 지연
     }
   };
 
   const handleInnerCeilingClose = () => {
     if (client) {
-      client.publish('nodemcu/ceiling', 'OFF');
+      client.publish('nodemcu/ceiling', 'ON');
       setTimeout(() => {
         sendToast("내벽 천장이 닫혔습니다.");
-      }, 1000);  // 1초 지연
+      }, 3000);  // 3초 지연
     }
   };
 

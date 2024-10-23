@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getNotificationsFromDB, deleteNotificationFromDB } from '../webOS_service/luna_service';
+import robotArmOnIcon from '../../../resources/images/RobotArmOn.png';
+import robotArmOffIcon from '../../../resources/images/RobotArmOff.png';
 import deleteIcon from '../../../resources/images/Delete.png';
 import noticeList_1 from '../../../resources/images/NoticeList_1.png';
 import noticeList_2 from '../../../resources/images/NoticeList_2.png';
@@ -36,6 +38,8 @@ const Notice = () => {
   // 아이콘 결정 함수
   const getNotificationIcon = (message) => {
     const iconMap = {
+        "병해충 판별과 자동 수확을 시작합니다.": robotArmOnIcon,
+        "병해충 판별과 자동 수확을 종료합니다.": robotArmOffIcon,
         "제어 조건을 변경하였습니다.": systemControlIcon,
         "천창이 자동으로 열렸습니다.": skyOpenIcon,
         "천창이 자동으로 닫혔습니다.": skyCloseIcon,
