@@ -1,4 +1,0 @@
-Received from Arduino: CO2: -1 ppm, Temperature: 25.90C, Humidity: 57.90%, Illuminance: 57.00 lx
-Error parsing data: could not convert string to float: '-1, Temperature'
-Received from Arduino: pH Value: -1.42
-Received from Arduino: Water Temperature: 22.81 C
