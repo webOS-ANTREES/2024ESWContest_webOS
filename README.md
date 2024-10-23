@@ -1,13 +1,8 @@
 # 제 22회 임베디드 소프트웨어 경진 대회 webOS부문 ANTREES팀
 
-<p align="center">
-  <a href="https://github.com/your-repo-link">
-    <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" width="160" height="40">
-  </a>
-  <a href="https://www.youtube.com/results?search_query=%EB%B9%84%EB%B9%94%EB%8C%80%EC%99%95">
-    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" width="160" height="40">
-  </a>
-</p>
+[![GitHub](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/webOS-ANTREES)
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/results?search_query=%EB%B9%84%EB%B9%94%EB%8C%80%EC%99%95)
+
 
 
 ## 작품명 : Berry Smart Farm
