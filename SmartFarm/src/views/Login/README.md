@@ -4,4 +4,4 @@
 
 ## 소개
 1. App을 사용하기 위한 로그인을 진행한다.
-2. 계정이 없는 경우, 회원가입을 통해 계정을 생성한다. - [회원가입](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/SmartFarm/src/views/SignUp/README.md)
+2. 계정이 없는 경우, 회원가입을 통해 계정을 생성한다. - [회원가입](https://github.com/webOS-ANTREES/2024ESWContest_webOS_3002/tree/main/SmartFarm/src/views/SignUp)
