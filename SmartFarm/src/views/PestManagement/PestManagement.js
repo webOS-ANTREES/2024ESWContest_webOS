@@ -7,6 +7,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
 import cameraIcon from '../../../resources/images/Camera.png';
 import robotArmIcon from '../../../resources/images/RobotArm.png';
+import strawBerryIcon from '../../../resources/images/StrawBerry.png';
 import css from './PestManagement.module.css';
 
 // 플러그인 등록
@@ -110,7 +111,7 @@ const PestManagement = () => {
   const handleSendMessageOn = () => {
     if (client) {
       client.publish('robot/location', 'ON');
-      sendToast("병해충 판별과 자동 수확을 시작합니다.");
+      sendToast("딸기 상태 및 병해충 판별을 시작합니다.");
     }
   };
 
@@ -118,7 +119,14 @@ const PestManagement = () => {
   const handleSendMessageOff = () => {
     if (client) {
       client.publish('robot/location', 'OFF');
-      sendToast("병해충 판별과 자동 수확을 종료합니다.");
+      sendToast("딸기 상태 및 병해충 판별을 종료합니다.");
+    }
+  };
+
+  const handleSendHARVOn = () => {
+    if (client) {
+      client.publish('robot/location', 'HARV');
+      sendToast("자동 수확 및 방제를 시작합니다.");
     }
   };
 
@@ -156,6 +164,10 @@ const PestManagement = () => {
           <button className={css.SendButton} onClick={handleSendMessageOff}>
             <img src={robotArmIcon} alt="OFF 아이콘" className={css.icon} />
             <span className={css.buttonText}>OFF</span>
+          </button>
+          <button className={css.SendButton} onClick={handleSendHARVOn}>
+            <img src={strawBerryIcon} alt="HARV 아이콘" className={css.icon} />
+            <span className={css.buttonText}>수확/방제</span>
           </button>
         </div>
       </div>

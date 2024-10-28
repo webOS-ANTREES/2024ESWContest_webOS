@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getNotificationsFromDB, deleteNotificationFromDB } from '../webOS_service/luna_service';
 import robotArmOnIcon from '../../../resources/images/RobotArmOn.png';
 import robotArmOffIcon from '../../../resources/images/RobotArmOff.png';
+import strawBerryIcon from '../../../resources/images/StrawBerry.png';
 import deleteIcon from '../../../resources/images/Delete.png';
 import noticeList_1 from '../../../resources/images/NoticeList_1.png';
 import noticeList_2 from '../../../resources/images/NoticeList_2.png';
@@ -38,8 +39,9 @@ const Notice = () => {
   // 아이콘 결정 함수
   const getNotificationIcon = (message) => {
     const iconMap = {
-        "병해충 판별과 자동 수확을 시작합니다.": robotArmOnIcon,
-        "병해충 판별과 자동 수확을 종료합니다.": robotArmOffIcon,
+        "딸기 상태 및 병해충 판별을 시작합니다.": robotArmOnIcon,
+        "딸기 상태 및 병해충 판별을 종료합니다.": robotArmOffIcon,
+        "자동 수확 및 방제를 시작합니다.": strawBerryIcon,
         "제어 조건을 변경하였습니다.": systemControlIcon,
         "천창이 자동으로 열렸습니다.": skyOpenIcon,
         "천창이 자동으로 닫혔습니다.": skyCloseIcon,
@@ -50,9 +52,11 @@ const Notice = () => {
         "내벽 천장이 열렸습니다.": ceilingOpenIcon,
         "내벽 천장이 닫혔습니다.": ceilingCloseIcon,
         "내벽이 자동으로 열렸습니다.": sideOpenIcon,
-        "내벽이 열렸습니다.": sideOpenIcon,
+        "왼쪽 내벽이 열렸습니다.": sideOpenIcon,
+        "오른쪽 내벽이 열렸습니다.": sideOpenIcon,
         "내벽이 자동으로 닫혔습니다.": sideCloseIcon,
-        "내벽이 닫혔습니다.": sideCloseIcon
+        "왼쪽 내벽이 닫혔습니다.": sideCloseIcon,
+        "오른쪽 내벽이 닫혔습니다.": sideCloseIcon
     };
 
     // '자동으로' 포함 여부를 무시하고 처리

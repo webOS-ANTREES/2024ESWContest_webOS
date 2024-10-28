@@ -168,12 +168,14 @@ const AutoControl = ({ client }) => {
       // 내벽 제어
       if (type === 'sideWall') {
         if (temperature >= tempSetting && humidity >= humiditySetting && co2 >= co2Setting && illuminance >= illuminanceSetting) {
-          client.publish('nodemcu/side', 'OFF');
+          client.publish('nodemcu/side_left', 'OFF');
+          client.publish('nodemcu/side_right', 'OFF');
           setTimeout(() => {
             sendToast("내벽이 자동으로 열렸습니다.");
           }, 3000);
         } else {
-          client.publish('nodemcu/side', 'ON');
+          client.publish('nodemcu/side_left', 'ON');
+          client.publish('nodemcu/side_right', 'ON');
           setTimeout(() => {
             sendToast("내벽이 자동으로 닫혔습니다.");
           }, 3000);

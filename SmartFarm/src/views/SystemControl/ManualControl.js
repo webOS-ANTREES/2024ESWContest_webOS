@@ -23,20 +23,38 @@ const ManualControl = ({ client }) => {
   };
 
   // 내벽 제어 함수
-  const handleInnerSide = () => {
+  const handleInnerLeftSide = () => {
     if (client) {
-      client.publish('nodemcu/side', 'OFF');
+      client.publish('nodemcu/side_left', 'OFF');
       setTimeout(() => {
-        sendToast("내벽이 열렸습니다.");
+        sendToast("왼쪽 내벽이 열렸습니다.");
       }, 3000);  // 3초 지연
     }
   };
 
-  const handleInnerSideClose = () => {
+  const handleInnerLeftSideClose = () => {
     if (client) {
-      client.publish('nodemcu/side', 'ON');
+      client.publish('nodemcu/side_left)', 'ON');
       setTimeout(() => {
-        sendToast("내벽이 닫혔습니다.");
+        sendToast("왼쪽 내벽이 닫혔습니다.");
+      }, 3000);  // 3초 지연
+    }
+  };
+
+  const handleInnerRightSide = () => {
+    if (client) {
+      client.publish('nodemcu/side_right', 'OFF');
+      setTimeout(() => {
+        sendToast("오른쪽 내벽이 열렸습니다.");
+      }, 3000);  // 3초 지연
+    }
+  };
+
+  const handleInnerRightSideClose = () => {
+    if (client) {
+      client.publish('nodemcu/side_rightt)', 'ON');
+      setTimeout(() => {
+        sendToast("오른쪽 내벽이 닫혔습니다.");
       }, 3000);  // 3초 지연
     }
   };
@@ -84,8 +102,10 @@ const ManualControl = ({ client }) => {
       <div className={css.SystemControlItem}>
         <h4>내벽 수동 제어</h4>
         <div className={css.ControlButtonContainer}>
-          <button className={css.ControlButton} onClick={handleInnerSide}>열기</button>
-          <button className={css.ControlButton} onClick={handleInnerSideClose}>닫기</button>
+          <button className={css.ControlButton} onClick={handleInnerLeftSide}>왼쪽 내벽 열기</button>
+          <button className={css.ControlButton} onClick={handleInnerLeftSideClose}>왼쪽 내벽 닫기</button>
+          <button className={css.ControlButton} onClick={handleInnerRightSide}>오른쪽 내벽 열기</button>
+          <button className={css.ControlButton} onClick={handleInnerRightSideClose}>오른쪽 내벽 닫기</button>
         </div>
       </div>
     </div>
