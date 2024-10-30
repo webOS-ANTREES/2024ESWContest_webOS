@@ -169,13 +169,13 @@ const AutoControl = ({ client }) => {
       if (type === 'sideWall') {
         if (temperature >= tempSetting && humidity >= humiditySetting && co2 >= co2Setting && illuminance >= illuminanceSetting) {
           client.publish('nodemcu/side_left', 'OFF');
-          client.publish('nodemcu/side_right', 'OFF');
+          client.publish('nodemcu/side_right', 'ON');
           setTimeout(() => {
             sendToast("내벽이 자동으로 열렸습니다.");
           }, 3000);
         } else {
           client.publish('nodemcu/side_left', 'ON');
-          client.publish('nodemcu/side_right', 'ON');
+          client.publish('nodemcu/side_right', 'OFF');
           setTimeout(() => {
             sendToast("내벽이 자동으로 닫혔습니다.");
           }, 3000);
@@ -271,7 +271,7 @@ const AutoControl = ({ client }) => {
           확인
         </button>
         <button className={css.ControlButton} onClick={() => handleResetToDefault('skylight')}>
-          기본값
+          기본 설정
         </button>
       </div>
       <div className={css.SystemControlItem}>
@@ -326,7 +326,7 @@ const AutoControl = ({ client }) => {
           확인
         </button>
         <button className={css.ControlButton} onClick={() => handleResetToDefault('ceiling')}>
-          기본값
+          기본 설정
         </button>
       </div>
       <div className={css.SystemControlItem}>
@@ -381,7 +381,7 @@ const AutoControl = ({ client }) => {
           확인
         </button>
         <button className={css.ControlButton} onClick={() => handleResetToDefault('sideWall')}>
-          기본값
+          기본 설정
         </button>
       </div>
     </div>

@@ -34,7 +34,7 @@ const ManualControl = ({ client }) => {
 
   const handleInnerLeftSideClose = () => {
     if (client) {
-      client.publish('nodemcu/side_left)', 'ON');
+      client.publish('nodemcu/side_left', 'ON');
       setTimeout(() => {
         sendToast("왼쪽 내벽이 닫혔습니다.");
       }, 3000);  // 3초 지연
@@ -43,7 +43,7 @@ const ManualControl = ({ client }) => {
 
   const handleInnerRightSide = () => {
     if (client) {
-      client.publish('nodemcu/side_right', 'OFF');
+      client.publish('nodemcu/side_right', 'ON');
       setTimeout(() => {
         sendToast("오른쪽 내벽이 열렸습니다.");
       }, 3000);  // 3초 지연
@@ -52,7 +52,7 @@ const ManualControl = ({ client }) => {
 
   const handleInnerRightSideClose = () => {
     if (client) {
-      client.publish('nodemcu/side_rightt)', 'ON');
+      client.publish('nodemcu/side_right', 'OFF');
       setTimeout(() => {
         sendToast("오른쪽 내벽이 닫혔습니다.");
       }, 3000);  // 3초 지연
@@ -65,7 +65,7 @@ const ManualControl = ({ client }) => {
       client.publish('nodemcu/ceiling', 'OFF');
       setTimeout(() => {
         sendToast("내벽 천장이 열렸습니다.");
-      }, 3000);  // 3초 지연
+      }, 5000);  // 5초 지연
     }
   };
 
@@ -74,7 +74,7 @@ const ManualControl = ({ client }) => {
       client.publish('nodemcu/ceiling', 'ON');
       setTimeout(() => {
         sendToast("내벽 천장이 닫혔습니다.");
-      }, 3000);  // 3초 지연
+      }, 5000);  // 5초 지연
     }
   };
 
@@ -102,10 +102,10 @@ const ManualControl = ({ client }) => {
       <div className={css.SystemControlItem}>
         <h4>내벽 수동 제어</h4>
         <div className={css.ControlButtonContainer}>
-          <button className={css.ControlButton} onClick={handleInnerLeftSide}>왼쪽 내벽 열기</button>
-          <button className={css.ControlButton} onClick={handleInnerLeftSideClose}>왼쪽 내벽 닫기</button>
-          <button className={css.ControlButton} onClick={handleInnerRightSide}>오른쪽 내벽 열기</button>
-          <button className={css.ControlButton} onClick={handleInnerRightSideClose}>오른쪽 내벽 닫기</button>
+          <button className={css.ControlButton} onClick={handleInnerLeftSide}>왼쪽 열기</button>
+          <button className={css.ControlButton} onClick={handleInnerLeftSideClose}>왼쪽 닫기</button>
+          <button className={css.ControlButton} onClick={handleInnerRightSide}>오른쪽 열기</button>
+          <button className={css.ControlButton} onClick={handleInnerRightSideClose}>오른쪽 닫기</button>
         </div>
       </div>
     </div>
